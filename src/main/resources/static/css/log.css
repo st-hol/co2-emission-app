@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css?family=Bitter:700");
+
+@font-face {
+    font-family: 'Helvetica Neue Cyr Light';
+    src: url('../fonts/helv/HelveticaNeueCyr-Light.eot');
+    src: url('../fonts/helv/HelveticaNeueCyr-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/helv/HelveticaNeueCyr-Light.woff') format('woff'),
+    url('../fonts/helv/HelveticaNeueCyr-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue Cyr Thin';
+    src: url('../fonts/helv/HelveticaNeueCyr-Thin.eot');
+    src: url('../fonts/helv/HelveticaNeueCyr-Thin.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/helv/HelveticaNeueCyr-Thin.woff') format('woff'),
+    url('../fonts/helv/HelveticaNeueCyr-Thin.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans Semibold';
+    src: url('../fonts/sans/OpenSans-SemiBold.eot');
+    src: url('../fonts/sans/OpenSans-SemiBold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/sans/OpenSans-SemiBold.woff') format('woff'),
+    url('../fonts/sans/OpenSans-SemiBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans Light';
+    src: url('../fonts/sans/OpenSans-Light.eot');
+    src: url('../fonts/sans/OpenSans-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/sans/OpenSans-Light.woff') format('woff'),
+    url('../fonts/sans/OpenSans-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    background: #eeeeee;
+}
