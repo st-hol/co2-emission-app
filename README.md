@@ -1,3 +1,3 @@
-# AI-based-sports-betting-web-app
+# CO2 emissions app
 
 diplome project at KPI
