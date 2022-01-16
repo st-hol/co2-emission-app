@@ -2,8 +2,8 @@ package com.kpi.diploma.controller.common;
 
 import com.kpi.diploma.domain.user.User;
 import com.kpi.diploma.domain.user.role.Role;
-import com.kpi.diploma.service.user.RoleService;
-import com.kpi.diploma.service.user.UserService;
+import com.kpi.diploma.service.base.RoleService;
+import com.kpi.diploma.service.base.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -19,7 +19,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true, proxyTargetClass = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -27,70 +26,47 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    public static BCryptPasswordEncoder bcryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Configuration
-    @Order(1)
-    public static class ApiWebSecurityConfig extends WebSecurityConfigurerAdapter {
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http.csrf().disable()
-                    .antMatcher("/api/**")
-                    .authorizeRequests()
-                    .anyRequest().permitAll()
-                    .and()
-                    .httpBasic();
-        }
+    @Override
+    public void configure(WebSecurity web) {
+        web
+                .ignoring()
+                .antMatchers("/resources/**",
+                        "/css/**",
+                        "/image/**",
+                        "/libs/**",
+                        "/js/**",
+                        "/fonts/**",
+                        "/webjars/**");
     }
 
-    @Configuration
-    @Order(2)
-    public static class FormWebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-        @Autowired
-        private CustomSuccessHandler customSuccessHandler;
-
-        @Override
-        public void configure(WebSecurity web) {
-            web
-                    .ignoring()
-                    .antMatchers("/resources/**",
-                            "/css/**",
-                            "/image/**",
-                            "/libs/**",
-                            "/js/**",
-                            "/fonts/**",
-                            "/webjars/**");
-        }
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http
-                    .authorizeRequests()
-                    .antMatchers("/", "/welcome", "/login", "/registration").permitAll()
-                    .antMatchers("/user/**").hasAnyAuthority("ADMIN", "USER")
-                    .antMatchers("/admin/**").hasAuthority("ADMIN")
-                    .anyRequest()
-                    .authenticated()
-                    .and()
-                    .csrf().disable()
-                    .formLogin()
-                    .loginPage("/login")
-                    .successHandler(customSuccessHandler)
-//                .defaultSuccessUrl("/success-login", true)
-                    .permitAll()
-                    .and()
-                    .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/").deleteCookies("JSESSIONID")
-//                .logoutSuccessUrl("/logout.done").deleteCookies("JSESSIONID")
-                    .invalidateHttpSession(true)
-                    .and()
-                    .exceptionHandling()
-                    .accessDeniedPage("/error/403");
-        }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/", "/welcome", "/login", "/registration").permitAll()
+                .antMatchers("/user/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .csrf().disable()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/cabinet", true)
+                .permitAll()
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/").deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true)
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/error/403");
     }
+
 
     @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception {
@@ -99,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(bcryptPasswordEncoder());
     }
 
 }

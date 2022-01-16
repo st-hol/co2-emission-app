@@ -1,8 +1,8 @@
 package com.kpi.diploma.validator;
 
 import com.kpi.diploma.domain.user.User;
-import com.kpi.diploma.dto.user.UserDto;
-import com.kpi.diploma.service.user.UserService;
+import com.kpi.diploma.dto.UserDto;
+import com.kpi.diploma.service.base.UserService;
 import com.kpi.diploma.util.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 public class UserValidator implements Validator {
 
     private static final String EMAIL = "email";
+    private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
     private static final String PASSWORD_CONFIRM = "passwordConfirm";
     private static final String BIRTH = "birth";
@@ -53,6 +54,17 @@ public class UserValidator implements Validator {
         }
         if (userService.findByUsername(user.getEmail()) != null) {
             errors.rejectValue(EMAIL, "Duplicate.userForm.username");
+        }
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, USERNAME, "NotEmpty");
+        if (user.getUsername().length() < 2 || user.getUsername().length() > 32) {
+            errors.rejectValue(USERNAME, "Size.userForm.username");
+        }
+        if (user.getUsername() != null && !EMAIL_REGEX.matcher(user.getUsername()).matches()) {
+            errors.rejectValue(USERNAME, "Username.email.invalid");
+        }
+        if (userService.findByUsername(user.getUsername()) != null) {
+            errors.rejectValue(USERNAME, "Duplicate.userForm.username");
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, PASSWORD, "NotEmpty");

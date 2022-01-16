@@ -1,9 +1,9 @@
 package com.kpi.diploma.controller.account;
 
 
-import com.kpi.diploma.dto.user.UserDto;
-import com.kpi.diploma.service.user.SecurityService;
-import com.kpi.diploma.service.user.UserService;
+import com.kpi.diploma.dto.UserDto;
+import com.kpi.diploma.service.base.SecurityService;
+import com.kpi.diploma.service.base.UserService;
 import com.kpi.diploma.validator.UserValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @Controller
@@ -26,7 +24,6 @@ public class AccountController {
     private SecurityService securityService;
     @Autowired
     private UserService userService;
-
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -55,16 +52,6 @@ public class AccountController {
             model.addAttribute("message", "You have been logged out successfully.");
         }
         return "common/login";
-    }
-
-    @GetMapping("/success-login")
-    public String defaultAfterLogin(HttpServletRequest request) {
-        if (request.isUserInRole("ADMIN")) {
-            return "redirect:/admin/home";
-        } else if (request.isUserInRole("CLIENT")) {
-            return "redirect:/user/home";
-        }
-        return "redirect:/";
     }
 
 }
