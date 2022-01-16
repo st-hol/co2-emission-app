@@ -1,6 +1,7 @@
 package com.kpi.diploma.service.base.impl;
 
 import com.google.common.collect.Lists;
+import com.kpi.diploma.domain.Car;
 import com.kpi.diploma.domain.user.Trip;
 import com.kpi.diploma.domain.user.User;
 import com.kpi.diploma.dto.CreateTripDto;
@@ -47,8 +48,15 @@ public class TripServiceImpl implements TripService {
     @Override
     public void createNewTrip(CreateTripDto dto, double calculatedCO2ForTrip) {
         Trip trip = new Trip();
-        if (dto.getCarId() != null) {
+        if (dto.isUseExistingCar() && dto.getCarId() != null) {
             trip.setCar(carService.findById(dto.getCarId()));
+        } else {
+            Car car = new Car();
+            car.setName(dto.getCar().getName());
+            car.setYearManufactured(dto.getCar().getYearManufactured());
+            car.setCylinders(dto.getCar().getCylinders());
+            car.setEngineSize(dto.getCar().getEngineSize());
+            carService.save(car);
         }
         trip.setName(dto.getName());
         trip.setFromCity(dto.getFrom());

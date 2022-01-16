@@ -15,7 +15,10 @@ public class CreateTripDto {
 
     private double distanceKm;
 
+    private boolean useExistingCar;
     private Long carId;
+
+    private CreateCarDto car;
 
     private boolean saveToHistory;
 }

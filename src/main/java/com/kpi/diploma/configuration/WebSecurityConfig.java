@@ -1,6 +1,5 @@
 package com.kpi.diploma.configuration;
 
-import com.kpi.diploma.auth.CustomSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -48,8 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/welcome", "/login", "/registration").permitAll()
-                .antMatchers("/user/**").hasAnyAuthority("ADMIN", "USER")
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/user/**").permitAll()//.hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/admin/**").permitAll()//.hasAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()

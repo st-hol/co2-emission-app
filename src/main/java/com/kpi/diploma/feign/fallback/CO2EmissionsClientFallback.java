@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CO2EmissionsClientFallback implements CO2EmissionsClient {
     @Override
-    public double co2Emissions(PredictCO2Request request) {
+    public CO2EmissionsClient.PredictCO2Response co2Emissions(PredictCO2Request request) {
         log.warn("FALLBACK!");
-        return 0;
+        return new PredictCO2Response(0);
     }
 }

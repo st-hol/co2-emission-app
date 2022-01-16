@@ -132,15 +132,15 @@ public class UserController {
     }
 
     @ResponseBody
-    @PostMapping("/calc-CO2")
+    @PostMapping("/co2")
     public Map<String, Object> calcCO2(@RequestBody CreateTripDto dto, BindingResult bindingResult) {
-        newTripValidator.validate(dto, bindingResult);
+        //newTripValidator.validate(dto, bindingResult);
         if (bindingResult.hasErrors()) {
             log.info("form had errors.");
             return Map.of("success", false);
         }
         double calculatedCO2ForTrip = co2AmountService.calculateCO2ForTrip(dto);
-        if (dto.isSaveToHistory()){
+        if (dto.isSaveToHistory()) {
             tripService.createNewTrip(dto, calculatedCO2ForTrip);
         }
         return Map.of("success", true, "amount", calculatedCO2ForTrip);

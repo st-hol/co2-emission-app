@@ -14,7 +14,7 @@ public interface CarService {
 
     Car findById(Long id);
 
-    Car save(Car user);
+    Car save(Car c);
 
     Page<Car> findAllByUserPageable(User user, PageRequest of);
 
