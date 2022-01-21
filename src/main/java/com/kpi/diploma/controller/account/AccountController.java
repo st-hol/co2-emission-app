@@ -28,7 +28,7 @@ public class AccountController {
     @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("userForm", new UserDto());
-        return "common/registration";
+        return "common/my-account";
     }
 
     @PostMapping("/registration")
@@ -36,7 +36,7 @@ public class AccountController {
         userValidator.validate(userForm, bindingResult);
         if (bindingResult.hasErrors()) {
             log.info("reg. form had errors.");
-            return "common/registration";
+            return "common/my-account";
         }
         userService.registerUser(userForm);
         securityService.autoLoginAfterReg(userForm.getEmail(), userForm.getPasswordConfirm());
@@ -45,13 +45,15 @@ public class AccountController {
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
+        model.addAttribute("userForm", new UserDto());
+
         if (error != null) {
             model.addAttribute("error", "Your username and password is invalid.");
         }
         if (logout != null) {
             model.addAttribute("message", "You have been logged out successfully.");
         }
-        return "common/login";
+        return "common/my-account";
     }
 
 }

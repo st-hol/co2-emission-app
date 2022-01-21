@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" th:src="@{/images/favicon.png}">
+    <title>ECO HTML</title>
+    <!-- CSS FILES START -->
+    <link type="text/css" th:href="@{/css/custom.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/color.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/responsive.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/owl.carousel.min.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/prettyPhoto.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/all.min.css}" rel="stylesheet">
+    <!-- CSS FILES End -->
+    <!--   JS Files Start  -->
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/jquery-migrate-1.4.1.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/jquery.prettyPhoto.js}"></script>
+    <script th:src="@{/js/isotope.min.js}"></script>
+    <script th:src="@{/js/custom.js}"></script>
+</head>
+<body>
+<div class="wrapper home2">
+    <!--Header Start-->
+    <header class="header-style-2">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand"><img th:src="@{/images/h2logo.png}" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
+                    class="fas fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <a class="nav-link dropdown-toggle" href="index-2.html" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false"> Home </a>
+
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="events-grid.html" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"> Events </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="events-grid.html">Events Grid</a></li>
+                            <li><a href="events-grid-2.html">Events Grid Two</a></li>
+                            <li><a href="events-grid-3.html">Events Grid Three</a></li>
+                            <li><a href="events-list.html">Events List</a></li>
+                            <li><a href="events-list-two.html">Events List Two</a></li>
+                            <li><a href="event-details.html">Event Details</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="causes.html" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"> Causes </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="causes.html">Causes Grid</a></li>
+                            <li><a href="causes-list.html">Causes List</a></li>
+                            <li><a href="causes-details.html">Causes Details</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="blog.html" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"> Blogs </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="blog.html">Blog Default</a></li>
+                            <li><a href="blog-list.html">Blog List</a></li>
+                            <li><a href="blog-grid.html">Blog Grid</a></li>
+                            <li><a href="blog-two-col.html">Blog Two Columns</a></li>
+                            <li><a href="blog-three-col.html">Blog Three Columns</a></li>
+                            <li><a href="blog-details.html">Blog Details</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"> Pages </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">Projects</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="projects.html">Projects</a></li>
+                                    <li><a href="projects-grid.html">Projects Grid</a></li>
+                                    <li><a href="projects-grid-two.html">Projects Grid Two</a></li>
+                                    <li><a href="projects-list.html">Projects List</a></li>
+                                    <li><a href="projects-details.html">Project Details</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Shop</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="shop.html">Shop</a></li>
+                                    <li><a href="shop-two.html">Shop Two</a></li>
+                                    <li><a href="shop-details.html">Shop Details</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="team.html">Team</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="team.html">Team One</a></li>
+                                    <li><a href="team-two.html">Team Two</a></li>
+                                    <li><a href="team-details.html">Team Details</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Gallery</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="gallery-grid.html">Gallery Grid</a></li>
+                                    <li><a href="gallery-full.html">Gallery Full</a></li>
+                                    <li><a href="gallery-masonry.html">Gallery Masonry</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="testimonials.html">Testimonials</a></li>
+                            <li><a href="donation.html">Donation</a></li>
+                            <li><a href="my-account.html">My Account</a></li>
+                            <li><a href="coming-soon.html">Coming Soon</a></li>
+                            <li><a href="page-404.html">404 Error</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="contact.html" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"> Contact </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="contact-one.html">Contact One</a></li>
+                            <li><a href="contact-two.html">Contact Two</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="topnav-right">
+                    <li><a class="mdonate" href="donation.html"><span>Make a Donation</span></a></li>
+                    <span sec:authorize="isAuthenticated()">
+                        <li class="login-reg"><a href="/logout">Logout</a></li>
+                    </span>
+                    <span sec:authorize="isAnonymous()">
+                        <li class="login-reg"><a href="my-account.html">Login</a> | <a href="my-account.html">Signup</a></li>
+                    </span>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div id="search">
+        <button type="button" class="close">×</button>
+        <form class="search-overlay-form">
+            <input type="search" value="" placeholder="type keyword(s) here"/>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    <!--Header End-->
+    <!--Slider Start-->
+    <section id="home-slider" class="owl-carousel owl-theme wf100">
+        <div class="item">
+            <div class="slider-caption h2slider">
+                <div class="container">
+                    <strong>Ecova<span> is the Best</span></strong>
+                    <h1>Eco Friendly</h1>
+                    <p>Nonprofit WordPress Theme</p>
+                    <a href="#" class="active">Find Out More</a> <a href="#">Join us Now</a>
+                </div>
+            </div>
+            <img th:src="@{/images/h2-slide1.jpg}" alt="">
+        </div>
+        <div class="item">
+            <div class="slider-caption h2slider">
+                <div class="container">
+                    <strong><span>Please</span> Stop Hunting & </strong>
+                    <h1>Save WildLife</h1>
+                    <p>of <strong>endangered animals</strong> in the world</p>
+                    <a href="#" class="active">Find Out More</a> <a href="#">Join us Now</a>
+                </div>
+            </div>
+            <img th:src="@{/images/h2-slide2.jpg}" alt="">
+        </div>
+        <div class="item">
+            <div class="slider-caption h2slider">
+                <div class="container">
+                    <strong>Save <span> & don’t waste our life</span> partner</strong>
+                    <h1>Water Resource</h1>
+                    <p>Before <strong>it’s too late</strong> for us...</p>
+                    <a href="#" class="active">Find Out More</a> <a href="#">Join us Now</a>
+                </div>
+            </div>
+            <img th:src="@{/images/h2-slide3.jpg}" alt="">
+        </div>
+    </section>
+    <!--Slider End-->
+    <!--Service Area Start-->
+    <section class="services-area wf100">
+        <div class="container">
+            <ul>
+                <!--box  start-->
+                <li>
+                    <div class="sinfo">
+                        <img th:src="@{/images/sericon1.png}" alt="">
+                        <h6>Recycling</h6>
+                        <p>Waste Management</p>
+                    </div>
+                </li>
+                <!--box  end-->
+                <!--box  start-->
+                <li>
+                    <div class="sinfo">
+                        <img th:src="@{/images/sericon2.png}" alt="">
+                        <h6>Wind Energy</h6>
+                        <p>Polar, Prevailing, Tropical</p>
+                    </div>
+                </li>
+                <!--box  end-->
+                <!--box  start-->
+                <li>
+                    <div class="sinfo">
+                        <img th:src="@{/images/sericon3.png}" alt="">
+                        <h6>Pure Water</h6>
+                        <p>Save Water Resources</p>
+                    </div>
+                </li>
+                <!--box  end-->
+                <!--box  start-->
+                <li class="active">
+                    <div class="sinfo">
+                        <img th:src="@{/images/sericon4.png}" alt="">
+                        <h6>Solar Panels</h6>
+                        <p>Save Natural Engery</p>
+                    </div>
+                </li>
+                <!--box  end-->
+                <!--box  start-->
+                <li>
+                    <div class="sinfo">
+                        <img th:src="@{/images/sericon5.png}" alt="">
+                        <h6>Forest Planting</h6>
+                        <p>Make Plants Alive for Life</p>
+                    </div>
+                </li>
+                <!--box  end-->
+            </ul>
+        </div>
+    </section>
+    <!--Service Area End-->
+
+    <!--Why Ecova + Facts Start-->
+    <section class="why-ecova wf100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1> Why Ecova!</h1>
+                    <p>Let’s Join us to do something awesome to Save Water, Energey, Control Pollution &
+                        Environment, Wildlife, Forest Planting Implant for Solar System.
+                    </p>
+                    <a href="#" class="cus">Signup to Join us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Why Ecova + Facts End-->
+
+    <!--About Section Start-->
+    <section class="home2-about wf100 p100 gallery">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="video-img"><a href="http://vimeo.com/43338103&amp;width=700" data-rel="prettyPhoto"
+                                              title="Vimeo video"><i class="fas fa-play"></i></a> <img
+                            th:src="@{/images/h2about.jpg}" alt=""></div>
+                </div>
+                <div class="col-md-7">
+                    <div class="h2-about-txt">
+                        <h3>About ecova</h3>
+                        <h2>Eco-friendly products can be made from scratch.</h2>
+                        <p> If anything’s hot in today’s economy, it’s saving money, including a broad range of green
+                            businesses helping people save energy, water, and other resources. </p>
+                        <a class="aboutus" href="#">More About us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="home-facts counter pt80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6 col-md-3">
+                        <div class="counter-box">
+                            <p class="counter-count">89000</p>
+                            <p class="ctxt">Trees Planted</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-md-3">
+                        <div class="counter-box">
+                            <p class="counter-count">79000</p>
+                            <p class="ctxt">Solar Panels in 2017</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-md-3">
+                        <div class="counter-box">
+                            <p class="counter-count">69000</p>
+                            <p class="ctxt">Wildlife Saved</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-md-3">
+                        <div class="counter-box">
+                            <p class="counter-count">59000</p>
+                            <p class="ctxt">Served Water Gallons</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--About Section End-->
+    <!--Urgent Causes Start-->
+    <section class="urgent-causes wf100 p80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="section-title-2 white">
+                        <h5>Urgent Cause</h5>
+                        <h2>Stop Global Warming</h2>
+                    </div>
+                    <p> We need your support and help to Stop Globar Warning. Few generations ago it to seemed like the
+                        world’s resources were infinite, and the people needed only. </p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <ul class="funds">
+                        <li class="text-left"><strong>73%</strong> Funded</li>
+                        <li class="text-center"><strong>$948.00</strong> Raised</li>
+                        <li class="text-right"><strong>$1750.00</strong> Required</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <div class="donation-amount">
+                        <h5>Donation Amount</h5>
+                        <form>
+                            <ul class="radio-boxes">
+                                <li>
+                                    <div class="radio custom">
+                                        <input name="donation" id="d1" type="radio" class="css-radio">
+                                        <label for="d1" class="css-label">$5</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio custom">
+                                        <input name="donation" id="d2" type="radio" class="css-radio">
+                                        <label for="d2" class="css-label">$20</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio custom">
+                                        <input name="donation" id="d3" type="radio" class="css-radio">
+                                        <label for="d3" class="css-label">$50</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio custom">
+                                        <input name="donation" id="d4" type="radio" class="css-radio">
+                                        <label for="d4" class="css-label">$100</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio custom">
+                                        <input name="donation" id="d5" type="radio" class="css-radio">
+                                        <label for="d5" class="css-label">$250</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio custom">
+                                        <input name="donation" id="d6" type="radio" class="css-radio">
+                                        <label for="d6" class="css-label">$500</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="radio custom">
+                                        <input name="donation" id="d7" type="radio" class="css-radio">
+                                        <label for="d7" class="css-label">$1000</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="inputs">
+                                        <input class="enter" type="text" placeholder="$ Other">
+                                    </div>
+                                </li>
+                                <li class="form-submit">
+                                    <button type="submit">Continue to Donate</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Urgent Causes End-->
+
+
+
+    <!--InstaGram Start-->
+    <div class="instagram">
+        <br>        <br>        <br>
+        <ul>
+            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta1.jpg}" alt=""></li>
+            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta2.jpg}" alt=""></li>
+            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta3.jpg}" alt=""></li>
+            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta4.jpg}" alt=""></li>
+            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta5.jpg}" alt=""></li>
+            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta6.jpg}" alt=""></li>
+            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta7.jpg}" alt=""></li>
+        </ul>
+    </div>
+    <!--InstaGram End-->
+    <!--Footer Start-->
+    <footer class="footer">
+        <div class="footer-top wf100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <!--Footer Widget Start-->
+                        <div class="footer-widget">
+                            <h4>About Ecova</h4>
+                            <p> If anything’s hot in today’s economy, it’s saving money, including a broad range of
+                                green businesses helping people save energy, water, and other resources. Definitely, you
+                                can go with this business as it is a nothing but the future. </p>
+                            <a href="#" class="lm">About us</a>
+                        </div>
+                        <!--Footer Widget End-->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <!--Footer Widget Start-->
+                        <div class="footer-widget">
+                            <h4>Our Promises</h4>
+                            <ul class="quick-links">
+                                <li><a href="#">Solar Energy</a></li>
+                                <li><a href="#">Waste Management</a></li>
+                                <li><a href="#">Eco Ideas</a></li>
+                                <li><a href="#">Recycling Materials</a></li>
+                                <li><a href="#">Plant Ecology</a></li>
+                                <li><a href="#">Saving Wildlife </a></li>
+                            </ul>
+                        </div>
+                        <!--Footer Widget End-->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <!--Footer Widget Start-->
+                        <div class="footer-widget">
+                            <h4>Latest Posts</h4>
+                            <ul class="lastest-products">
+                                <li><img th:src="@{/images/flp1.jpg}" alt=""> <strong><a href="#">How you can keep
+                                    alive wild animals for...</a></strong> <span class="pdate"><i>Posted:</i> 29 September, 2018</span>
+                                </li>
+                                <li><img th:src="@{/images/flp2.jpg}" alt=""> <strong><a href="#">Eliminate your
+                                    plastic bottle pollution & keep...</a></strong> <span class="pdate"><i>Posted:</i> 29 September, 2018</span>
+                                </li>
+                                <li><img th:src="@{/images/flp3.jpg}" alt=""> <strong><a href="#">How you can keep
+                                    alive wild animals for...</a></strong> <span class="pdate"><i>Posted:</i> 29 September, 2018</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Footer Widget End-->
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyr wf100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4"><img th:src="@{/images/logo.png}" alt=""></div>
+                    <div class="col-md-8 col-sm-8">
+                        <p><a href="www.stanislav-holovachuk.net">Link</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Footer End-->
+</div>
+
+</body>
+
+</html>

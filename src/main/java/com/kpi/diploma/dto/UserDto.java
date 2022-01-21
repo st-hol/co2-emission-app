@@ -17,6 +17,4 @@ public class UserDto {
     private String name;
     private Integer accountNumber;
     private BigDecimal balance;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate birth;
 }

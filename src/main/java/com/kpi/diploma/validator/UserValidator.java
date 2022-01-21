@@ -29,7 +29,6 @@ public class UserValidator implements Validator {
 
     private static final Pattern EMAIL_REGEX =
             Pattern.compile("^[\\w\\d._-]+@[\\w\\d.-]+\\.[\\w\\d]{2,6}$");
-    private static final int MAX_AGE = 130;
     private static final int ZERO = 0;
 
     @Autowired
@@ -60,9 +59,6 @@ public class UserValidator implements Validator {
         if (user.getUsername().length() < 2 || user.getUsername().length() > 32) {
             errors.rejectValue(USERNAME, "Size.userForm.username");
         }
-        if (user.getUsername() != null && !EMAIL_REGEX.matcher(user.getUsername()).matches()) {
-            errors.rejectValue(USERNAME, "Username.email.invalid");
-        }
         if (userService.findByUsername(user.getUsername()) != null) {
             errors.rejectValue(USERNAME, "Duplicate.userForm.username");
         }
@@ -74,12 +70,6 @@ public class UserValidator implements Validator {
 
         if (!user.getPasswordConfirm().equals(user.getPassword())) {
             errors.rejectValue(PASSWORD_CONFIRM, "Diff.userForm.passwordConfirm");
-        }
-
-        final int userAge = calculateAge(user.getBirth(), LocalDate.now());
-        final boolean invalidAge = userAge > MAX_AGE || userAge == ZERO;
-        if (Utils.isAfterOrEq(user.getBirth(), LocalDate.now()) || invalidAge) {
-            errors.rejectValue(BIRTH, "Incorrect.birth.date");
         }
 
         log.error("user validation failed: {}", errors);

@@ -25,7 +25,7 @@ public class CommonController {
 
     @GetMapping({"/", "/welcome"})
     public String la(Model model) {
-        return "common/landing";
+        return "common/index";
     }
 
     @GetMapping({"/default-home"})

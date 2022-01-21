@@ -40,8 +40,6 @@ public class User {
     private boolean enabled;
     private String name;
     private String accountNumber;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate birth;
     private BigDecimal co2YearAmount;
 
     /**
