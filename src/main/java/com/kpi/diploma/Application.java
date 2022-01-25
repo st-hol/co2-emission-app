@@ -9,8 +9,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * <<BACKLOG>>
- * -landing
- * -singIn/signUp
+ * -landing+
+ * -singIn/signUp+
  * -userCabinet:
  *     -garage
  *         -display all cars
@@ -22,6 +22,16 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  *     -update user's co2 amount for year
  *     -newTrip*just calc - do not save
  * -create 1year job for clearing year amount co2
+ *
+ *
+ * cab - co2amount, data about
+ * SIDEMENU:
+ * garage
+ * Add car
+ * new trip
+ * test trip
+ * trips history
+ *
  */
 @SpringBootApplication
 @EnableScheduling

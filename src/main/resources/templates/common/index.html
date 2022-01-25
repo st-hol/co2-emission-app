@@ -131,7 +131,9 @@
                     </li>
                 </ul>
                 <ul class="topnav-right">
-                    <li><a class="mdonate" href="donation.html"><span>Make a Donation</span></a></li>
+                    <span sec:authorize="isAuthenticated()">
+                        <li><a class="mdonate" href="/user/cabinet"><span>Go To Cabinet</span></a></li>
+                    </span>
                     <span sec:authorize="isAuthenticated()">
                         <li class="login-reg"><a href="/logout">Logout</a></li>
                     </span>
@@ -145,7 +147,7 @@
     <div id="search">
         <button type="button" class="close">×</button>
         <form class="search-overlay-form">
-            <input type="search" value="" placeholder="type keyword(s) here"/>
+            <input type="search" value="" placeholder="type keyword(s) here" />
             <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
         </form>
     </div>
@@ -395,10 +397,9 @@
     <!--Urgent Causes End-->
 
 
-
     <!--InstaGram Start-->
     <div class="instagram">
-        <br>        <br>        <br>
+        <br> <br> <br>
         <ul>
             <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta1.jpg}" alt=""></li>
             <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta2.jpg}" alt=""></li>

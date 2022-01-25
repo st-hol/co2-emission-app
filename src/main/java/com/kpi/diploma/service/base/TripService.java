@@ -1,7 +1,7 @@
 package com.kpi.diploma.service.base;
 
 
-import com.kpi.diploma.domain.user.Trip;
+import com.kpi.diploma.domain.Trip;
 import com.kpi.diploma.domain.user.User;
 import com.kpi.diploma.dto.CreateTripDto;
 import org.springframework.data.domain.Page;

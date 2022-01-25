@@ -1,7 +1,7 @@
 package com.kpi.diploma.repository;
 
 
-import com.kpi.diploma.domain.user.Trip;
+import com.kpi.diploma.domain.Trip;
 import com.kpi.diploma.domain.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

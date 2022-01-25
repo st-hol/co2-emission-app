@@ -1,14 +1,20 @@
-package com.kpi.diploma.domain.user;
+package com.kpi.diploma.domain;
 
 import com.kpi.diploma.domain.Car;
+import com.kpi.diploma.domain.user.User;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Setter
@@ -32,6 +38,9 @@ public class Trip {
 
     @ManyToOne
     private Car car;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
 
     /**
      * users have trips

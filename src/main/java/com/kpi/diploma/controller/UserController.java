@@ -2,7 +2,7 @@ package com.kpi.diploma.controller;
 
 import com.kpi.diploma.controller.technical.Pager;
 import com.kpi.diploma.domain.Car;
-import com.kpi.diploma.domain.user.Trip;
+import com.kpi.diploma.domain.Trip;
 import com.kpi.diploma.domain.user.User;
 import com.kpi.diploma.dto.CreateCarDto;
 import com.kpi.diploma.dto.CreateTripDto;
@@ -48,10 +48,10 @@ public class UserController {
     @Autowired
     private CO2AmountService co2AmountService;
 
-    @GetMapping({"/home", "/"})
+    @GetMapping({"/cabinet","/home", "/"})
     public String home(Model model) {
         model.addAttribute("user", userService.obtainCurrentPrincipleUser());
-        return "user/home";
+        return "user/cabinet";
     }
 
 

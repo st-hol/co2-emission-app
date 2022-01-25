@@ -2,7 +2,7 @@ package com.kpi.diploma.service.base.impl;
 
 import com.google.common.collect.Lists;
 import com.kpi.diploma.domain.Car;
-import com.kpi.diploma.domain.user.Trip;
+import com.kpi.diploma.domain.Trip;
 import com.kpi.diploma.domain.user.User;
 import com.kpi.diploma.dto.CreateTripDto;
 import com.kpi.diploma.repository.TripRepository;

@@ -1,17 +1,16 @@
 package com.kpi.diploma.domain.user;
 
 import com.kpi.diploma.domain.Car;
+import com.kpi.diploma.domain.Trip;
 import com.kpi.diploma.domain.user.role.Role;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

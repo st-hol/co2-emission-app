@@ -1,9 +1,8 @@
 package com.kpi.diploma.domain;
 
 import com.kpi.diploma.domain.type.EcoType;
-import com.kpi.diploma.domain.user.Trip;
 import com.kpi.diploma.domain.user.User;
-import com.kpi.diploma.domain.user.role.Role;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
