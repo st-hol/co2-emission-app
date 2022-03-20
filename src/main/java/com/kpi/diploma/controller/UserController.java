@@ -1,29 +1,39 @@
 package com.kpi.diploma.controller;
 
-import com.kpi.diploma.controller.technical.Pager;
-import com.kpi.diploma.domain.Car;
-import com.kpi.diploma.domain.Trip;
-import com.kpi.diploma.domain.user.User;
-import com.kpi.diploma.dto.CreateCarDto;
-import com.kpi.diploma.dto.CreateTripDto;
-import com.kpi.diploma.service.base.CarService;
-import com.kpi.diploma.service.base.TripService;
-import com.kpi.diploma.service.base.UserService;
+import java.util.Map;
+import java.util.Optional;
 
-import com.kpi.diploma.service.co2.CO2AmountService;
-import com.kpi.diploma.validator.NewCarValidator;
-import com.kpi.diploma.validator.NewTripValidator;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Map;
-import java.util.Optional;
+import com.kpi.diploma.controller.technical.Pager;
+import com.kpi.diploma.domain.Car;
+import com.kpi.diploma.domain.Trip;
+import com.kpi.diploma.domain.user.User;
+import com.kpi.diploma.dto.CreateCarDto;
+import com.kpi.diploma.dto.CreateTripDto;
+import com.kpi.diploma.dto.TestTripDto;
+import com.kpi.diploma.service.base.CarService;
+import com.kpi.diploma.service.base.TripService;
+import com.kpi.diploma.service.base.UserService;
+import com.kpi.diploma.service.co2.CO2AmountService;
+import com.kpi.diploma.validator.NewCarValidator;
+import com.kpi.diploma.validator.NewTripValidator;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
@@ -54,13 +64,12 @@ public class UserController {
         return "user/cabinet";
     }
 
-
     /**
      * @param pageSize - the size of the page
      * @param page     - the page number
      * @return model and view
      */
-    @GetMapping("/cars")
+    @GetMapping("/car")
     public String listAllCars(Model model,
                               @RequestParam("pageSize") Optional<Integer> pageSize,
                               @RequestParam("page") Optional<Integer> page) {
@@ -84,7 +93,7 @@ public class UserController {
         return "user/cars";
     }
 
-    @GetMapping("/trips")
+    @GetMapping("/trip/history")
     public String listAllTrips(Model model,
                                @RequestParam("pageSize") Optional<Integer> pageSize,
                                @RequestParam("page") Optional<Integer> page) {
@@ -103,14 +112,14 @@ public class UserController {
         return "user/trips";
     }
 
-    @GetMapping("/new-car")
+    @GetMapping("/car/new")
     public String formNewCar(Model model) {
         model.addAttribute("carForm", new CreateCarDto());
         model.addAttribute("user", userService.obtainCurrentPrincipleUser());
         return "/user/new-car";
     }
 
-    @PostMapping("/cars")
+    @PostMapping("/car")
     public String createNewCar(@ModelAttribute("carForm") CreateCarDto dto,
                                BindingResult bindingResult, Model model) {
 
@@ -124,11 +133,18 @@ public class UserController {
         return "redirect:/user/cars";
     }
 
-    @GetMapping("/new-trip")
+    @GetMapping("/trip/new")
     public String formNewTrip(Model model) {
         model.addAttribute("tripForm", new CreateCarDto());
         model.addAttribute("user", userService.obtainCurrentPrincipleUser());
         return "/user/new-trip";
+    }
+
+    @GetMapping("/trip/test")
+    public String formTestTrip(Model model) {
+        model.addAttribute("tripForm", new TestTripDto());
+        model.addAttribute("user", userService.obtainCurrentPrincipleUser());
+        return "/user/test-trip";
     }
 
     @ResponseBody
@@ -146,7 +162,7 @@ public class UserController {
         return Map.of("success", true, "amount", calculatedCO2ForTrip);
     }
 
-    @DeleteMapping("/cars/{id}")
+    @DeleteMapping("/car/{id}")
     public String deleteCar(@PathVariable Long id) {
         carService.delete(id);
         return "redirect:/user/cars";

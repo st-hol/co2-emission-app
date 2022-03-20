@@ -1,9 +1,8 @@
 package com.kpi.diploma.dto;
 
-import com.kpi.diploma.domain.Car;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
-import javax.persistence.ManyToOne;
+import lombok.Data;
 
 @Data
 public class CreateTripDto {
@@ -15,10 +14,11 @@ public class CreateTripDto {
 
     private double distanceKm;
 
-    private boolean useExistingCar;
-    private Long carId;
+    //todo create awesome feature (or not)
+    private boolean useExistingCar = true;
 
-    private CreateCarDto car;
+    @JsonUnwrapped
+    private CarDto car;
 
     private boolean saveToHistory;
 }

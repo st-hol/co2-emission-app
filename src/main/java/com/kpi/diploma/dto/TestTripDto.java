@@ -1,12 +1,16 @@
 package com.kpi.diploma.dto;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode
-public class CreateCarDto {
+public class TestTripDto {
     private String name;
+
+    private String from;
+
+    private String to;
+
+    private double distanceKm;
 
     private int yearManufactured;
 

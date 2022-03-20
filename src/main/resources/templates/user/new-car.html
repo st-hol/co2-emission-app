@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New car</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- CSS FILES START -->
+    <link type="text/css" th:href="@{/css/all.min.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/stylecab.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- CSS FILES End -->
+</head>
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<!-- Navigation-->
+<div th:replace="user/nav :: nav">&nbsp;</div>
+<div class="content-wrapper">
+    <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="#">Cabinet</a>
+            </li>
+            <li class="breadcrumb-item active">Add new car</li>
+        </ol>
+
+        <div class="container">
+
+            <section class="panel panel-default">
+
+                <div class="panel-body">
+                    <form th:object="${carForm}" action="#" th:action="@{/user/car}" method="post">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">Make up alias for car</label>
+                            <div class="col-sm-9">
+                                <input required type="text" class="form-control" name="name" id="name" placeholder="e.g. Ford Focus 2">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">In which year car is manufactured</label>
+                            <div class="col-sm-9">
+                                <input required type="number" class="form-control" name="year" id="year" placeholder="e.g. 2012">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="about" class="col-sm-3 control-label">Tell about your car</label>
+                            <div class="col-sm-9">
+                                <textarea name="about" id="about" placeholder="About car" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="engineSize" class="col-sm-3 control-label">What is engine size</label>
+                            <div class="col-sm-9">
+                                <input required type="number" class="form-control" name="engineSize" id="engineSize" placeholder="e.g. 1.6">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cylinders" class="col-sm-3 control-label">How mane cylinders</label>
+                            <div class="col-sm-9">
+                                <input required type="number" class="form-control" name="cylinders" id="cylinders" placeholder="e.g. 4">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fuelConsumptionComb" class="col-sm-3 control-label">What is fuel consumption (comb.)</label>
+                            <div class="col-sm-9">
+                                <input required type="number" class="form-control" name="fuelConsumptionComb" id="fuelConsumptionComb"
+                                       placeholder="e.g. 7.5">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="file_img" class="col-sm-3 control-label">Upload image (jpg/png)</label>
+                            <div class="col-sm-3">
+                                <input type="file" id="file_img" name="file_img">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9 text-center">
+                                <button type="submit" class="btn btn-primary">Add car!</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<div th:replace="user/footer :: footer">&nbsp;</div>
+<!-- Scroll to Top Button-->
+<div th:replace="user/scrolltop :: scrolltop">&nbsp;</div>
+<!-- Logout Modal-->
+<div th:replace="user/logoutmodal :: logoutmodal">&nbsp;</div>
+
+
+<!--   JS Files Start  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/dataTables.bootstrap4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script th:src="@{/js/table.js}"></script>
+
+
+<!--<div class="form-group">-->
+<!--    <label for="tech" class="col-sm-3 control-label">Технолог</label>-->
+<!--    <div class="col-sm-3">-->
+<!--        <select class="form-control">-->
+<!--            <option value="">Выберите</option>-->
+<!--            <option value="texnolog2">Технолог 2</option>-->
+<!--            <option value="texnolog3">Технолог 3</option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--</div> &lt;!&ndash; form-group // &ndash;&gt;-->
+
+<!--<div class="form-group">-->
+<!--    <label for="name" class="col-sm-3 control-label">Тип заказа</label>-->
+<!--    <div class="col-sm-9">-->
+<!--        <label class="radio-inline">-->
+<!--            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Внешный заказ-->
+<!--        </label>-->
+<!--        <label class="radio-inline">-->
+<!--            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Внутренный заказ-->
+<!--        </label>-->
+<!--    </div>-->
+<!--</div> &lt;!&ndash; form-group // &ndash;&gt;-->
+</body>
+</html>
