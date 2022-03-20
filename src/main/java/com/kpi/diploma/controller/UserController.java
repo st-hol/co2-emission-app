@@ -150,7 +150,7 @@ public class UserController {
     @ResponseBody
     @PostMapping("/co2")
     public Map<String, Object> calcCO2(@RequestBody CreateTripDto dto, BindingResult bindingResult) {
-        //newTripValidator.validate(dto, bindingResult);
+        newTripValidator.validate(dto, bindingResult);
         if (bindingResult.hasErrors()) {
             log.info("form had errors.");
             return Map.of("success", false);
