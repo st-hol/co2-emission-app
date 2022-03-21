@@ -41,9 +41,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="name" class="col-sm-3 control-label">In which year car is manufactured</label>
+                            <label class="col-sm-3 control-label" for="yearManufactured">In which year car is manufactured</label>
                             <div class="col-sm-9">
-                                <input required type="number" class="form-control" name="year" id="year" placeholder="e.g. 2012">
+                                <input class="form-control" id="yearManufactured" name="yearManufactured" placeholder="e.g. 2012" required
+                                       type="number">
                             </div>
                         </div>
                         <div class="form-group">
@@ -55,7 +56,8 @@
                         <div class="form-group">
                             <label for="engineSize" class="col-sm-3 control-label">What is engine size</label>
                             <div class="col-sm-9">
-                                <input required type="number" class="form-control" name="engineSize" id="engineSize" placeholder="e.g. 1.6">
+                                <input class="form-control" id="engineSize" name="engineSize" placeholder="e.g. 1.6" required step=".01"
+                                       type="number">
                             </div>
                         </div>
                         <div class="form-group">
@@ -67,10 +69,22 @@
                         <div class="form-group">
                             <label for="fuelConsumptionComb" class="col-sm-3 control-label">What is fuel consumption (comb.)</label>
                             <div class="col-sm-9">
-                                <input required type="number" class="form-control" name="fuelConsumptionComb" id="fuelConsumptionComb"
+                                <input class="form-control" id="fuelConsumptionComb" name="fuelConsumptionComb" required step=".01" type="number"
                                        placeholder="e.g. 7.5">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="fuelType">Choose fuel type</label>
+                            <div class="col-sm-3">
+                                <select class="form-control" id="fuelType" name="fuelType" required>
+                                    <th:block th:each="fuelT : ${fuelTypes}">
+                                        <option th:text="${fuelT.value}" th:value="${fuelT.value}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="file_img" class="col-sm-3 control-label">Upload image (jpg/png)</label>
                             <div class="col-sm-3">

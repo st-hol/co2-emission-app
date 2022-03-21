@@ -19,4 +19,6 @@ public class TestTripDto {
     private int cylinders;
 
     private double fuelConsumptionComb;
+
+    private String fuelType;
 }

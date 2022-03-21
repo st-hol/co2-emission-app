@@ -1,13 +1,13 @@
 package com.kpi.diploma.service.base;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import com.kpi.diploma.domain.Car;
 import com.kpi.diploma.domain.user.User;
 import com.kpi.diploma.dto.CreateCarDto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-
-import java.util.List;
 
 public interface CarService {
     List<Car> findAll();
@@ -22,4 +22,5 @@ public interface CarService {
 
     void delete(Long id);
 
+    List<Car> findAllByUser(User user);
 }

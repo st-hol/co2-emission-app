@@ -36,44 +36,29 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="w-100 p-5 d-lg-flex flex-row justify-content-center">
-                    <div class="card mx-auto col-lg-2 col-sm-6 ">
-                        <img src="https://eskipaper.com/images/		mercedes-benz-1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Mercedes Benz</h5>
-                            <p class="card-text text-success"><strong>37,000 $</strong></p>
-                            <p class="card-text text-muted"><s>37,500 $</s></p>
-                            <a href="#" class="btn btn-outline-secondary">Buy now</a>
-                        </div>
-                    </div>
 
-                    <div class="card mx-auto col-lg-2 col-sm-6 ">
-                        <img src="https://eskipaper.com/images/	peugeot-onyx-concept-1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Peugeot Onyx Concept </h5>
-                            <p class="card-text text-success"><strong>17,500 $</strong></p>
-                            <p class="card-text text-muted"><s>17,666 $</s></p>
-                            <a href="#" class="btn btn-outline-secondary">Buy now</a>
-                        </div>
-                    </div>
-                    <div class="card mx-auto col-lg-2 col-sm-6 ">
-                        <img src="https://eskipaper.com/images/mclaren-p1-sunrise-1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Mclaren p1 sunrise</h5>
-                            <p class="card-text text-success"><strong>4,289,500 $</strong></p>
-                            <p class="card-text text-muted"><s>4,300,000 $</s></p>
-                            <a href="#" class="btn btn-outline-secondary">Buy now</a>
-                        </div>
-                    </div>
+                    <th:block th:each="car : ${cars}">
 
-                    <div class="card mx-auto col-lg-2 col-sm-6 ">
-                        <img src="https://eskipaper.com/images/	mercedesbenz-cls-63-car-1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Mercedes-Benz CLS 63 Car</h5>
-                            <p class="card-text text-success"><strong>298,999 $</strong></p>
-                            <p class="card-text text-muted"><s>299,999 $</s></p>
-                            <a href="#" class="btn btn-outline-secondary">Buy now</a>
+                        <div class="card mx-auto col-lg-2 col-sm-6 ">
+                            <img alt="..." class="card-img-top" src="https://eskipaper.com/images/	peugeot-onyx-concept-1.jpg">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${car.name} + ' ' + ${car.yearManufactured}"></h5>
+                                <p class="card-text text-success"><strong th:text="'Engine: ' + ${car.engineSize}"></strong></p>
+                                <p class="card-text text-dark"><strong th:text="'Cylinders: ' + ${car.cylinders}"></strong></p>
+                                <p class="card-text text-warning"><strong th:text="'Fuel Cons.: ' + ${car.fuelConsumptionComb}"></strong></p>
+                                <p class="card-text text-danger"><strong th:text="'Fuel type: ' + ${car.fuelType.value}"></strong></p>
+                                <a class="btn btn-outline-secondary" href="#">Edit props.</a>
+                                <form class="d-inline" th:action="@{/user/car/{carId}(carId=${car.id})}" th:method="delete">
+                                    <input name="_method" type="hidden" value="DELETE">
+                                    <input name="id" th:value="${car.id}" type="hidden" />
+                                    <button class="btn btn-danger btn-sm rounded-0" data-placement="top" data-toggle="tooltip" title="Delete"
+                                            type="submit"><i class="fa fa-trash"></i></button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
+
+                    </th:block>
+
                 </div>
             </div>
         </div>
@@ -112,6 +97,37 @@
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+
+<!--<div class="card mx-auto col-lg-2 col-sm-6 ">-->
+<!--    <img src="https://eskipaper.com/images/		mercedes-benz-1.jpg" class="card-img-top" alt="...">-->
+<!--    <div class="card-body">-->
+<!--        <h5 class="card-title">Mercedes Benz</h5>-->
+<!--        <p class="card-text text-success"><strong>37,000 $</strong></p>-->
+<!--        <p class="card-text text-muted"><s>37,500 $</s></p>-->
+<!--        <a href="#" class="btn btn-outline-secondary">Buy now</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="card mx-auto col-lg-2 col-sm-6 ">-->
+<!--    <img src="https://eskipaper.com/images/mclaren-p1-sunrise-1.jpg" class="card-img-top" alt="...">-->
+<!--    <div class="card-body">-->
+<!--        <h5 class="card-title">Mclaren p1 sunrise</h5>-->
+<!--        <p class="card-text text-success"><strong>4,289,500 $</strong></p>-->
+<!--        <p class="card-text text-muted"><s>4,300,000 $</s></p>-->
+<!--        <a href="#" class="btn btn-outline-secondary">Buy now</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="card mx-auto col-lg-2 col-sm-6 ">-->
+<!--    <img src="https://eskipaper.com/images/	mercedesbenz-cls-63-car-1.jpg" class="card-img-top" alt="...">-->
+<!--    <div class="card-body">-->
+<!--        <h5 class="card-title">Mercedes-Benz CLS 63 Car</h5>-->
+<!--        <p class="card-text text-success"><strong>298,999 $</strong></p>-->
+<!--        <p class="card-text text-muted"><s>299,999 $</s></p>-->
+<!--        <a href="#" class="btn btn-outline-secondary">Buy now</a>-->
+<!--    </div>-->
+<!--</div>-->
 
 </body>
 </html>

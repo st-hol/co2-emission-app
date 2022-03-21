@@ -41,7 +41,7 @@
                             <div class="col-sm-3">
                                 <select class="form-control" name="carId" id="carId" required>
                                     <th:block th:each="car : ${cars}">
-                                        <option th:text="${car.name}" th:value="${bet.id}"></option>
+                                        <option th:text="${car.name}" th:value="${car.id}"></option>
                                     </th:block>
                                 </select>
                             </div>
@@ -74,7 +74,8 @@
                         <div class="form-group">
                             <label for="name" class="col-sm-3 control-label">How long is distance in km?</label>
                             <div class="col-sm-9">
-                                <input required type="number" class="form-control" name="distanceKm" id="distanceKm" placeholder="e.g. 715">
+                                <input class="form-control" id="distanceKm" name="distanceKm" placeholder="e.g. 715.5" required step=".1"
+                                       type="number">
                             </div>
                         </div>
 

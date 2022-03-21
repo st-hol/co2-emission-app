@@ -15,4 +15,6 @@ public class CreateCarDto {
     private int cylinders;
 
     private double fuelConsumptionComb;
+
+    private String fuelType;
 }

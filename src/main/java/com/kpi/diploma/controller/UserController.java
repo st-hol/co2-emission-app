@@ -1,5 +1,6 @@
 package com.kpi.diploma.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kpi.diploma.controller.technical.Pager;
 import com.kpi.diploma.domain.Car;
 import com.kpi.diploma.domain.Trip;
+import com.kpi.diploma.domain.type.FuelType;
 import com.kpi.diploma.domain.user.User;
 import com.kpi.diploma.dto.CreateCarDto;
 import com.kpi.diploma.dto.CreateTripDto;
@@ -74,22 +76,18 @@ public class UserController {
                               @RequestParam("pageSize") Optional<Integer> pageSize,
                               @RequestParam("page") Optional<Integer> page) {
 
-        // Evaluate page size. If requested parameter is null, return initial
-        // page size
-        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-        // Evaluate page. If requested parameter is null or less than 0 (to
-        // prevent exception), return initial size. Otherwise, return value of
-        // param. decreased by 1.
-        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-
+        //        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+        //        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
         User user = userService.obtainCurrentPrincipleUser();
-        Page<Car> cars = carService.findAllByUserPageable(user, PageRequest.of(evalPage, evalPageSize));
-        Pager pager = new Pager(cars.getTotalPages(), cars.getNumber(), BUTTONS_TO_SHOW);
+        //        Page<Car> cars = carService.findAllByUserPageable(user, PageRequest.of(evalPage, evalPageSize));
+        //        Pager pager = new Pager(cars.getTotalPages(), cars.getNumber(), BUTTONS_TO_SHOW);
+        //        model.addAttribute("pager", pager);
+        //		model.addAttribute("selectedPageSize", evalPageSize);
+        //		model.addAttribute("pageSizes", PAGE_SIZES);
 
+        List<Car> cars = carService.findAllByUser(user);
         model.addAttribute("cars", cars);
-        model.addAttribute("selectedPageSize", evalPageSize);
-        model.addAttribute("pageSizes", PAGE_SIZES);
-        model.addAttribute("pager", pager);
+
         return "user/cars";
     }
 
@@ -116,6 +114,7 @@ public class UserController {
     public String formNewCar(Model model) {
         model.addAttribute("carForm", new CreateCarDto());
         model.addAttribute("user", userService.obtainCurrentPrincipleUser());
+        model.addAttribute("fuelTypes", FuelType.values());
         return "/user/new-car";
     }
 
@@ -126,17 +125,22 @@ public class UserController {
         newCarValidator.validate(dto, bindingResult);
         if (bindingResult.hasErrors()) {
             log.info("form had errors.");
+            model.addAttribute("carForm", new CreateCarDto());
             model.addAttribute("user", userService.obtainCurrentPrincipleUser());
+            model.addAttribute("fuelTypes", FuelType.values());
             return "user/new-car";
         }
         carService.createNewCar(dto);
-        return "redirect:/user/cars";
+        return "redirect:/user/car";
     }
 
     @GetMapping("/trip/new")
     public String formNewTrip(Model model) {
+        User user = userService.obtainCurrentPrincipleUser();
+        List<Car> cars = carService.findAllByUser(user);
         model.addAttribute("tripForm", new CreateCarDto());
-        model.addAttribute("user", userService.obtainCurrentPrincipleUser());
+        model.addAttribute("user", user);
+        model.addAttribute("cars", cars);
         return "/user/new-trip";
     }
 
@@ -144,6 +148,7 @@ public class UserController {
     public String formTestTrip(Model model) {
         model.addAttribute("tripForm", new TestTripDto());
         model.addAttribute("user", userService.obtainCurrentPrincipleUser());
+        model.addAttribute("fuelTypes", FuelType.values());
         return "/user/test-trip";
     }
 
@@ -165,7 +170,7 @@ public class UserController {
     @DeleteMapping("/car/{id}")
     public String deleteCar(@PathVariable Long id) {
         carService.delete(id);
-        return "redirect:/user/cars";
+        return "redirect:/user/car";
     }
 
 }
