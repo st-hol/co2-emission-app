@@ -23,4 +23,7 @@ public class CarDto {
     private double fuelConsumptionComb;
 
     private double co2emissions;
+
+    private String about;
+
 }

@@ -12,6 +12,8 @@ public class TestTripDto {
 
     private double distanceKm;
 
+    private String about;
+
     private int yearManufactured;
 
     private double engineSize;

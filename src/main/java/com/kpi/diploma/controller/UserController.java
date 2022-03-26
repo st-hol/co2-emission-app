@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -153,7 +154,8 @@ public class UserController {
     }
 
     @ResponseBody
-    @PostMapping("/co2")
+    @PostMapping(value = "/co2",
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, Object> calcCO2(@RequestBody CreateTripDto dto, BindingResult bindingResult) {
         newTripValidator.validate(dto, bindingResult);
         if (bindingResult.hasErrors()) {

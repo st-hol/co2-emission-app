@@ -17,4 +17,7 @@ public class CreateCarDto {
     private double fuelConsumptionComb;
 
     private String fuelType;
+
+    private String about;
+
 }

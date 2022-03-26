@@ -1,20 +1,26 @@
 package com.kpi.diploma.domain;
 
-import com.kpi.diploma.domain.Car;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.kpi.diploma.domain.user.User;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import javax.persistence.*;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Setter
@@ -35,6 +41,8 @@ public class Trip {
     private String name;
 
     private double co2amount;
+
+    private String about;
 
     @ManyToOne
     private Car car;

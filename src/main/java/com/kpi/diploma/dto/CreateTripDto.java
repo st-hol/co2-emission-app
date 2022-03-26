@@ -1,7 +1,5 @@
 package com.kpi.diploma.dto;
 
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-
 import lombok.Data;
 
 @Data
@@ -17,8 +15,9 @@ public class CreateTripDto {
     //todo create awesome feature (or not)
     private boolean useExistingCar = true;
 
-    @JsonUnwrapped
-    private CarDto car;
+    private Long carId;
+
+    private String about;
 
     private boolean saveToHistory;
 }

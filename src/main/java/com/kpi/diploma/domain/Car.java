@@ -49,6 +49,8 @@ public class Car {
 
     private double co2emissions;
 
+    private String about;
+
     /**
      * users have cars
      */
