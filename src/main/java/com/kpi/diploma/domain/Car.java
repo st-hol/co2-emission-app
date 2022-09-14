@@ -25,7 +25,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(exclude = "users")
+@ToString(exclude = {"users", "trips"})
 @EqualsAndHashCode
 @Entity
 public class Car {

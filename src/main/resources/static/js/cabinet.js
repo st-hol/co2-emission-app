@@ -95,10 +95,10 @@ var myLineChart = new Chart(ctx, {
     labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [
       {
-        label: "Revenue",
+        label: "Emissions",
         backgroundColor: "rgba(2,117,216,1)",
         borderColor: "rgba(2,117,216,1)",
-        data: [4215, 5312, 6251, 7841, 9821, 14984]
+        data: [1.7, 1.2, 1.5, 0.9, 1.2, 1.3]
       }
     ]
   },
@@ -121,7 +121,7 @@ var myLineChart = new Chart(ctx, {
         {
           ticks: {
             min: 0,
-            max: 15000,
+            max: 2,
             maxTicksLimit: 5
           },
           gridLines: {
@@ -140,7 +140,7 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: "pie",
   data: {
-    labels: ["Blue", "Red", "Yellow", "Green"],
+    labels: ["Audi A4", "BMW X5", "Ford Focus", "Kia Rio"],
     datasets: [
       {
         data: [12.21, 15.58, 11.25, 8.32],
