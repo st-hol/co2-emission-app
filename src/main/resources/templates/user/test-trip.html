@@ -12,6 +12,7 @@
     <link type="text/css" th:href="@{/css/all.min.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/stylecab.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/mystyles.css}" rel="stylesheet">
     <!-- CSS FILES End -->
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -32,12 +33,31 @@
 
             <section class="panel panel-default">
 
-                <div class="panel-body">
+                <div class="panel-body panel-body-my">
                     <form th:object="${tripForm}" action="#" th:action="@{/user/co2}" method="post">
 
-                        <h3>Car Info</h3>
+                        <div style="text-align: center" id="successAlert" class="alert alert-success" role="alert">
+                            <h3>Calculate the CO<sub>2</sub> emissions of your car journey</h3>
+                            <p style="text-align: left">
+                                When calculating the CO<sub>2</sub> emissions of your trip, there are also small things that are important for
+                                the
+                                calculation. For example, when you travel by car, you need more fuel if you have a caravan behind your exhaust or
+                                if you have a roof box or bicycle rack with you. In general, the more weight you carry, the more polluting the
+                                car journey is and the more CO<sub>2</sub> your car emits. There are a number of standard calculations that you
+                                can use when
+                                traveling by car. For example, with diesel you emit an average of 132 gr of CO<sub>2</sub> per kilometer, while
+                                with petrol
+                                this is 120 CO<sub>2</sub> per kilometer . These emissions are calculated on average consumption. This can
+                                therefore differ
+                                greatly based on weight and car.
+                            </p>
+                        </div>
+
+                        <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
+
+                        <h3 class="form-group-my">Car Info</h3>
                         <hr>
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label class="col-sm-3 control-label" for="yearManufactured">In which year car is manufactured</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="yearManufactured" name="yearManufactured" placeholder="e.g. 2012" required
@@ -45,29 +65,29 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="engineSize" class="col-sm-3 control-label">What is engine size</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="engineSize" name="engineSize" placeholder="e.g. 1.6" required step=".01"
                                        type="number">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="cylinders" class="col-sm-3 control-label">How mane cylinders</label>
                             <div class="col-sm-9">
                                 <input required type="number" class="form-control" name="cylinders" id="cylinders" placeholder="e.g. 4">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="fuelConsumptionComb" class="col-sm-3 control-label">What is fuel consumption (comb.)</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="fuelConsumptionComb" name="fuelConsumptionComb" required step=".01" type="number"
                                        placeholder="e.g. 7.5">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label class="col-sm-3 control-label" for="fuelType">Choose fuel type</label>
-                            <div class="col-sm-3">
+                            <div class="col-sm-9">
                                 <select class="form-control" id="fuelType" name="fuelType" required>
                                     <th:block th:each="fuelT : ${fuelTypes}">
                                         <option th:text="${fuelT.value}" th:value="${fuelT.value}"></option>
@@ -76,25 +96,33 @@
                             </div>
                         </div>
 
-                        <br>
-                        <h3>Ride Info</h3>
+
+                        <div style="text-align: center; margin-bottom: 2rem; margin-top: 2rem" class="alert alert-warning"
+                             role="alert">
+                            <h5>Don't know exact characteristics of your car?</h5>
+                            <p style="text-align: center">
+                                Try checking it there: <a class="alert-link" href="https://www.auto-data.net/en/">https://www.auto-data.net/en/</a>
+                            </p>
+                        </div>
+
+                        <h3 class="form-group-my">Ride Info</h3>
                         <hr>
 
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="name" class="col-sm-3 control-label">I am riding from</label>
                             <div class="col-sm-9">
                                 <input required type="text" class="form-control" name="from" id="from"
                                        placeholder="e.g. Kyiv">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="name" class="col-sm-3 control-label">I am riding to</label>
                             <div class="col-sm-9">
                                 <input required type="text" class="form-control" name="to" id="to"
                                        placeholder="e.g Lviv">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="distanceKm" class="col-sm-3 control-label">How long is distance in km?</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="distanceKm" name="distanceKm" placeholder="e.g. 715.5" required step=".1"
@@ -102,11 +130,21 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div style="text-align: center; margin-bottom: 2rem; margin-top: 2rem" class="alert alert-warning"
+                             role="alert">
+                            <h5>Don't know exact distance between your points?</h5>
+                            <p style="text-align: center">
+                                Try checking it there: <a class="alert-link" href="https://www.distancecalculator.net/">https://www.distancecalculator.net/</a>
+                            </p>
+                        </div>
+
+                        <div class="form-group form-group-my">
                             <div class="col-sm-offset-3 col-sm-9 text-center">
                                 <button type="submit" class="btn btn-primary">Test!</button>
                             </div>
                         </div>
+
+
                     </form>
                 </div>
             </section>

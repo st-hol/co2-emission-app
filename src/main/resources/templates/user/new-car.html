@@ -12,6 +12,7 @@
     <link type="text/css" th:href="@{/css/all.min.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/stylecab.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/mystyles.css}" rel="stylesheet">
     <!-- CSS FILES End -->
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -32,41 +33,51 @@
 
             <section class="panel panel-default">
 
-                <div class="panel-body">
+                <div style="" class="panel-body">
+
                     <form th:object="${carForm}" action="#" th:action="@{/user/car}" method="post">
-                        <div class="form-group">
+
+                        <div style="text-align: center; margin-bottom: 2rem;" class="alert alert-warning"
+                             role="alert">
+                            <h5>Don't know exact characteristics of your car?</h5>
+                            <p style="text-align: center">
+                                Try checking it there: <a class="alert-link" href="https://www.auto-data.net/en/">https://www.auto-data.net/en/</a>
+                            </p>
+                        </div>
+
+                        <div class="form-group form-group-my">
                             <label for="name" class="col-sm-3 control-label">Make up alias for car</label>
                             <div class="col-sm-9">
                                 <input required type="text" class="form-control" name="name" id="name" placeholder="e.g. Ford Focus 2">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label class="col-sm-3 control-label" for="yearManufactured">In which year car is manufactured</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="yearManufactured" name="yearManufactured" placeholder="e.g. 2012" required
                                        type="number">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="about" class="col-sm-3 control-label">Tell about your car</label>
                             <div class="col-sm-9">
                                 <textarea name="about" id="about" placeholder="About car" class="form-control"></textarea>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="engineSize" class="col-sm-3 control-label">What is engine size</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="engineSize" name="engineSize" placeholder="e.g. 1.6" required step=".01"
                                        type="number">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="cylinders" class="col-sm-3 control-label">How mane cylinders</label>
                             <div class="col-sm-9">
                                 <input required type="number" class="form-control" name="cylinders" id="cylinders" placeholder="e.g. 4">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="fuelConsumptionComb" class="col-sm-3 control-label">What is fuel consumption (comb.)</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="fuelConsumptionComb" name="fuelConsumptionComb" required step=".01" type="number"
@@ -74,9 +85,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label class="col-sm-3 control-label" for="fuelType">Choose fuel type</label>
-                            <div class="col-sm-3">
+                            <div class="col-sm-9">
                                 <select class="form-control" id="fuelType" name="fuelType" required>
                                     <th:block th:each="fuelT : ${fuelTypes}">
                                         <option th:text="${fuelT.value}" th:value="${fuelT.value}"></option>
@@ -85,18 +96,21 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="file_img" class="col-sm-3 control-label">Upload image (jpg/png)</label>
-                            <div class="col-sm-3">
+                            <div class="col-sm-9">
                                 <input type="file" id="file_img" name="file_img">
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <div class="col-sm-offset-3 col-sm-9 text-center">
                                 <button type="submit" class="btn btn-primary">Add car!</button>
                             </div>
                         </div>
+
+
+
                     </form>
                 </div>
             </section>

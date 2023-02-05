@@ -12,9 +12,22 @@
     <link type="text/css" th:href="@{/css/all.min.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/stylecab.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/mystyles.css}" rel="stylesheet">
     <!-- CSS FILES End -->
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
+
+<section class="popup">
+    <div class="popup__content">
+        <div class="close">
+            <span></span>
+            <span></span>
+        </div>
+        <span id="successCO2"></span>
+    </div>
+</section>
+
 <!-- Navigation-->
 <div th:replace="user/nav :: nav">&nbsp;</div>
 <div class="content-wrapper">
@@ -32,13 +45,29 @@
 
             <section class="panel panel-default">
 
-                <div class="panel-body">
+                <div class="panel-body panel-body-my">
                     <form action="#">
 
+                        <div style="text-align: center" class="alert alert-success" role="alert">
+                            <h3>What do you do with your CO<sub>2</sub> calculation?</h3>
+                            <p style="text-align: left">
+                                Once you have calculated the CO<sub>2</sub> emissions of your trip, it is important to do something with it.
+                                There are many
+                                options online to easily offset your emissions. However, there is also a disadvantage with CO<sub>2</sub>
+                                compensation; you
+                                do not reverse the pollution with it. The CO<sub>2</sub> emitted by your journey is in the air and no matter how
+                                many trees
+                                you plant, the specific CO<sub>2</sub> remains in the air. It is best to calculate the CO<sub>2</sub> before your
+                                trip and choose the
+                                most sustainable trip based on that. This way you ensure in advance that too many emissions do not end up in the
+                                air and that you no longer have to compensate anything.
+                            </p>
+                        </div>
+                        <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
 
-                        <div id="useExistingCar" class="form-group">
+                        <div id="useExistingCar" class="form-group form-group-my">
                             <label for="carId" class="col-sm-3 control-label">Choose car</label>
-                            <div class="col-sm-3">
+                            <div class="col-sm-9">
                                 <select class="form-control" name="carId" id="carId" required>
                                     <th:block th:each="car : ${cars}">
                                         <option th:text="${car.name}" th:value="${car.id}"></option>
@@ -47,7 +76,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="name" class="col-sm-3 control-label">Make up alias for trip</label>
                             <div class="col-sm-9">
                                 <input required type="text" class="form-control" name="name" id="name"
@@ -55,7 +84,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="name" class="col-sm-3 control-label">I am riding from</label>
                             <div class="col-sm-9">
                                 <input required type="text" class="form-control" name="from" id="from"
@@ -63,7 +92,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="name" class="col-sm-3 control-label">I am riding to</label>
                             <div class="col-sm-9">
                                 <input required type="text" class="form-control" name="to" id="to"
@@ -71,7 +100,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="name" class="col-sm-3 control-label">How long is distance in km?</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="distanceKm" name="distanceKm" placeholder="e.g. 715.5" required step=".1"
@@ -79,7 +108,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label for="about" class="col-sm-3 control-label">Tell about your trip</label>
                             <div class="col-sm-9">
                                 <textarea name="about" id="about" placeholder="About trip" class="form-control"></textarea>
@@ -87,7 +116,7 @@
                         </div>
 
 
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <label class="col-sm-3 control-label">Save trip to history?</label>
                             <div class="col-sm-9">
                                 <label class="radio-inline">
@@ -99,8 +128,15 @@
                             </div>
                         </div>
 
+                        <div style="text-align: center; margin-bottom: 2rem; margin-top: 2rem" id="successAlert" class="alert alert-warning"
+                             role="alert">
+                            <h5>Don't know exact distance between your points?</h5>
+                            <p style="text-align: center">
+                                Try checking it there: <a class="alert-link" href="https://www.distancecalculator.net/">https://www.distancecalculator.net/</a>
+                            </p>
+                        </div>
 
-                        <div class="form-group">
+                        <div class="form-group form-group-my">
                             <div class="col-sm-offset-3 col-sm-9 text-center">
                                 <button class="btn btn-primary" id="newTr">Ride!</button>
                             </div>

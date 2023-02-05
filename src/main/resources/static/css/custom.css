@@ -1479,7 +1479,7 @@ header.header-style-2 .navbar {
 	margin: 0px;
 }
 header.header-style-2 .navbar-brand {
-	background: #33691e;
+	/*background: #33691e;*/
 	width: 270px;
 	text-align: center;
 	padding: 13px 0;

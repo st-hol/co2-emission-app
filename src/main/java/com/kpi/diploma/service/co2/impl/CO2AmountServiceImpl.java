@@ -27,12 +27,17 @@ public class CO2AmountServiceImpl implements CO2AmountService {
         request = new CO2EmissionsClient.PredictCO2Request(car.getEngineSize(), car.getCylinders(), car.getFuelConsumptionComb());
         log.info("Request co2 from feign with req {}", request);
         double emission = co2EmissionsClient.co2Emissions(request).getCo2();
-
+        log.info("co2 emissions of {} is {} g/km", car, emission);
         return calculateByFormula(emission, dto.getDistanceKm());
     }
 
+    /**
+     * Calculate value.
+     * @param emission g/km
+     * @param distanceKm km
+     * @return value of emissions per trip
+     */
     private double calculateByFormula(double emission, double distanceKm) {
-        // todo
         return emission * distanceKm;
     }
 }

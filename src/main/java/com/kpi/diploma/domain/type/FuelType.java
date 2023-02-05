@@ -4,8 +4,9 @@ import com.kpi.diploma.domain.type.typed.StringTypeEnum;
 
 public enum FuelType implements StringTypeEnum {
 
-    GAS("Gas"),
+    PETROL("Petrol"),
     DIESEL("Diesel"),
+    GAS("Gas"),
     UNDEFINED("Undefined");
 
     private final String value;

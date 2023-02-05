@@ -1,0 +1,69 @@
+@charset "utf-8";
+/* CSS Document */
+@media (max-width: 991px) {
+    #secondLogout {
+        display: none;
+    }
+}
+
+.popup {
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+}
+.popup .popup__content {
+    width: 60%;
+    overflow: auto;
+    padding: 50px;
+    background: white;
+    color: black;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+}
+.popup .popup__content .close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 20px;
+    display: block;
+}
+.popup .popup__content .close span {
+    cursor: pointer;
+    position: fixed;
+    width: 20px;
+    height: 3px;
+    background: #099ccc;
+}
+.popup .popup__content .close span:nth-child(1) {
+    transform: rotate(45deg);
+}
+.popup .popup__content .close span:nth-child(2) {
+    transform: rotate(135deg);
+}
+
+
+.panel-body-my {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid green;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-group-my {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

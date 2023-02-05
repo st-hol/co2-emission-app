@@ -207,6 +207,9 @@ ul.ftags a {
 }
 }
  @media (min-width: 768px) and (max-width: 991px) {
+	 #secondLogout {
+		 display: none;
+	 }
 .wrapper {
 	width: 100%;
 	float: left;
@@ -566,6 +569,9 @@ section.page404.wf100.p80 img {
 
 }
  @media (min-width: 576px) and (max-width: 767px) {
+     #secondLogout {
+         display: none;
+     }
 .wrapper {
 	width: 100%;
 	float: left;
@@ -832,6 +838,9 @@ section.page404.wf100.p80 img {
 }
 }
  @media (min-width: 280px) and (max-width: 575px) {
+	 #secondLogout {
+		 display: none;
+	 }
 .wrapper {
 	width: 100%;
 	float: left;
