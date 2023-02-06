@@ -2,13 +2,10 @@ package com.kpi.diploma.controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kpi.diploma.controller.technical.Pager;
 import com.kpi.diploma.domain.Car;
 import com.kpi.diploma.domain.Trip;
 import com.kpi.diploma.domain.type.FuelType;
@@ -80,41 +75,18 @@ public class UserController {
 	 * @return model and view
 	 */
 	@GetMapping("/car")
-	public String listAllCars(Model model,
-			@RequestParam("pageSize") Optional<Integer> pageSize,
-			@RequestParam("page") Optional<Integer> page) {
-
-		//        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-		//        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+	public String listAllCars(Model model) {
 		User user = userService.obtainCurrentPrincipleUser();
-		//        Page<Car> cars = carService.findAllByUserPageable(user, PageRequest.of(evalPage, evalPageSize));
-		//        Pager pager = new Pager(cars.getTotalPages(), cars.getNumber(), BUTTONS_TO_SHOW);
-		//        model.addAttribute("pager", pager);
-		//		model.addAttribute("selectedPageSize", evalPageSize);
-		//		model.addAttribute("pageSizes", PAGE_SIZES);
-
 		List<Car> cars = carService.findAllByUser(user);
 		model.addAttribute("cars", cars);
-
 		return "user/cars";
 	}
 
 	@GetMapping("/trip/history")
-	public String listAllTrips(Model model,
-			@RequestParam("pageSize") Optional<Integer> pageSize,
-			@RequestParam("page") Optional<Integer> page) {
-
-		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-
+	public String listAllTrips(Model model) {
 		User user = userService.obtainCurrentPrincipleUser();
-		Page<Trip> trips = tripService.findAllByUserPageable(user, PageRequest.of(evalPage, evalPageSize));
-		Pager pager = new Pager(trips.getTotalPages(), trips.getNumber(), BUTTONS_TO_SHOW);
-
+		List<Trip> trips = tripService.findAllByUser(user);
 		model.addAttribute("trips", trips);
-		model.addAttribute("selectedPageSize", evalPageSize);
-		model.addAttribute("pageSizes", PAGE_SIZES);
-		model.addAttribute("pager", pager);
 		return "user/trips";
 	}
 
@@ -173,7 +145,8 @@ public class UserController {
 		}
 		double calculatedCO2ForTrip = co2AmountService.calculateCO2ForTrip(dto);
 		if (dto.isSaveToHistory()) {
-			tripService.createNewTrip(dto, calculatedCO2ForTrip);
+			User user = userService.obtainCurrentPrincipleUser();
+			tripService.createNewTrip(dto, user, calculatedCO2ForTrip);
 		}
 		Car car = carService.findById(dto.getCarId());
 		return ResponseEntity.ok(CO2CalculatedDto.builder()

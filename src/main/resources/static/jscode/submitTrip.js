@@ -4,7 +4,7 @@ function handleError(reason) {
     let resp = JSON.parse(reason.responseText).details;
     let div = $('#errorAlert');
     div.empty();
-    $.each(resp, function( index, value ) {
+    $.each(resp, function(index, value) {
       div.append(`${value}<br>`);
     });
     div.show();
@@ -45,9 +45,11 @@ $(document).ready(function() {
           console.log(result.error);
         } else {
           if (result) {
-            const co2text = `Your trip from [${result.from}] to [${result.to}] driving 
-             the car [${result.carName}] with average fuel consumption [${result.fuelConsumptionComb}] 
-             will result in total Carbon Footprint of [${result.co2Amount}].`;
+            const co2text = `Your trip from [ ${result.from} ] to [ ${result.to} ] driving 
+             the car [ ${result.carName} ] with average fuel consumption [ ${result.fuelConsumptionComb} ] 
+             will result in total 
+             Carbon Footprint of [ ${parseFloat(result.co2Amount).toFixed(2)} ] g/km 
+             which also is  [ ${parseFloat(result.co2Amount/1000).toFixed(2)} ] kg/km .`;
             $('#successCO2').text(co2text);
             $(".popup").fadeIn(500);
             $('#errorAlert').hide();
@@ -80,7 +82,6 @@ $(document).ready(function() {
     }
   });
 });
-
 
 $(".close").click(function() {
   $(".popup").fadeOut(500);

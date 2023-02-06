@@ -29,7 +29,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(exclude = {"roles", "cars"})
+@ToString(exclude = {"roles", "cars", "trips"})
 @EqualsAndHashCode
 @Entity
 public class User {

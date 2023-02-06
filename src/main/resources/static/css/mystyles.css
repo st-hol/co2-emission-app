@@ -19,18 +19,21 @@
     bottom: 0;
     text-align: center;
 }
+
 .popup .popup__content {
     width: 60%;
     overflow: auto;
-    padding: 50px;
+    padding: 80px;
     background: white;
     color: black;
     position: relative;
     top: 50%;
     left: 50%;
+    font-size: 18px;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
 }
+
 .popup .popup__content .close {
     position: absolute;
     right: 20px;
@@ -38,6 +41,7 @@
     width: 20px;
     display: block;
 }
+
 .popup .popup__content .close span {
     cursor: pointer;
     position: fixed;
@@ -45,9 +49,11 @@
     height: 3px;
     background: #099ccc;
 }
+
 .popup .popup__content .close span:nth-child(1) {
     transform: rotate(45deg);
 }
+
 .popup .popup__content .close span:nth-child(2) {
     transform: rotate(135deg);
 }
@@ -66,4 +72,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+.navbar-sidenav-my {
+    background-color: darkslategrey !important;
+    padding-top: 1.5rem !important;
+}
+
+.sidenav-second-level-my {
+    background-color: #2a5252 !important;
+}
+
+.navbar-my {
+    background-color: #184f4f !important;
+}
+
+.nav-link-toggler-my {
+    background-color: #184f4f !important;
+}
+
+.nav-link-my {
+}
+
+.nav-item-my {
+    text-align: left;
+    /*margin-left: 1rem;*/
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.content-wrapper-my {
+    padding-left: 2rem;
+    padding-top: 2rem;
 }

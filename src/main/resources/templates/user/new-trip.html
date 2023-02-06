@@ -17,20 +17,21 @@
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 
-
-<section class="popup">
-    <div class="popup__content">
-        <div class="close">
-            <span></span>
-            <span></span>
-        </div>
-        <span id="successCO2"></span>
-    </div>
-</section>
-
 <!-- Navigation-->
 <div th:replace="user/nav :: nav">&nbsp;</div>
-<div class="content-wrapper">
+<div class="content-wrapper content-wrapper-my">
+
+    <section class="popup">
+        <div class="popup__content">
+            <div class="close">
+                <span></span>
+                <span></span>
+            </div>
+            <span id="successCO2"></span>
+        </div>
+    </section>
+
+
     <div class="container-fluid">
 
         <!-- Breadcrumbs-->
@@ -123,7 +124,7 @@
                                     <input type="radio" name="saveToHistory" id="saveToHistory1" value="true"> Yes
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="saveToHistory" id="saveToHistory2" value="false"> No
+                                    <input checked type="radio" name="saveToHistory" id="saveToHistory2" value="false"> No
                                 </label>
                             </div>
                         </div>

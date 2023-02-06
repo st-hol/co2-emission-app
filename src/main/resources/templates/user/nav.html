@@ -1,24 +1,24 @@
-<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+<nav th:fragment="nav" class="navbar navbar-my navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="/">Green Mission</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="/user/cabinet">
+        <ul class="navbar-nav navbar-sidenav navbar-sidenav-my" id="exampleAccordion">
+            <li class="nav-item nav-item-my " data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link nav-link-my" href="/user/cabinet">
                     <i class="fa fa-fw fa-calendar"></i>
                     <span class="nav-link-text">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Garage">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
+            <li class="nav-item nav-item-my " data-toggle="tooltip" data-placement="right" title="Garage">
+                <a class="nav-link nav-link-my nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
                    data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-car"></i>
                     <span class="nav-link-text">Garage</span>
                 </a>
-                <ul class="sidenav-second-level collapse" id="collapseComponents">
+                <ul class="sidenav-second-level sidenav-second-level-my collapse" id="collapseComponents">
                     <li>
                         <a href="/user/car">My cars</a>
                     </li>
@@ -27,13 +27,13 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Trips">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponentsTrips"
+            <li class="nav-item nav-item-my " data-toggle="tooltip" data-placement="right" title="Trips">
+                <a class="nav-link nav-link-my nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponentsTrips"
                    data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-road"></i>
                     <span class="nav-link-text">Trips</span>
                 </a>
-                <ul class="sidenav-second-level collapse" id="collapseComponentsTrips">
+                <ul class="sidenav-second-level sidenav-second-level-my collapse" id="collapseComponentsTrips">
                     <li>
                         <a href="/user/trip/new">New trip</a>
                     </li>
@@ -46,23 +46,23 @@
                 </ul>
             </li>
 
-            <li class="nav-item" id="secondLogout" data-toggle="tooltip" data-placement="right" title="Logout">
+            <li class="nav-item nav-item-my " id="secondLogout" data-toggle="tooltip" data-placement="right" title="Logout">
                 <a class="nav-link">
-                    <a class="nav-link"  href="/logout" data-toggle="modal" data-target="#exampleModal">
-                        <i class="fa fa-fw fa-arrow-alt-circle-left"></i>  <span class="nav-link-text">Logout</span></a>
+                    <a class="nav-link nav-link-my" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-arrow-alt-circle-left"></i> <span class="nav-link-text">Logout</span></a>
                 </a>
             </li>
         </ul>
-        <ul class="navbar-nav sidenav-toggler">
-            <li class="nav-item">
-                <a class="nav-link text-center" id="sidenavToggler">
+        <ul class="navbar-nav  nav-link-toggler-my sidenav-toggler">
+            <li class="nav-item nav-item-my ">
+                <a class="nav-link nav-link-my text-center" id="sidenavToggler">
                     <i class="fa fa-fw fa-angle-left"></i>
                 </a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link"  href="/logout" data-toggle="modal" data-target="#exampleModal">
+            <li class="nav-item nav-item-my ">
+                <a class="nav-link nav-link-my" data-toggle="modal" data-target="#exampleModal">
                     <i class="fa fa-fw fa-arrow-alt-circle-left"></i> Logout</a>
             </li>
         </ul>

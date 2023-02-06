@@ -1,5 +1,7 @@
 package com.kpi.diploma.service.base.impl;
 
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +48,12 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public void createNewTrip(CreateTripDto dto, double calculatedCO2ForTrip) {
+    public List<Trip> findAllByUser(User user) {
+        return repository.findAllByUsers(user);
+    }
+
+    @Override
+    public void createNewTrip(CreateTripDto dto, User user, double calculatedCO2ForTrip) {
         Trip trip = new Trip();
         trip.setCar(carService.findById(dto.getCarId()));
         trip.setName(dto.getName());
@@ -54,7 +61,9 @@ public class TripServiceImpl implements TripService {
         trip.setToCity(dto.getTo());
         trip.setDistanceKm(dto.getDistanceKm());
         trip.setCo2amount(calculatedCO2ForTrip);
-
+        trip.setUsers(Collections.singletonList(user));
+        trip.setDate(LocalDate.now());
+        trip.setAbout(dto.getAbout());
         repository.save(trip);
     }
 }

@@ -12,12 +12,13 @@
     <link type="text/css" th:href="@{/css/all.min.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/stylecab.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/mystyles.css}" rel="stylesheet">
     <!-- CSS FILES End -->
 </head>
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body class="fixed-nav sticky-footer" id="page-top">
 <!-- Navigation-->
 <div th:replace="user/nav :: nav">&nbsp;</div>
-<div class="content-wrapper">
+<div class="content-wrapper content-wrapper-my">
     <div class="container-fluid">
 
         <!-- Breadcrumbs-->
@@ -56,94 +57,16 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                        </tr>
-                        <tr>
-                            <td>Sea Vacation Trip</td>
-                            <td>Kyiv, Ukraine</td>
-                            <td>Barcelona, Spain</td>
-                            <td>3110.0</td>
-                            <td>2021/07/12</td>
-                            <td>4,532</td>
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29</td>
-                            <td>$433,060</td>
-                        </tr>
-                        <tr>
-                            <td>Colleen Hurst</td>
-                            <td>Javascript Developer</td>
-                            <td>San Francisco</td>
-                            <td>39</td>
-                            <td>2009/09/15</td>
-                            <td>$205,500</td>
-                        </tr>
-                        <tr>
-                            <td>Sonya Frost</td>
-                            <td>Software Engineer</td>
-                            <td>Edinburgh</td>
-                            <td>23</td>
-                            <td>2008/12/13</td>
-                            <td>$103,600</td>
-                        </tr>
-                        <tr>
-                            <td>Jena Gaines</td>
-                            <td>Office Manager</td>
-                            <td>London</td>
-                            <td>30</td>
-                            <td>2008/12/19</td>
-                            <td>$90,560</td>
-                        </tr>
-                        <tr>
-                            <td>Quinn Flynn</td>
-                            <td>Support Lead</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2013/03/03</td>
-                            <td>$342,000</td>
-                        </tr>
-                        <tr>
-                            <td>Charde Marshall</td>
-                            <td>Regional Director</td>
-                            <td>San Francisco</td>
-                            <td>36</td>
-                            <td>2008/10/16</td>
-                            <td>$470,600</td>
-                        </tr>
-                        <tr>
-                            <td>Haley Kennedy</td>
-                            <td>Senior Marketing Designer</td>
-                            <td>London</td>
-                            <td>43</td>
-                            <td>2012/12/18</td>
-                            <td>$313,500</td>
-                        </tr>
-                        <tr>
-                            <td>Tatyana Fitzpatrick</td>
-                            <td>Regional Director</td>
-                            <td>London</td>
-                            <td>19</td>
-                            <td>2010/03/17</td>
-                            <td>$385,750</td>
-                        </tr>
+                        <th:block th:each="trip : ${trips}">
+                            <tr>
+                                <td th:text="${trip.name}"></td>
+                                <td th:text="${trip.fromCity}"></td>
+                                <td th:text="${trip.toCity}"></td>
+                                <td th:text="${trip.distanceKm} + ' km'"></td>
+                                <td th:text="${#temporals.format(trip.date)}"></td>
+                                <td th:text="${#numbers.formatDecimal(trip.co2amount/1000, 0, 'COMMA', 2, 'POINT') + ' kg/km'}"></td>
+                            </tr>
+                        </th:block>
                         </tbody>
                     </table>
                 </div>
@@ -173,3 +96,93 @@
 
 </body>
 </html>
+
+
+<!--<tr>-->
+<!--    <td>Tiger Nixon</td>-->
+<!--    <td>System Architect</td>-->
+<!--    <td>Edinburgh</td>-->
+<!--    <td>61</td>-->
+<!--    <td>2011/04/25</td>-->
+<!--    <td>$320,800</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>Garrett Winters</td>-->
+<!--    <td>Accountant</td>-->
+<!--    <td>Tokyo</td>-->
+<!--    <td>63</td>-->
+<!--    <td>2011/07/25</td>-->
+<!--    <td>$170,750</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>Sea Vacation Trip</td>-->
+<!--    <td>Kyiv, Ukraine</td>-->
+<!--    <td>Barcelona, Spain</td>-->
+<!--    <td>3110.0</td>-->
+<!--    <td>2021/07/12</td>-->
+<!--    <td>4,532</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>Cedric Kelly</td>-->
+<!--    <td>Senior Javascript Developer</td>-->
+<!--    <td>Edinburgh</td>-->
+<!--    <td>22</td>-->
+<!--    <td>2012/03/29</td>-->
+<!--    <td>$433,060</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>Colleen Hurst</td>-->
+<!--    <td>Javascript Developer</td>-->
+<!--    <td>San Francisco</td>-->
+<!--    <td>39</td>-->
+<!--    <td>2009/09/15</td>-->
+<!--    <td>$205,500</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>Sonya Frost</td>-->
+<!--    <td>Software Engineer</td>-->
+<!--    <td>Edinburgh</td>-->
+<!--    <td>23</td>-->
+<!--    <td>2008/12/13</td>-->
+<!--    <td>$103,600</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>Jena Gaines</td>-->
+<!--    <td>Office Manager</td>-->
+<!--    <td>London</td>-->
+<!--    <td>30</td>-->
+<!--    <td>2008/12/19</td>-->
+<!--    <td>$90,560</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>Quinn Flynn</td>-->
+<!--    <td>Support Lead</td>-->
+<!--    <td>Edinburgh</td>-->
+<!--    <td>22</td>-->
+<!--    <td>2013/03/03</td>-->
+<!--    <td>$342,000</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>Charde Marshall</td>-->
+<!--    <td>Regional Director</td>-->
+<!--    <td>San Francisco</td>-->
+<!--    <td>36</td>-->
+<!--    <td>2008/10/16</td>-->
+<!--    <td>$470,600</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>Haley Kennedy</td>-->
+<!--    <td>Senior Marketing Designer</td>-->
+<!--    <td>London</td>-->
+<!--    <td>43</td>-->
+<!--    <td>2012/12/18</td>-->
+<!--    <td>$313,500</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>Tatyana Fitzpatrick</td>-->
+<!--    <td>Regional Director</td>-->
+<!--    <td>London</td>-->
+<!--    <td>19</td>-->
+<!--    <td>2010/03/17</td>-->
+<!--    <td>$385,750</td>-->
+<!--</tr>-->
