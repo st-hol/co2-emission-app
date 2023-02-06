@@ -106,7 +106,7 @@ public class UserController {
 	}
 
 	@GetMapping("/car/{id}/image")
-	public void showProductImage(@PathVariable String id,
+	public void showImage(@PathVariable String id,
 			HttpServletResponse response) throws IOException {
 		response.setContentType("image/png");
 		Car car = carService.findById(Long.parseLong(id));

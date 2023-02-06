@@ -59,6 +59,34 @@
 }
 
 
+/**/
+
+.container-cnt {
+    display: flex;
+    flex-flow: wrap row;
+    align-items: center;
+    justify-content:center;
+    margin-top:1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin: 1.5%;
+    font-size: 30px;
+    background-color: #f4f4f4;
+    color: #499f68;
+    width: 200px;
+    border-radius: 50%;
+    height: 200px;
+    vertical-align: middle;
+}
+
+/**/
+
 .panel-body-my {
     display: flex;
     justify-content: center;
@@ -108,8 +136,9 @@
 }
 
 .car-img-my {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    /*margin-top: 10px;*/
+    /*margin-bottom: 10px;*/
+    margin: 2rem 0;
 }
 
 .card-title-my {
@@ -117,4 +146,5 @@
     text-align: center;
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
+    margin-top: 1rem !important;
 }

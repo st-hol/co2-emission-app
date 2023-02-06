@@ -1,5 +1,6 @@
 package com.kpi.diploma.service.base.impl;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,6 +19,7 @@ import com.kpi.diploma.domain.user.User;
 import com.kpi.diploma.dto.UserDto;
 import com.kpi.diploma.repository.UserRepository;
 import com.kpi.diploma.service.base.UserService;
+import com.kpi.diploma.util.math.BigDecimalUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -93,7 +95,13 @@ public class UserServiceImpl implements UserService {
         return userDto;
     }
 
-    /**
+	@Override
+	public void incrementYearlyCO2(User user, double calculatedCO2ForTrip) {
+		user.setCo2YearAmount(BigDecimalUtils.sumBigDecimals(user.getCo2YearAmount(), BigDecimal.valueOf(calculatedCO2ForTrip)));
+        userRepository.save(user);
+	}
+
+	/**
      * return names of null-fields
      *
      * @param source

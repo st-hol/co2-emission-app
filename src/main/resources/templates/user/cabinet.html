@@ -27,6 +27,13 @@
             </li>
             <li class="breadcrumb-item active">My Dashboard</li>
         </ol>
+
+        <div class="container-cnt">
+            <h3 class="text-success text-center">Your yearly CO<sub>2</sub> amount is</h3>
+            <div class="counter" th:data-countto="${user.co2YearAmount}/1000000" data-duration="1000">0</div>
+            <h3 class="text-success text-center">tons!</h3>
+        </div>
+
         <!-- Area Chart Example-->
         <div class="card mb-3">
             <div class="card-header">
@@ -95,6 +102,32 @@
 
 <script th:src="@{/js/cabinet.js}"></script>
 <script th:src="@{/js/table.js}"></script>
+
+<script>
+
+  $(".counter").each(function () {
+    var $this = $(this),
+      countTo = $this.attr("data-countto");
+    countDuration = parseInt($this.attr("data-duration"));
+    $({ counter: $this.text() }).animate(
+      {
+        counter: parseFloat(countTo).toFixed(2)
+      },
+      {
+        duration: countDuration,
+        easing: "linear",
+        step: function () {
+          $this.text(Math.floor(this.counter));
+        },
+        complete: function () {
+          $this.text(this.counter);
+        }
+      }
+    );
+  });
+
+
+</script>
 
 </body>
 </html>

@@ -40,12 +40,13 @@
 
                     <th:block th:each="car : ${cars}">
 
-                        <div class="card mx-auto col-lg-2 col-sm-6 ">
+                        <div class="card mx-auto col-lg-3 col-sm-6 ">
                             <div class="card-body">
                                 <h6 class="card-title card-title-my" th:text="${car.name} + ' ' + ${car.yearManufactured}"></h6>
                                 <!--<img alt="..." class="card-img-top car-img-my" src="https://eskipaper.com/images/	peugeot-onyx-concept-1.jpg">-->
                                 <!-- <img th:src="${'picCar' + car.id} == null ? _ : @{'data:image/png;base64,'+${'picCar' + car.id}}">-->
-                                <img class="card-img-top" th:src="@{'/user/car/' + ${car.id} + '/image'}">
+                                <img alt="Image lost :("
+                                     class="card-img-top car-img-my" th:src="@{'/user/car/' + ${car.id} + '/image'}">
                                 <p class="card-text text-dark"><strong th:text="'Engine: ' + ${car.engineSize}"></strong></p>
                                 <p class="card-text text-dark"><strong th:text="'Cylinders: ' + ${car.cylinders}"></strong></p>
                                 <p class="card-text text-danger"><strong th:text="'Fuel Cons.: ' + ${car.fuelConsumptionComb}"></strong></p>

@@ -16,10 +16,13 @@ import com.kpi.diploma.dto.DriveTripDto;
 import com.kpi.diploma.repository.TripRepository;
 import com.kpi.diploma.service.base.CarService;
 import com.kpi.diploma.service.base.TripService;
+import com.kpi.diploma.service.base.UserService;
 import com.kpi.diploma.service.co2.CO2AmountService;
 
 @Service
 public class TripServiceImpl implements TripService {
+    @Autowired
+    private UserService userService;
     @Autowired
     private TripRepository repository;
     @Autowired
@@ -65,5 +68,7 @@ public class TripServiceImpl implements TripService {
         trip.setDate(LocalDate.now());
         trip.setAbout(dto.getAbout());
         repository.save(trip);
+
+        userService.incrementYearlyCO2(user, calculatedCO2ForTrip);
     }
 }

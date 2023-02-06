@@ -79,5 +79,6 @@ public class User {
             roles.add(role);
         }
         this.accountNumber = RandomStringUtils.randomAlphanumeric(10);
+        this.co2YearAmount = BigDecimal.ZERO;
     }
 }
