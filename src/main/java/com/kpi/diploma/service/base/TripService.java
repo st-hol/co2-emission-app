@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageRequest;
 
 import com.kpi.diploma.domain.Trip;
 import com.kpi.diploma.domain.user.User;
-import com.kpi.diploma.dto.CreateTripDto;
+import com.kpi.diploma.dto.DriveTripDto;
 
 public interface TripService {
     List<Trip> findAll();
@@ -20,5 +20,5 @@ public interface TripService {
 
     List<Trip> findAllByUser(User user);
 
-    void createNewTrip(CreateTripDto dto, User user, double calculatedCO2ForTrip);
+    void createNewTrip(DriveTripDto dto, User user, double calculatedCO2ForTrip);
 }

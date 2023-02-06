@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import com.kpi.diploma.domain.Trip;
 import com.kpi.diploma.domain.user.User;
-import com.kpi.diploma.dto.CreateTripDto;
+import com.kpi.diploma.dto.DriveTripDto;
 import com.kpi.diploma.repository.TripRepository;
 import com.kpi.diploma.service.base.CarService;
 import com.kpi.diploma.service.base.TripService;
@@ -53,7 +53,7 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public void createNewTrip(CreateTripDto dto, User user, double calculatedCO2ForTrip) {
+    public void createNewTrip(DriveTripDto dto, User user, double calculatedCO2ForTrip) {
         Trip trip = new Trip();
         trip.setCar(carService.findById(dto.getCarId()));
         trip.setName(dto.getName());

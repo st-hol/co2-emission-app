@@ -5,7 +5,8 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode
-public class CreateCarDto {
+public class GarageCarDto {
+    private long id;
     private String name;
 
     private int yearManufactured;

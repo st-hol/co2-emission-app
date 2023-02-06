@@ -106,3 +106,15 @@
     padding-left: 2rem;
     padding-top: 2rem;
 }
+
+.car-img-my {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card-title-my {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}

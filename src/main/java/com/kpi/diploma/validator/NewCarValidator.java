@@ -1,11 +1,13 @@
 package com.kpi.diploma.validator;
 
-import com.kpi.diploma.dto.CreateCarDto;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import com.kpi.diploma.dto.GarageCarDto;
+
+import lombok.extern.slf4j.Slf4j;
 
 @SuppressWarnings("squid:S2068")
 @Slf4j
@@ -17,13 +19,13 @@ public class NewCarValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return CreateCarDto.class.equals(aClass);
+        return GarageCarDto.class.equals(aClass);
     }
 
 
     @Override
     public void validate(Object o, Errors errors) {
-        CreateCarDto dto = (CreateCarDto) o;
+        GarageCarDto dto = (GarageCarDto) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", NOT_EMPTY);
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "yearManufactured", NOT_EMPTY);

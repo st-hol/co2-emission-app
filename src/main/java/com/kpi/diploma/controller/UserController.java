@@ -1,11 +1,20 @@
 package com.kpi.diploma.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,23 +26,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kpi.diploma.controller.technical.Pager;
 import com.kpi.diploma.domain.Car;
 import com.kpi.diploma.domain.Trip;
 import com.kpi.diploma.domain.type.FuelType;
 import com.kpi.diploma.domain.user.User;
 import com.kpi.diploma.dto.CO2CalculatedDto;
-import com.kpi.diploma.dto.CreateCarDto;
-import com.kpi.diploma.dto.CreateTripDto;
+import com.kpi.diploma.dto.DriveTripDto;
+import com.kpi.diploma.dto.GarageCarDto;
 import com.kpi.diploma.dto.TestTripDto;
 import com.kpi.diploma.payload.ErrorDetails;
 import com.kpi.diploma.service.base.CarService;
 import com.kpi.diploma.service.base.TripService;
 import com.kpi.diploma.service.base.UserService;
 import com.kpi.diploma.service.co2.CO2AmountService;
+import com.kpi.diploma.util.ImageUtil;
 import com.kpi.diploma.validator.NewCarValidator;
 import com.kpi.diploma.validator.NewTripValidator;
 
@@ -48,7 +62,7 @@ public class UserController {
 	private static final int INITIAL_PAGE = 0;
 	private static final int INITIAL_PAGE_SIZE = 3;
 	private static final int[] PAGE_SIZES = {3, 5, 10, 15, 20, 30};
-	private static final FuelType[] FUEL_TYPES = {FuelType.DIESEL, FuelType.PETROL, FuelType.GAS};
+	private static final List<FuelType> FUEL_TYPES = FuelType.getValidTypes();
 
 	@Autowired
 	private UserService userService;
@@ -75,11 +89,29 @@ public class UserController {
 	 * @return model and view
 	 */
 	@GetMapping("/car")
-	public String listAllCars(Model model) {
+	public String listAllCars(Model model,
+			@RequestParam("pageSize") Optional<Integer> pageSize,
+			@RequestParam("page") Optional<Integer> page) {
+
+		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 		User user = userService.obtainCurrentPrincipleUser();
-		List<Car> cars = carService.findAllByUser(user);
+		Page<Car> cars = carService.findAllByUserPageable(user, PageRequest.of(evalPage, evalPageSize));
+		Pager pager = new Pager(cars.getTotalPages(), cars.getNumber(), BUTTONS_TO_SHOW);
+		model.addAttribute("pager", pager);
+		model.addAttribute("selectedPageSize", evalPageSize);
+		model.addAttribute("pageSizes", PAGE_SIZES);
 		model.addAttribute("cars", cars);
 		return "user/cars";
+	}
+
+	@GetMapping("/car/{id}/image")
+	public void showProductImage(@PathVariable String id,
+			HttpServletResponse response) throws IOException {
+		response.setContentType("image/png");
+		Car car = carService.findById(Long.parseLong(id));
+		InputStream is = new ByteArrayInputStream(ImageUtil.decompressImage(car.getImageData()));
+		IOUtils.copy(is, response.getOutputStream());
 	}
 
 	@GetMapping("/trip/history")
@@ -92,25 +124,56 @@ public class UserController {
 
 	@GetMapping("/car/new")
 	public String formNewCar(Model model) {
-		model.addAttribute("carForm", new CreateCarDto());
+		model.addAttribute("carForm", new GarageCarDto());
 		model.addAttribute("user", userService.obtainCurrentPrincipleUser());
 		model.addAttribute("fuelTypes", FUEL_TYPES);
 		return "/user/new-car";
 	}
 
-	@PostMapping("/car")
-	public String createNewCar(@ModelAttribute("carForm") CreateCarDto dto,
-			BindingResult bindingResult, Model model) {
+	@GetMapping("/car/{id}/edit")
+	public String editCar(Model model, @PathVariable("id") Long id) {
+		model.addAttribute("id", id);
+		model.addAttribute("carForm", new GarageCarDto());
+		model.addAttribute("user", userService.obtainCurrentPrincipleUser());
+		model.addAttribute("fuelTypes", FUEL_TYPES);
+		return "/user/edit-car";
+	}
 
+	@PostMapping("/car")
+	public String createNewCar(@ModelAttribute("carForm") GarageCarDto dto, @RequestParam("image") MultipartFile file,
+			BindingResult bindingResult, Model model) throws IOException {
+		if (file != null && file.getContentType() != null && !"image/png".equals(file.getContentType())) {
+			bindingResult.rejectValue("about", "IMAGE", "Please provide image in PNG format.");
+		}
 		newCarValidator.validate(dto, bindingResult);
 		if (bindingResult.hasErrors()) {
 			log.info("form had errors.");
-			model.addAttribute("carForm", new CreateCarDto());
+			model.addAttribute("errorMessage", bindingResult.getAllErrors().get(0).getDefaultMessage());
+			model.addAttribute("carForm", new GarageCarDto());
 			model.addAttribute("user", userService.obtainCurrentPrincipleUser());
 			model.addAttribute("fuelTypes", FUEL_TYPES);
 			return "user/new-car";
 		}
-		carService.createNewCar(dto);
+		carService.createNewCar(dto, file);
+		return "redirect:/user/car";
+	}
+
+	@PutMapping("/car")
+	public String updateCar(@ModelAttribute("carForm") GarageCarDto dto, @RequestParam("image") MultipartFile file,
+			BindingResult bindingResult, Model model) throws IOException {
+		if (file != null && file.getContentType() != null && !"image/png".equals(file.getContentType())) {
+			bindingResult.rejectValue("about", "IMAGE", "Please provide image in PNG format.");
+		}
+		newCarValidator.validate(dto, bindingResult);
+		if (bindingResult.hasErrors()) {
+			log.info("form had errors.");
+			model.addAttribute("errorMessage", bindingResult.getAllErrors().get(0).getDefaultMessage());
+			model.addAttribute("carForm", new GarageCarDto());
+			model.addAttribute("user", userService.obtainCurrentPrincipleUser());
+			model.addAttribute("fuelTypes", FUEL_TYPES);
+			return "user/edit-car";
+		}
+		carService.updateCar(dto, file);
 		return "redirect:/user/car";
 	}
 
@@ -118,7 +181,7 @@ public class UserController {
 	public String formNewTrip(Model model) {
 		User user = userService.obtainCurrentPrincipleUser();
 		List<Car> cars = carService.findAllByUser(user);
-		model.addAttribute("tripForm", new CreateCarDto());
+		model.addAttribute("tripForm", new GarageCarDto());
 		model.addAttribute("user", user);
 		model.addAttribute("cars", cars);
 		return "/user/new-trip";
@@ -134,7 +197,7 @@ public class UserController {
 
 	@ResponseBody
 	@PostMapping(value = "/co2", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> calcCO2(@RequestBody CreateTripDto dto, BindingResult bindingResult) {
+	public ResponseEntity<?> calcCO2(@RequestBody DriveTripDto dto, BindingResult bindingResult) {
 		newTripValidator.validate(dto, bindingResult);
 		if (bindingResult.hasErrors()) {
 			log.info("form had errors.");
@@ -144,11 +207,21 @@ public class UserController {
 					.body(new ErrorDetails("Bad request", HttpStatus.BAD_REQUEST, details));
 		}
 		double calculatedCO2ForTrip = co2AmountService.calculateCO2ForTrip(dto);
-		if (dto.isSaveToHistory()) {
+		if (dto.isSaveToHistory() && !dto.isTestTrip()) {
 			User user = userService.obtainCurrentPrincipleUser();
 			tripService.createNewTrip(dto, user, calculatedCO2ForTrip);
 		}
-		Car car = carService.findById(dto.getCarId());
+		Car car;
+		if (dto.isTestTrip()) {
+			car = Car.builder()
+					.cylinders(dto.getCylinders())
+					.name("Test Car")
+					.engineSize(dto.getEngineSize())
+					.fuelConsumptionComb(dto.getFuelConsumptionComb())
+					.build();
+		} else {
+			car = carService.findById(dto.getCarId());
+		}
 		return ResponseEntity.ok(CO2CalculatedDto.builder()
 				.from(dto.getFrom())
 				.to(dto.getTo())

@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>New trip</title>
+    <title>Edit car</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,18 +19,6 @@
 <!-- Navigation-->
 <div th:replace="user/nav :: nav">&nbsp;</div>
 <div class="content-wrapper content-wrapper-my">
-
-    <section class="popup">
-        <div class="popup__content">
-            <div class="close">
-                <span></span>
-                <span></span>
-            </div>
-            <span id="successCO2"></span>
-        </div>
-    </section>
-
-
     <div class="container-fluid">
 
         <!-- Breadcrumbs-->
@@ -38,37 +26,37 @@
             <li class="breadcrumb-item">
                 <a href="#">Cabinet</a>
             </li>
-            <li class="breadcrumb-item active">Ride test trip</li>
+            <li class="breadcrumb-item active">Edit your car</li>
         </ol>
 
         <div class="container">
 
             <section class="panel panel-default">
 
-                <div class="panel-body panel-body-my">
-                    <form action="#">
+                <div style="" class="panel-body">
 
-                        <div style="text-align: center" class="alert alert-success" role="alert">
-                            <h3>Calculate the CO<sub>2</sub> emissions of your car journey</h3>
-                            <p style="text-align: left">
-                                When calculating the CO<sub>2</sub> emissions of your trip, there are also small things that are important for
-                                the
-                                calculation. For example, when you travel by car, you need more fuel if you have a caravan behind your exhaust or
-                                if you have a roof box or bicycle rack with you. In general, the more weight you carry, the more polluting the
-                                car journey is and the more CO<sub>2</sub> your car emits. There are a number of standard calculations that you
-                                can use when
-                                traveling by car. For example, with diesel you emit an average of 132 gr of CO<sub>2</sub> per kilometer, while
-                                with petrol
-                                this is 120 CO<sub>2</sub> per kilometer . These emissions are calculated on average consumption. This can
-                                therefore differ
-                                greatly based on weight and car.
+                    <form th:object="${carForm}" action="#" th:action="@{/user/car}" th:method="put" enctype="multipart/form-data">
+
+                        <div class="alert alert-danger" role="alert" th:if="${errorMessage != null}" th:text="${errorMessage}"></div>
+
+
+                        <input hidden="hidden" type="text" class="form-control" name="id" id="id" th:value="${id}">
+
+                        <div style="text-align: center; margin-bottom: 2rem;" class="alert alert-warning"
+                             role="alert">
+                            <h5>Don't know exact characteristics of your car?</h5>
+                            <p style="text-align: center">
+                                Try checking it there: <a class="alert-link"
+                                                          href="https://www.auto-data.net/en/">https://www.auto-data.net/en/</a>
                             </p>
                         </div>
 
-                        <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
-
-                        <h3 class="form-group-my">Car Info</h3>
-                        <hr>
+                        <div class="form-group form-group-my">
+                            <label for="name" class="col-sm-3 control-label">Make up alias for car</label>
+                            <div class="col-sm-9">
+                                <input required type="text" class="form-control" name="name" id="name" placeholder="e.g. Ford Focus 2">
+                            </div>
+                        </div>
                         <div class="form-group form-group-my">
                             <label class="col-sm-3 control-label" for="yearManufactured">In which year car is manufactured</label>
                             <div class="col-sm-9">
@@ -76,7 +64,12 @@
                                        type="number">
                             </div>
                         </div>
-
+                        <div class="form-group form-group-my">
+                            <label for="about" class="col-sm-3 control-label">Tell about your car</label>
+                            <div class="col-sm-9">
+                                <textarea name="about" id="about" placeholder="About car" class="form-control"></textarea>
+                            </div>
+                        </div>
                         <div class="form-group form-group-my">
                             <label for="engineSize" class="col-sm-3 control-label">What is engine size</label>
                             <div class="col-sm-9">
@@ -85,7 +78,7 @@
                             </div>
                         </div>
                         <div class="form-group form-group-my">
-                            <label for="cylinders" class="col-sm-3 control-label">How many cylinders</label>
+                            <label for="cylinders" class="col-sm-3 control-label">How mane cylinders</label>
                             <div class="col-sm-9">
                                 <input required type="number" class="form-control" name="cylinders" id="cylinders" placeholder="e.g. 4">
                             </div>
@@ -97,6 +90,7 @@
                                        placeholder="e.g. 7.5">
                             </div>
                         </div>
+
                         <div class="form-group form-group-my">
                             <label class="col-sm-3 control-label" for="fuelType">Choose fuel type</label>
                             <div class="col-sm-9">
@@ -108,54 +102,18 @@
                             </div>
                         </div>
 
-
-                        <div style="text-align: center; margin-bottom: 2rem; margin-top: 2rem" class="alert alert-warning"
-                             role="alert">
-                            <h5>Don't know exact characteristics of your car?</h5>
-                            <p style="text-align: center">
-                                Try checking it there: <a class="alert-link" href="https://www.auto-data.net/en/">https://www.auto-data.net/en/</a>
-                            </p>
-                        </div>
-
-                        <h3 class="form-group-my">Ride Info</h3>
-                        <hr>
-
                         <div class="form-group form-group-my">
-                            <label for="from" class="col-sm-3 control-label">I am riding from</label>
+                            <label for="file_img" class="col-sm-3 control-label">Upload image (png)</label>
                             <div class="col-sm-9">
-                                <input required type="text" class="form-control" name="from" id="from"
-                                       placeholder="e.g. Kyiv">
+                                <input type="file" id="file_img" name="image" accept="image/*" class="form-control-file">
                             </div>
-                        </div>
-                        <div class="form-group form-group-my">
-                            <label for="to" class="col-sm-3 control-label">I am riding to</label>
-                            <div class="col-sm-9">
-                                <input required type="text" class="form-control" name="to" id="to"
-                                       placeholder="e.g Lviv">
-                            </div>
-                        </div>
-                        <div class="form-group form-group-my">
-                            <label for="distanceKm" class="col-sm-3 control-label">How long is distance in km?</label>
-                            <div class="col-sm-9">
-                                <input class="form-control" id="distanceKm" name="distanceKm" placeholder="e.g. 715.5" required step=".1"
-                                       type="number">
-                            </div>
-                        </div>
-
-                        <div style="text-align: center; margin-bottom: 2rem; margin-top: 2rem" class="alert alert-warning"
-                             role="alert">
-                            <h5>Don't know exact distance between your points?</h5>
-                            <p style="text-align: center">
-                                Try checking it there: <a class="alert-link" href="https://www.distancecalculator.net/">https://www.distancecalculator.net/</a>
-                            </p>
                         </div>
 
                         <div class="form-group form-group-my">
                             <div class="col-sm-offset-3 col-sm-9 text-center">
-                                <button class="btn btn-primary" id="newTr">Test!</button>
+                                <button type="submit" class="btn btn-primary">Add car!</button>
                             </div>
                         </div>
-
 
                     </form>
                 </div>
@@ -183,8 +141,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 
-<script th:src="@{/jscode/submitTestTrip.js}"></script>
 <script th:src="@{/js/table.js}"></script>
 
+
+<!--<div class="form-group">-->
+<!--    <label for="tech" class="col-sm-3 control-label">Технолог</label>-->
+<!--    <div class="col-sm-3">-->
+<!--        <select class="form-control">-->
+<!--            <option value="">Выберите</option>-->
+<!--            <option value="texnolog2">Технолог 2</option>-->
+<!--            <option value="texnolog3">Технолог 3</option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--</div> &lt;!&ndash; form-group // &ndash;&gt;-->
+
+<!--<div class="form-group">-->
+<!--    <label for="name" class="col-sm-3 control-label">Тип заказа</label>-->
+<!--    <div class="col-sm-9">-->
+<!--        <label class="radio-inline">-->
+<!--            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Внешный заказ-->
+<!--        </label>-->
+<!--        <label class="radio-inline">-->
+<!--            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Внутренный заказ-->
+<!--        </label>-->
+<!--    </div>-->
+<!--</div> &lt;!&ndash; form-group // &ndash;&gt;-->
 </body>
 </html>

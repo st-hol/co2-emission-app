@@ -1,11 +1,9 @@
 package com.kpi.diploma.service.base.impl;
 
-import com.google.common.collect.Lists;
-import com.kpi.diploma.domain.user.User;
-import com.kpi.diploma.dto.UserDto;
-import com.kpi.diploma.repository.UserRepository;
-import com.kpi.diploma.service.base.UserService;
-import lombok.extern.slf4j.Slf4j;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -15,9 +13,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.google.common.collect.Lists;
+import com.kpi.diploma.domain.user.User;
+import com.kpi.diploma.dto.UserDto;
+import com.kpi.diploma.repository.UserRepository;
+import com.kpi.diploma.service.base.UserService;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -69,7 +71,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User obtainCurrentPrincipleUser() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if ("anonymousUser".equals(principal.toString())) {
+            return null;
+        }
+        UserDetails userDetails = (UserDetails) principal;
         return userRepository.findByEmail(userDetails.getUsername());
     }
 

@@ -5,7 +5,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.kpi.diploma.dto.CreateTripDto;
+import com.kpi.diploma.dto.DriveTripDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,15 +20,13 @@ public class NewTripValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> aClass) {
-		return CreateTripDto.class.equals(aClass);
+		return DriveTripDto.class.equals(aClass);
 	}
 
 	@Override
 	public void validate(Object o, Errors errors) {
-		CreateTripDto dto = (CreateTripDto) o;
+		DriveTripDto dto = (DriveTripDto) o;
 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", NOT_EMPTY,
-				"Trip name can't be empty.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "from", NOT_EMPTY,
 				"Departure can't be empty.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "to", NOT_EMPTY,
@@ -38,7 +36,11 @@ public class NewTripValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "saveToHistory", NOT_EMPTY,
 				"Please chose whether you want to save trip in trip history.");
 
-		if (dto.getCarId() == null) {
+		if (!dto.isTestTrip()) {
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", NOT_EMPTY,
+					"Trip name can't be empty.");
+		}
+		if (!dto.isTestTrip() && dto.getCarId() == null) {
 			errors.rejectValue("carId", NOT_EMPTY, "No car specified.");
 		}
 		if (dto.getDistanceKm() < ERROR) {

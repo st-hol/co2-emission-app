@@ -41,14 +41,18 @@
                     <th:block th:each="car : ${cars}">
 
                         <div class="card mx-auto col-lg-2 col-sm-6 ">
-                            <img alt="..." class="card-img-top" src="https://eskipaper.com/images/	peugeot-onyx-concept-1.jpg">
                             <div class="card-body">
-                                <h5 class="card-title" th:text="${car.name} + ' ' + ${car.yearManufactured}"></h5>
-                                <p class="card-text text-success"><strong th:text="'Engine: ' + ${car.engineSize}"></strong></p>
+                                <h6 class="card-title card-title-my" th:text="${car.name} + ' ' + ${car.yearManufactured}"></h6>
+                                <!--<img alt="..." class="card-img-top car-img-my" src="https://eskipaper.com/images/	peugeot-onyx-concept-1.jpg">-->
+                                <!-- <img th:src="${'picCar' + car.id} == null ? _ : @{'data:image/png;base64,'+${'picCar' + car.id}}">-->
+                                <img class="card-img-top" th:src="@{'/user/car/' + ${car.id} + '/image'}">
+                                <p class="card-text text-dark"><strong th:text="'Engine: ' + ${car.engineSize}"></strong></p>
                                 <p class="card-text text-dark"><strong th:text="'Cylinders: ' + ${car.cylinders}"></strong></p>
-                                <p class="card-text text-warning"><strong th:text="'Fuel Cons.: ' + ${car.fuelConsumptionComb}"></strong></p>
+                                <p class="card-text text-danger"><strong th:text="'Fuel Cons.: ' + ${car.fuelConsumptionComb}"></strong></p>
                                 <p class="card-text text-danger"><strong th:text="'Fuel type: ' + ${car.fuelType.value}"></strong></p>
-                                <a class="btn btn-outline-secondary" href="#">Edit props.</a>
+                                <a class="btn btn-outline-secondary"
+                                   th:href="@{/user/car/{carId}/edit(carId=${car.id})}">Edit
+                                    props.</a>
                                 <form class="d-inline" th:action="@{/user/car/{carId}(carId=${car.id})}" th:method="delete">
                                     <input name="_method" type="hidden" value="DELETE">
                                     <input name="id" th:value="${car.id}" type="hidden" />
@@ -64,22 +68,51 @@
             </div>
         </div>
 
+        <br>
+        <br>
+        <div class="container mt-2">
+            <div class="row">
+                <!--                <div class="form-group col-md-1">-->
+                <!--                    <select class="pgselect form-control pagination bg-light " id="pageSizeSelect">-->
+                <!--                        <option class="text-center mx-auto" th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"-->
+                <!--                                th:selected="${pageSize} == ${selectedPageSize}"></option>-->
+                <!--                    </select>-->
+                <!--                </div>-->
 
-        <nav aria-label="...">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled ">
-                    <span class="page-link ">Previous</span>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item" aria-current="page">
-                    <span class="page-link">2<span class="sr-only">(current)</span></span>
-                </li>
-                <li class="page-item "><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link a3" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+                <div th:if="${cars.totalPages > 1}" class="form-group col-md-11 pagination-centered">
+                    <ul class="pagination justify-content-center font-weight-medium">
+                        <li class="page-item" th:class="${cars.number == 0} ? disabled">
+                            <a class="page-link bg-light" th:href="@{/user/car/(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+                        </li>
+
+                        <li class="page-item" th:disabled="${cars.number == 0}" th:class="${cars.number == 0} ? disabled">
+                            <a class="page-link  bg-light" th:disabled="${cars.number == 0}"
+                               th:href="@{/user/car/(pageSize=${selectedPageSize}, page=${cars.number})}">&larr;</a>
+                        </li>
+
+                        <li class="page-item" th:class="${cars.number == (page - 1)} ? 'active pointer-disabled'"
+                            th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                            <a class="page-link bg-light" th:href="@{/user/car/(pageSize=${selectedPageSize}, page=${page})}"
+                               th:text="${page}"></a>
+                        </li>
+
+                        <li class="page-item" th:disabled="${cars.number + 1 == cars.totalPages}"
+                            th:class="${cars.number + 1 == cars.totalPages} ? disabled">
+                            <a class="page-link  bg-light" th:disabled="${cars.number + 1 == cars.totalPages}"
+                               th:href="@{/user/car/(pageSize=${selectedPageSize}, page=${cars.number + 1 >= cars.totalPages ? cars.totalPages :
+                               cars.number + 2})}">&rarr;
+                            </a>
+                        </li>
+
+                        <li class="page-item" th:class="${cars.number + 1 == cars.totalPages} ? disabled">
+                            <a class="page-link bg-light"
+                               th:href="@{/user/car/(pageSize=${selectedPageSize}, page=${cars.totalPages})}">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br>
 
         <div th:replace="user/footer :: footer">&nbsp;</div>
         <!-- Scroll to Top Button-->
@@ -129,6 +162,7 @@
 <!--        <a href="#" class="btn btn-outline-secondary">Buy now</a>-->
 <!--    </div>-->
 <!--</div>-->
+
 
 </body>
 </html>
