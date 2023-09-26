@@ -64,7 +64,7 @@
                                 <td th:text="${trip.toCity}"></td>
                                 <td th:text="${trip.distanceKm} + ' km'"></td>
                                 <td th:text="${#temporals.format(trip.date)}"></td>
-                                <td th:text="${#numbers.formatDecimal(trip.co2amount/1000, 0, 'COMMA', 2, 'POINT') + ' kg'}"></td>
+                                <td th:text="${#numbers.formatDecimal(trip.co2amount, 0, 'COMMA', 6, 'POINT') + ' kg'}"></td>
                             </tr>
                         </th:block>
                         </tbody>
