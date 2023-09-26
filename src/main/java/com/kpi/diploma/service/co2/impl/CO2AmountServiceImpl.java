@@ -62,6 +62,7 @@ public class CO2AmountServiceImpl implements CO2AmountService {
 		} else {
 			fuelType = TypeEnum.findOptionalEnumValue(FuelType.class, driveTripDto.getFuelType()).orElse(FuelType.UNDEFINED);
 		}
-		return ftFloatingCoefficientCorrelationMap.get(fuelType) * emission * driveTripDto.getDistanceKm();
+		final double emissionsKG = emission / 1000.0;
+		return ftFloatingCoefficientCorrelationMap.get(fuelType) * emissionsKG * driveTripDto.getDistanceKm();
 	}
 }
