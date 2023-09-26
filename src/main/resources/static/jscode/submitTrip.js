@@ -48,8 +48,8 @@ $(document).ready(function() {
             const co2text = `Your trip from [ ${result.from} ] to [ ${result.to} ] driving 
              the car [ ${result.carName} ] with average fuel consumption [ ${result.fuelConsumptionComb} ] 
              will result in total 
-             Carbon Footprint of [ ${parseFloat(result.co2Amount).toFixed(4)} ] g 
-             which also is  [ ${parseFloat(result.co2Amount/1000).toFixed(8)} ] kg.`;
+             Carbon Footprint of [ ${parseFloat(result.co2Amount*1000).toFixed(4)} ] g 
+             which also is  [ ${parseFloat(result.co2Amount).toFixed(8)} ] kg .`;
             $('#successCO2').text(co2text);
             $(".popup").fadeIn(500);
             $('#errorAlert').hide();
