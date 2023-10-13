@@ -34,7 +34,7 @@
             <h3 class="text-success text-center">kg!</h3>
         </div>
 
-        <div class="container-cnt" th:if="${user.co2YearAmount} > 90 && ${user.co2YearAmount} < 120">
+        <div class="container-cnt" th:if="${user.co2YearAmount} > 90 and ${user.co2YearAmount} < 120">
             <h3 class="text-warning text-center">Your yearly CO<sub>2</sub> amount is</h3>
             <div class="counter text-warning" th:data-countto="${user.co2YearAmount}">0</div>
             <h3 class="text-warning text-center">kg!</h3>
