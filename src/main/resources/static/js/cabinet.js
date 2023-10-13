@@ -9,23 +9,41 @@ var myLineChart = new Chart(ctx, {
   type: "line",
   data: {
     labels: [
-      "Mar 1",
-      "Mar 2",
-      "Mar 3",
-      "Mar 4",
-      "Mar 5",
-      "Mar 6",
-      "Mar 7",
-      "Mar 8",
-      "Mar 9",
-      "Mar 10",
-      "Mar 11",
-      "Mar 12",
-      "Mar 13"
+      "Oct 1",
+      "Oct 2",
+      "Oct 3",
+      "Oct 4",
+      "Oct 5",
+      "Oct 6",
+      "Oct 7",
+      "Oct 8",
+      "Oct 9",
+      "Oct 10",
+      "Oct 11",
+      "Oct 12",
+      "Oct 13",
+      "Oct 14",
+      "Oct 15",
+      "Oct 16",
+      "Oct 17",
+      "Oct 18",
+      "Oct 19",
+      "Oct 20",
+      "Oct 21",
+      "Oct 22",
+      "Oct 23",
+      "Oct 24",
+      "Oct 25",
+      "Oct 26",
+      "Oct 27",
+      "Oct 28",
+      "Oct 29",
+      "Oct 30",
+      "Oct 31"
     ],
     datasets: [
       {
-        label: "Sessions",
+        label: "emissions (g)",
         lineTension: 0.3,
         backgroundColor: "rgba(2,117,216,0.2)",
         borderColor: "rgba(2,117,216,1)",
@@ -37,19 +55,37 @@ var myLineChart = new Chart(ctx, {
         pointHitRadius: 20,
         pointBorderWidth: 2,
         data: [
-          10000,
-          30162,
-          26263,
-          18394,
-          18287,
-          28682,
-          31274,
-          33259,
-          25849,
-          24159,
-          32651,
-          31984,
-          38451
+          1120,
+          2120,
+          500,
+          900,
+          3000,
+          1800,
+          1244,
+          1444,
+          423,
+          141,
+          0,
+          0,
+          0,
+          0,
+          422,
+          900,
+          1600,
+          2100,
+          1424,
+          1244,
+          4591,
+          4000,
+          2100,
+          1300,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
         ]
       }
     ]
@@ -59,13 +95,13 @@ var myLineChart = new Chart(ctx, {
       xAxes: [
         {
           time: {
-            unit: "date"
+            unit: "day of month"
           },
           gridLines: {
             display: false
           },
           ticks: {
-            maxTicksLimit: 7
+            maxTicksLimit: 31
           }
         }
       ],
@@ -73,7 +109,7 @@ var myLineChart = new Chart(ctx, {
         {
           ticks: {
             min: 0,
-            max: 40000,
+            max: 5000,
             maxTicksLimit: 5
           },
           gridLines: {
@@ -88,17 +124,17 @@ var myLineChart = new Chart(ctx, {
   }
 });
 // -- Bar Chart Example
-var ctx = document.getElementById("myBarChart");
-var myLineChart = new Chart(ctx, {
+var ctx2 = document.getElementById("myBarChart");
+var myBarChart = new Chart(ctx2, {
   type: "bar",
   data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
+    labels: [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     datasets: [
       {
         label: "Emissions",
         backgroundColor: "rgba(2,117,216,1)",
         borderColor: "rgba(2,117,216,1)",
-        data: [1.7, 1.2, 1.5, 0.9, 1.2, 1.3]
+        data: [1.7, 2.2, 1.5, 3.9, 1.2, 4.3, 1.7, 0.9, 1.2, 4.1, 0, 0]
       }
     ]
   },
@@ -113,7 +149,7 @@ var myLineChart = new Chart(ctx, {
             display: false
           },
           ticks: {
-            maxTicksLimit: 6
+            maxTicksLimit: 12
           }
         }
       ],
@@ -121,7 +157,7 @@ var myLineChart = new Chart(ctx, {
         {
           ticks: {
             min: 0,
-            max: 2,
+            max: 6,
             maxTicksLimit: 5
           },
           gridLines: {
@@ -136,8 +172,8 @@ var myLineChart = new Chart(ctx, {
   }
 });
 // -- Pie Chart Example
-var ctx = document.getElementById("myPieChart");
-var myPieChart = new Chart(ctx, {
+var ctx3 = document.getElementById("myPieChart");
+var myPieChart = new Chart(ctx3, {
   type: "pie",
   data: {
     labels: ["Audi A4", "BMW X5", "Ford Focus", "Kia Rio"],

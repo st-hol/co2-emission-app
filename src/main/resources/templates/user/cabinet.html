@@ -28,24 +28,27 @@
             <li class="breadcrumb-item active">My Dashboard</li>
         </ol>
 
-        <div class="container-cnt">
+        <div class="container-cnt" th:if="${user.co2YearAmount} < 90">
             <h3 class="text-success text-center">Your yearly CO<sub>2</sub> amount is</h3>
             <div class="counter text-success" th:data-countto="${user.co2YearAmount}">0</div>
             <h3 class="text-success text-center">kg!</h3>
         </div>
 
-        <!-- Area Chart Example-->
-        <div class="card mb-3">
-            <div class="card-header">
-                <i class="fa fa-area-chart"></i>Your area-chart statistics</div>
-            <div class="card-body">
-                <canvas id="myAreaChart" width="100%" height="30"></canvas>
-            </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        <div class="container-cnt" th:if="${user.co2YearAmount} > 90 && ${user.co2YearAmount} < 120">
+            <h3 class="text-warning text-center">Your yearly CO<sub>2</sub> amount is</h3>
+            <div class="counter text-warning" th:data-countto="${user.co2YearAmount}">0</div>
+            <h3 class="text-warning text-center">kg!</h3>
         </div>
+
+        <div class="container-cnt" th:if="${user.co2YearAmount} > 120">
+            <h3 class="text-danger text-center">Your yearly CO<sub>2</sub> amount is</h3>
+            <div class="counter text-danger" th:data-countto="${user.co2YearAmount}">0</div>
+            <h3 class="text-danger text-center">kg!</h3>
+        </div>
+
         <div class="row">
             <div class="col-lg-8">
-                <!-- Example Bar Chart Card-->
+                <!-- Bar Chart Card-->
                 <div class="card mb-3">
                     <div class="card-header">
                         <i class="fa fa-bar-chart"></i>CO<sub>2</sub> emissions by months</div>
@@ -71,18 +74,30 @@
 
             </div>
             <div class="col-lg-4">
-                <!-- Example Pie Chart Card-->
+                <!-- Pie Chart Card-->
                 <div class="card mb-3">
                     <div class="card-header">
                         <i class="fa fa-pie-chart"></i>Your most used cars</div>
                     <div class="card-body">
-                        <canvas id="myPieChart" width="100%" height="100"></canvas>
+                        <canvas id="myPieChart" width="100%" height="70"></canvas>
                     </div>
                     <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Area Chart-->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-area-chart"></i>Current month daily exhaust overview</div>
+        <div class="card-body">
+            <canvas id="myAreaChart" width="98%" height="30"></canvas>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <div th:replace="user/footer :: footer">&nbsp;</div>
