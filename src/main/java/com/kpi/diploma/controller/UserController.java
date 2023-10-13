@@ -206,10 +206,10 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(new ErrorDetails("Bad request", HttpStatus.BAD_REQUEST, details));
 		}
-		double calculatedCO2ForTrip = co2AmountService.calculateCO2ForTrip(dto);
+		double kgCO2ForTrip = co2AmountService.calculateCO2ForTrip(dto);
 		if (dto.isSaveToHistory() && !dto.isTestTrip()) {
 			User user = userService.obtainCurrentPrincipleUser();
-			tripService.createNewTrip(dto, user, calculatedCO2ForTrip);
+			tripService.createNewTrip(dto, user, kgCO2ForTrip);
 		}
 		Car car;
 		if (dto.isTestTrip()) {
@@ -228,7 +228,7 @@ public class UserController {
 				.carName(car.getName())
 				.engineSize(car.getEngineSize())
 				.fuelConsumptionComb(car.getFuelConsumptionComb())
-				.co2Amount(calculatedCO2ForTrip)
+				.co2Amount(kgCO2ForTrip)
 				.build());
 	}
 

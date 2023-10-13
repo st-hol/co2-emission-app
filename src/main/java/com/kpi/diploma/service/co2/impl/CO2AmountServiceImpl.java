@@ -32,6 +32,11 @@ public class CO2AmountServiceImpl implements CO2AmountService {
 	@Autowired
 	private CarService carService;
 
+	/**
+	 * calculateCO2ForTrip
+	 * @param dto DriveTripDto
+	 * @return KG of CO₂
+	 */
 	@Override
 	public double calculateCO2ForTrip(DriveTripDto dto) {
 		CO2EmissionsClient.PredictCO2Request request;
@@ -52,7 +57,7 @@ public class CO2AmountServiceImpl implements CO2AmountService {
 	 *
 	 * @param emissionGramPer100km     g/km
 	 * @param driveTripDto dto with trip info
-	 * @return value of emissions per trip
+	 * @return value of emissions per trip c
 	 */
 	private double calculateByFormula(double emissionGramPer100km, DriveTripDto driveTripDto) {
 		FuelType fuelType;

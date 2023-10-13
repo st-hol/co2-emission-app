@@ -56,19 +56,19 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public void createNewTrip(DriveTripDto dto, User user, double calculatedCO2ForTrip) {
+    public void createNewTrip(DriveTripDto dto, User user, double kgCO2ForTrip) {
         Trip trip = new Trip();
         trip.setCar(carService.findById(dto.getCarId()));
         trip.setName(dto.getName());
         trip.setFromCity(dto.getFrom());
         trip.setToCity(dto.getTo());
         trip.setDistanceKm(dto.getDistanceKm());
-        trip.setCo2amount(calculatedCO2ForTrip);
+        trip.setCo2amount(kgCO2ForTrip);
         trip.setUsers(Collections.singletonList(user));
         trip.setDate(LocalDate.now());
         trip.setAbout(dto.getAbout());
         repository.save(trip);
 
-        userService.incrementYearlyCO2(user, calculatedCO2ForTrip);
+        userService.incrementYearlyCO2(user, kgCO2ForTrip);
     }
 }

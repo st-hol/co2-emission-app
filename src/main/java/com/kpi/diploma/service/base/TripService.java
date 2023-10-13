@@ -20,5 +20,5 @@ public interface TripService {
 
     List<Trip> findAllByUser(User user);
 
-    void createNewTrip(DriveTripDto dto, User user, double calculatedCO2ForTrip);
+    void createNewTrip(DriveTripDto dto, User user, double kgCO2ForTrip);
 }
