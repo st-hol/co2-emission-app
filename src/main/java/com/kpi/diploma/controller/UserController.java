@@ -243,7 +243,7 @@ public class UserController {
 	}
 
 	@ResponseBody
-	@PostMapping(value = "/stats", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/stats", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<StatsDto> getStats() {
 		final User user = userService.obtainCurrentPrincipleUser();
 
@@ -252,6 +252,7 @@ public class UserController {
 		final Map<String, Double> carUsageFrequencyToPercents = statsService.calcCarUsageFrequencyToPercents(user);
 
 		final StatsDto response = StatsDto.builder()
+				.simulationDemoModeEnabled(false)
 				.currentMonthDailyExhaust(currentMonthDailyExhaust)
 				//line chart
 				.currentMonthDailyExhaustMinY(
