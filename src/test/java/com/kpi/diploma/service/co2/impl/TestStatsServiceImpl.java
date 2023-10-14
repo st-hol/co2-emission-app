@@ -20,14 +20,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.kpi.diploma.domain.Car;
 import com.kpi.diploma.domain.Trip;
 import com.kpi.diploma.domain.user.User;
-import com.kpi.diploma.service.base.CarService;
 import com.kpi.diploma.service.base.TripService;
 
 @ExtendWith(MockitoExtension.class)
 class TestStatsServiceImpl {
 
-	@Mock
-	private CarService carService;
 	@Mock
 	private TripService tripService;
 	@InjectMocks

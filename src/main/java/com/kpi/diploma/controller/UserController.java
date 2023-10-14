@@ -253,7 +253,24 @@ public class UserController {
 
 		final StatsDto response = StatsDto.builder()
 				.currentMonthDailyExhaust(currentMonthDailyExhaust)
+				//line chart
+				.currentMonthDailyExhaustMinY(
+						currentMonthDailyExhaust.values().stream().mapToInt(x -> Math.toIntExact(Math.round(x))).min().orElse(0))
+				.currentMonthDailyExhaustMaxY(
+						currentMonthDailyExhaust.values().stream().mapToInt(x -> Math.toIntExact(Math.round(x))).max().orElse(10))
+				.currentMonthDailyExhaustHighest(
+						currentMonthDailyExhaust.values().stream().mapToDouble(x -> x).max().orElse(0))
+				.currentMonthDailyExhaustMedium(
+						currentMonthDailyExhaust.values().stream().mapToDouble(x -> x).average().orElse(0))
+				.currentMonthDailyExhaustLowest(
+						currentMonthDailyExhaust.values().stream().mapToDouble(x -> x).min().orElse(0))
+				//bar chart
 				.emissionsByMonths(emissionsByMonths)
+				.emissionsByMonthsMinY(
+						emissionsByMonths.values().stream().mapToInt(x -> Math.toIntExact(Math.round(x))).min().orElse(0))
+				.emissionsByMonthsMaxY(
+						currentMonthDailyExhaust.values().stream().mapToInt(x -> Math.toIntExact(Math.round(x))).max().orElse(1000))
+				//pie chart
 				.carUsageFrequencyToPercents(carUsageFrequencyToPercents)
 				.build();
 		return ResponseEntity.ok(response);
