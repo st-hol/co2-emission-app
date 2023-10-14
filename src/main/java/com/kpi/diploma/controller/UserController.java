@@ -41,12 +41,14 @@ import com.kpi.diploma.domain.user.User;
 import com.kpi.diploma.dto.CO2CalculatedDto;
 import com.kpi.diploma.dto.DriveTripDto;
 import com.kpi.diploma.dto.GarageCarDto;
+import com.kpi.diploma.dto.StatsDto;
 import com.kpi.diploma.dto.TestTripDto;
 import com.kpi.diploma.payload.ErrorDetails;
 import com.kpi.diploma.service.base.CarService;
 import com.kpi.diploma.service.base.TripService;
 import com.kpi.diploma.service.base.UserService;
 import com.kpi.diploma.service.co2.CO2AmountService;
+import com.kpi.diploma.service.co2.StatsService;
 import com.kpi.diploma.util.ImageUtil;
 import com.kpi.diploma.validator.NewCarValidator;
 import com.kpi.diploma.validator.NewTripValidator;
@@ -76,6 +78,8 @@ public class UserController {
 	private NewTripValidator newTripValidator;
 	@Autowired
 	private CO2AmountService co2AmountService;
+	@Autowired
+	private StatsService statsService;
 
 	@GetMapping({"/cabinet", "/home", "/"})
 	public String home(Model model) {
@@ -236,6 +240,23 @@ public class UserController {
 	public String deleteCar(@PathVariable Long id) {
 		carService.delete(id);
 		return "redirect:/user/car";
+	}
+
+	@ResponseBody
+	@PostMapping(value = "/stats", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<StatsDto> getStats() {
+		final User user = userService.obtainCurrentPrincipleUser();
+
+		final Map<String, Double> currentMonthDailyExhaust = statsService.calcCurrentMonthDailyExhaust(user);
+		final Map<String, Double> emissionsByMonths = statsService.calcEmissionsByMonths(user);
+		final Map<String, Double> carUsageFrequencyToPercents = statsService.calcCarUsageFrequencyToPercents(user);
+
+		final StatsDto response = StatsDto.builder()
+				.currentMonthDailyExhaust(currentMonthDailyExhaust)
+				.emissionsByMonths(emissionsByMonths)
+				.carUsageFrequencyToPercents(carUsageFrequencyToPercents)
+				.build();
+		return ResponseEntity.ok(response);
 	}
 
 }

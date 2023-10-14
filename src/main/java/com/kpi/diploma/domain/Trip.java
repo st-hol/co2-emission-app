@@ -40,7 +40,7 @@ public class Trip {
 
     private String name;
 
-    private double co2amount;
+    private double co2amount; //kg
 
     private String about;
 
