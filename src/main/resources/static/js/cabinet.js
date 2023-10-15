@@ -196,7 +196,7 @@ function realView(result) {
   var myLineChart = new Chart(ctx, {
     type: "line",
     data: {
-      labels: [...result.currentMonthDailyExhaust.keys()],
+      labels: [...Object.keys(result.currentMonthDailyExhaust)],
       datasets: [
         {
           label: "emissions (g)",
@@ -210,7 +210,7 @@ function realView(result) {
           pointHoverBackgroundColor: "rgba(2,117,216,1)",
           pointHitRadius: 20,
           pointBorderWidth: 2,
-          data: [...result.currentMonthDailyExhaust.values()]
+          data: [...Object.values(result.currentMonthDailyExhaust)]
         }
       ]
     },
@@ -225,7 +225,7 @@ function realView(result) {
               display: false
             },
             ticks: {
-              maxTicksLimit: [...result.currentMonthDailyExhaust.keys().length]
+              maxTicksLimit: [...Object.keys(result.currentMonthDailyExhaust)].length
             }
           }
         ],
@@ -252,13 +252,13 @@ function realView(result) {
   var myBarChart = new Chart(ctx2, {
     type: "bar",
     data: {
-      labels: [...result.emissionsByMonths.keys()],
+      labels: [...Object.keys(result.emissionsByMonths)],
       datasets: [
         {
           label: "Emissions",
           backgroundColor: "rgba(2,117,216,1)",
           borderColor: "rgba(2,117,216,1)",
-          data: [...result.emissionsByMonths.values()]
+          data: [...Object.values(result.emissionsByMonths)]
         }
       ]
     },
@@ -273,7 +273,7 @@ function realView(result) {
               display: false
             },
             ticks: {
-              maxTicksLimit: result.emissionsByMonths.keys().length
+              maxTicksLimit: [...Object.keys(result.emissionsByMonths)].length
             }
           }
         ],
@@ -300,10 +300,10 @@ function realView(result) {
   var myPieChart = new Chart(ctx3, {
     type: "pie",
     data: {
-      labels: [...result.carUsageFrequencyToPercents.keys()],
+      labels: [...Object.keys(result.carUsageFrequencyToPercents)],
       datasets: [
         {
-          data: [...result.carUsageFrequencyToPercents.values()],
+          data: [...Object.values(result.carUsageFrequencyToPercents)],
           backgroundColor: ["#007bff", "#dc3545", "#ffc107", "#28a745"]
         }
       ]
@@ -326,7 +326,7 @@ $(document).ready(function() {
           console.log(result.error);
           simulationView();
         } else {
-          if (result && !result.simulationDemoModeEnabled) {
+          if (result && result.simulationDemoModeEnabled === false) {
             realView(result);
             // $('#successAlert').css({ 'display': 'block' });
           } else {

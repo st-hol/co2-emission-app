@@ -17,15 +17,14 @@ public class StatsDto {
 	private final Map<String, Double> currentMonthDailyExhaust;
 	private final int currentMonthDailyExhaustMinY; // gram per day
 	private final int currentMonthDailyExhaustMaxY; // gram per day
-	private final Double currentMonthDailyExhaustHighest;
-	private final Double currentMonthDailyExhaustMedium;
-	private final Double currentMonthDailyExhaustLowest;
-
 
 	//BAR CHART: October - 2,5 kg, November - 4 kg , N ...
 	private final Map<String, Double> emissionsByMonths;
 	private final int emissionsByMonthsMinY; // kg per month
 	private final int emissionsByMonthsMaxY; // kg per month
+	private final Double emissionsByMonthsHighest;
+	private final Double emissionsByMonthsMedium;
+	private final Double emissionsByMonthsLowest;
 
 	//PIE CHART: BMW - 90%, Ford - 5%, N - n% ...
 	private final Map<String, Double> carUsageFrequencyToPercents;

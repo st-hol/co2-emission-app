@@ -65,6 +65,8 @@ public class UserController {
 	private static final int INITIAL_PAGE_SIZE = 3;
 	private static final int[] PAGE_SIZES = {3, 5, 10, 15, 20, 30};
 	private static final List<FuelType> FUEL_TYPES = FuelType.getValidTypes();
+	private static final boolean SIMULATION_VIEW = true;
+	private static final String FORMAT = "%,.3f";
 
 	@Autowired
 	private UserService userService;
@@ -83,7 +85,19 @@ public class UserController {
 
 	@GetMapping({"/cabinet", "/home", "/"})
 	public String home(Model model) {
-		model.addAttribute("user", userService.obtainCurrentPrincipleUser());
+		final User user = userService.obtainCurrentPrincipleUser();
+		model.addAttribute("user", user);
+
+		final Map<String, Double> emissionsByMonths = statsService.calcEmissionsByMonths(user);
+		final double emissionsByMonthsHighest = emissionsByMonths.values().stream().mapToDouble(x -> x).max().orElse(0);
+		final double emissionsByMonthsMedium = emissionsByMonths.values().stream().mapToDouble(x -> x).average().orElse(0);
+		final double emissionsByMonthsLowest = emissionsByMonths.values().stream().mapToDouble(x -> x).min().orElse(0);
+
+		model.addAttribute("simulationDemoModeEnabled", SIMULATION_VIEW);
+		model.addAttribute("emissionsByMonthsHighest", String.format(FORMAT, emissionsByMonthsHighest));
+		model.addAttribute("emissionsByMonthsMedium", String.format(FORMAT, emissionsByMonthsMedium));
+		model.addAttribute("emissionsByMonthsLowest", String.format(FORMAT, emissionsByMonthsLowest));
+
 		return "user/cabinet";
 	}
 
@@ -252,25 +266,20 @@ public class UserController {
 		final Map<String, Double> carUsageFrequencyToPercents = statsService.calcCarUsageFrequencyToPercents(user);
 
 		final StatsDto response = StatsDto.builder()
-				.simulationDemoModeEnabled(false)
+				//real or demo view
+				.simulationDemoModeEnabled(SIMULATION_VIEW)
 				.currentMonthDailyExhaust(currentMonthDailyExhaust)
 				//line chart
 				.currentMonthDailyExhaustMinY(
 						currentMonthDailyExhaust.values().stream().mapToInt(x -> Math.toIntExact(Math.round(x))).min().orElse(0))
 				.currentMonthDailyExhaustMaxY(
-						currentMonthDailyExhaust.values().stream().mapToInt(x -> Math.toIntExact(Math.round(x))).max().orElse(10))
-				.currentMonthDailyExhaustHighest(
-						currentMonthDailyExhaust.values().stream().mapToDouble(x -> x).max().orElse(0))
-				.currentMonthDailyExhaustMedium(
-						currentMonthDailyExhaust.values().stream().mapToDouble(x -> x).average().orElse(0))
-				.currentMonthDailyExhaustLowest(
-						currentMonthDailyExhaust.values().stream().mapToDouble(x -> x).min().orElse(0))
+						currentMonthDailyExhaust.values().stream().mapToInt(x -> Math.toIntExact(Math.round(x)) + 1).max().orElse(10))
 				//bar chart
 				.emissionsByMonths(emissionsByMonths)
 				.emissionsByMonthsMinY(
 						emissionsByMonths.values().stream().mapToInt(x -> Math.toIntExact(Math.round(x))).min().orElse(0))
 				.emissionsByMonthsMaxY(
-						currentMonthDailyExhaust.values().stream().mapToInt(x -> Math.toIntExact(Math.round(x))).max().orElse(1000))
+						currentMonthDailyExhaust.values().stream().mapToInt(x -> Math.toIntExact(Math.round(x)) + 1).max().orElse(1000))
 				//pie chart
 				.carUsageFrequencyToPercents(carUsageFrequencyToPercents)
 				.build();
