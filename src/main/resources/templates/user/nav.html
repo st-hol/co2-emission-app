@@ -9,21 +9,21 @@
             <li class="nav-item nav-item-my " data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a class="nav-link nav-link-my" href="/user/cabinet">
                     <i class="fa fa-fw fa-calendar"></i>
-                    <span class="nav-link-text">Dashboard</span>
+                    <span class="nav-link-text" th:text="#{nav.dshbrd}">Dashboard</span>
                 </a>
             </li>
             <li class="nav-item nav-item-my " data-toggle="tooltip" data-placement="right" title="Garage">
                 <a class="nav-link nav-link-my nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents"
                    data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-car"></i>
-                    <span class="nav-link-text">Garage</span>
+                    <span class="nav-link-text" th:text="#{nav.autopart}">Garage</span>
                 </a>
                 <ul class="sidenav-second-level sidenav-second-level-my collapse" id="collapseComponents">
                     <li>
-                        <a href="/user/car">My cars</a>
+                        <a href="/user/car"  th:text="#{nav.my.cars}">My cars</a>
                     </li>
                     <li>
-                        <a href="/user/car/new">Add car</a>
+                        <a href="/user/car/new"  th:text="#{nav.add.car}">Add car</a>
                     </li>
                 </ul>
             </li>
@@ -31,17 +31,17 @@
                 <a class="nav-link nav-link-my nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponentsTrips"
                    data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-road"></i>
-                    <span class="nav-link-text">Trips</span>
+                    <span class="nav-link-text"  th:text="#{nav.trips}">Trips</span>
                 </a>
                 <ul class="sidenav-second-level sidenav-second-level-my collapse" id="collapseComponentsTrips">
                     <li>
-                        <a href="/user/trip/new">New trip</a>
+                        <a href="/user/trip/new"  th:text="#{mav.trips.new}">New trip</a>
                     </li>
                     <li>
-                        <a href="/user/trip/test">Test trip</a>
+                        <a href="/user/trip/test"  th:text="#{nav.trip.test}">Test trip</a>
                     </li>
                     <li>
-                        <a href="/user/trip/history">Trip history</a>
+                        <a href="/user/trip/history" th:text="#{nav.trip.hist}">Trip history</a>
                     </li>
                 </ul>
             </li>
@@ -49,7 +49,8 @@
             <li class="nav-item nav-item-my " id="secondLogout" data-toggle="tooltip" data-placement="right" title="Logout">
                 <a class="nav-link">
                     <a class="nav-link nav-link-my" data-toggle="modal" data-target="#exampleModal">
-                        <i class="fa fa-fw fa-arrow-alt-circle-left"></i> <span class="nav-link-text">Logout</span></a>
+                        <i class="fa fa-fw fa-arrow-alt-circle-left"></i>
+                        <span class="nav-link-text"  th:text="#{nav.trip.logout}">Logout</span></a>
                 </a>
             </li>
         </ul>
@@ -61,9 +62,38 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+            <li class="my-nav-soc-li" >
+                <div class="navbar-nav ml-auto">
+                    <div style="margin-right: 2rem;"
+                         th:with="currentUrl=(${#httpServletRequest.requestURI + '?' + #strings.defaultString(#httpServletRequest.queryString, '')})">
+
+                        <div th:if="${(param.lang != null)}">
+                            <a class="nav-item nav-link my-nav-link  d-inline"
+                               th:href="@{${urlBuilder.replaceQueryParam('lang', 'ua').build().toUriString()}}"
+                               th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+                                <img class="soc-icon" th:src="@{/images/locale/ukr.png}" alt="">
+                            </a>
+                            <a class="nav-item nav-link my-nav-link d-inline"
+                               th:href="@{${urlBuilder.replaceQueryParam('lang', 'eng').build().toUriString()}}"
+                               th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+                                <img class="soc-icon" th:src="@{/images/locale/eng.png}" alt="">
+                            </a>
+                        </div>
+                        <div th:if="${(param.lang == null)}">
+                            <a class="nav-item nav-link my-nav-link d-inline" th:href="@{${currentUrl}(lang=ua)}">
+                                <img class="soc-icon" th:src="@{/images/locale/ukr.png}" alt="">
+                            </a>
+                            <a class="nav-item nav-link my-nav-link d-inline" th:href="@{${currentUrl}(lang=eng)}">
+                                <img class="soc-icon" th:src="@{/images/locale/eng.png}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
             <li class="nav-item nav-item-my ">
                 <a class="nav-link nav-link-my" data-toggle="modal" data-target="#exampleModal">
-                    <i class="fa fa-fw fa-arrow-alt-circle-left"></i> Logout</a>
+                    <i class="fa fa-fw fa-arrow-alt-circle-left"></i>  <span  th:text="#{l.logout}">Logout</span></a>
             </li>
         </ul>
     </div>

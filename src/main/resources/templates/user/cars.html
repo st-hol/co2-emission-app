@@ -13,6 +13,7 @@
     <link type="text/css" th:href="@{/css/stylecab.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/mystyles.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/navbarstyles.css}" rel="stylesheet">
     <!-- CSS FILES End -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -29,9 +30,9 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="#">Cabinet</a>
+                <a href="#" th:text="#{cab.my.cab}" >Cabinet</a>
             </li>
-            <li class="breadcrumb-item active">My Cars</li>
+            <li class="breadcrumb-item active" th:text="#{cab.my.cars}">My Cars</li>
         </ol>
 
         <div class="container-fluid">
@@ -47,13 +48,12 @@
                                 <!-- <img th:src="${'picCar' + car.id} == null ? _ : @{'data:image/png;base64,'+${'picCar' + car.id}}">-->
                                 <img alt="Image lost :("
                                      class="card-img-top car-img-my" th:src="@{'/user/car/' + ${car.id} + '/image'}">
-                                <p class="card-text text-dark"><strong th:text="'Engine: ' + ${car.engineSize}"></strong></p>
-                                <p class="card-text text-dark"><strong th:text="'Cylinders: ' + ${car.cylinders}"></strong></p>
-                                <p class="card-text text-danger"><strong th:text="'Fuel Cons.: ' + ${car.fuelConsumptionComb}"></strong></p>
-                                <p class="card-text text-danger"><strong th:text="'Fuel type: ' + ${car.fuelType.value}"></strong></p>
+                                <p class="card-text text-dark"><strong th:text="#{cab.engine} + ${car.engineSize}"></strong></p>
+                                <p class="card-text text-dark"><strong th:text="#{cab.cylindrs} + ${car.cylinders}"></strong></p>
+                                <p class="card-text text-danger"><strong th:text="#{cab.fuel.cons} + ${car.fuelConsumptionComb}"></strong></p>
+                                <p class="card-text text-danger"><strong th:text="#{cab.fuel.type} + ${car.fuelType.value}"></strong></p>
                                 <a class="btn btn-outline-secondary"
-                                   th:href="@{/user/car/{carId}/edit(carId=${car.id})}">Edit
-                                    props.</a>
+                                   th:href="@{/user/car/{carId}/edit(carId=${car.id})}" th:text="#{cab.edit.props}">Edit props.</a>
                                 <form class="d-inline" th:action="@{/user/car/{carId}(carId=${car.id})}" th:method="delete">
                                     <input name="_method" type="hidden" value="DELETE">
                                     <input name="id" th:value="${car.id}" type="hidden" />

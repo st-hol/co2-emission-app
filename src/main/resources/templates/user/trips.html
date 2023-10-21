@@ -13,6 +13,7 @@
     <link type="text/css" th:href="@{/css/stylecab.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/mystyles.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/navbarstyles.css}" rel="stylesheet">
     <!-- CSS FILES End -->
 </head>
 <body class="fixed-nav sticky-footer" id="page-top">
@@ -24,38 +25,38 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="#">Cabinet</a>
+                <a href="#"  th:text="#{cab.my.cab}">Cabinet</a>
             </li>
-            <li class="breadcrumb-item active">My Trip History</li>
+            <li class="breadcrumb-item active" th:text="#{ts.hist}">My Trip History</li>
         </ol>
 
         <!-- Example DataTables Card-->
         <div class="card mb-3">
             <div class="card-header">
-                <i class="fa fa-table"></i> List of your prev. trips</div>
+                <i class="fa fa-table"></i> <span  th:text="#{ts.list.trips}"> List of your prev. trips</span></div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Alias</th>
-                            <th>From</th>
-                            <th>To</th>
-                            <th>Distance (km)</th>
-                            <th>Car</th>
-                            <th>Date</th>
-                            <th>CO<sub>2</sub> kg</th>
+                            <th th:text="#{ts.alias}">Alias</th>
+                            <th th:text="#{ts.from}">From</th>
+                            <th th:text="#{ts.to}">To</th>
+                            <th th:text="#{ts.kmd}">Distance (km)</th>
+                            <th th:text="#{ts.car}">Car</th>
+                            <th th:text="#{ts.date}">Date</th>
+                            <th th:text="#{ts.co2kg}">CO<sub>2</sub> kg</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
-                            <th>Alias</th>
-                            <th>From</th>
-                            <th>To</th>
-                            <th>Distance (km)</th>
-                            <th>Car</th>
-                            <th>Date</th>
-                            <th>CO<sub>2</sub> kg</th>
+                            <th th:text="#{ts.alias}">Alias</th>
+                            <th th:text="#{ts.from}">From</th>
+                            <th th:text="#{ts.to}">To</th>
+                            <th th:text="#{ts.kmd}">Distance (km)</th>
+                            <th th:text="#{ts.car}">Car</th>
+                            <th th:text="#{ts.date}">Date</th>
+                            <th th:text="#{ts.co2kg}">CO<sub>2</sub> kg</th>
                         </tr>
                         </tfoot>
                         <tbody>

@@ -11,6 +11,7 @@
     <title>Login and Register</title>
     <!-- CSS FILES START -->
     <link type="text/css" th:href="@{/css/custom.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/navbarstyles.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/color.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/responsive.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/owl.carousel.min.css}" rel="stylesheet">
@@ -41,37 +42,66 @@
                     class="fas fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="#"> Home </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" th:text="#{l.home}"> Home </a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" role="button" data-toggle="dropdown"
-                           aria-expanded="false" aria-haspopup="true"> Why us </a>
+                           aria-expanded="false" aria-haspopup="true" th:text="#{l.whyus}"> Why us </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button" data-toggle="dropdown"
-                           aria-expanded="false" aria-haspopup="true"> Numbers </a>
+                           aria-expanded="false" aria-haspopup="true" th:text="#{l.numbers}"> Numbers </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false"> Pages </a>
+                           aria-haspopup="true" aria-expanded="false" th:text="#{l.pages}"> Pages </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false"> Contact </a>
+                           aria-haspopup="true" aria-expanded="false" th:text="#{l.cont}"> Contact </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">stanislav.holovachuk@gmail.com</a></li>
                             <li><a href="#">holovachuk.stanislav@lll.kpi.com<</a></li>
                         </ul>
                     </li>
                 </ul>
-                <ul class="topnav-right">
+                <li class="my-nav-soc-li">
+                    <div class="navbar-nav ml-auto">
+                <div style="margin-right: 2rem;"
+                        th:with="currentUrl=(${#httpServletRequest.requestURI + '?' + #strings.defaultString(#httpServletRequest.queryString, '')})">
+
+                    <div th:if="${(param.lang != null)}">
+                        <a class="nav-item nav-link my-nav-link  d-inline"
+                           th:href="@{${urlBuilder.replaceQueryParam('lang', 'ua').build().toUriString()}}"
+                           th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+                            <img class="soc-icon-landing" th:src="@{/images/locale/ukr.png}" alt="">
+                        </a>
+                        <a class="nav-item nav-link my-nav-link d-inline"
+                           th:href="@{${urlBuilder.replaceQueryParam('lang', 'eng').build().toUriString()}}"
+                           th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+                            <img class="soc-icon-landing" th:src="@{/images/locale/eng.png}" alt="">
+                        </a>
+                    </div>
+                    <div th:if="${(param.lang == null)}">
+                        <a class="nav-item nav-link my-nav-link d-inline" th:href="@{${currentUrl}(lang=ua)}">
+                            <img class="soc-icon-landing" th:src="@{/images/locale/ukr.png}" alt="">
+                        </a>
+                        <a class="nav-item nav-link my-nav-link d-inline" th:href="@{${currentUrl}(lang=eng)}">
+                            <img class="soc-icon-landing" th:src="@{/images/locale/eng.png}" alt="">
+                        </a>
+                    </div>
+                </div>
+                        </div>
+                        </li>
+                        <ul class="topnav-right">
                     <span sec:authorize="isAuthenticated()">
-                        <li><a class="mdonate" href="/user/cabinet"><span>Go To Cabinet</span></a></li>
+                        <li><a class="mdonate" href="/user/cabinet"><span th:text="#{l.gotocab}">Go To Cabinet</span></a></li>
                     </span>
                     <span sec:authorize="isAuthenticated()">
-                        <li class="login-reg"><a href="/logout">Logout</a></li>
+                        <li class="login-reg"><a href="/logout" th:text="#{l.logout}">Logout</a></li>
                     </span>
                     <span sec:authorize="isAnonymous()">
-                        <li class="login-reg"><a href="my-account.html">Login</a> | <a href="my-account.html">Signup</a></li>
+                        <li class="login-reg"><a href="my-account.html" th:text="#{l.login}">Login</a> |
+                            <a href="my-account.html" th:text="#{l.signup}">Signup</a></li>
                     </span>
                 </ul>
             </div>
@@ -90,10 +120,11 @@
         <div class="item" style=" background: black;">
             <div class="slider-caption h2slider">
                 <div class="container">
-                    <strong>Green Mission<span> is your helper in</span></strong>
-                    <h1>Becoming CO<sub>2</sub> Friendly</h1>
-                    <p> on your car rides</p>
-                    <a href="#" class="active">Find Out More</a> <a href="my-account.html">Join us Now!</a>
+                    <strong th:text="#{l.green.mission}">Green Mission<span th:text="#{l.is.your.helper.in}"> is your helper in</span></strong>
+                    <h1 th:text="#{l.becoming.co2.friendly}">Becoming CO<sub>2</sub> Friendly</h1>
+                    <p th:text="#{l.on.your.car.rides}"> on your car rides</p>
+                    <a href="#" class="active"th:text="#{l.find.more}" >Find Out More</a> <a href="my-account.html" th:text="#{l.join.us.now}">Join
+                    us Now!</a>
                 </div>
             </div>
             <img style="object-fit: cover;  opacity: 0.4;" th:src="@{/images/h2-slide1.jpg}" alt="">
@@ -101,10 +132,13 @@
         <div class="item" style=" background: black;  overflow: hidden;">
             <div class="slider-caption h2slider">
                 <div class="container">
-                    <strong><span>Please</span> Stop Polluting Ecology & </strong>
-                    <h1>Start Being Green Friendly</h1>
-                    <p>by <strong>joining Green Mission</strong> and starting track your CO<sub>2</sub>!</p>
-                    <a href="#" class="active">Find Out More</a> <a href="my-account.html">Join us Now!</a>
+                    <strong><span th:text="#{l.please.stop.poluting.eco}">Please Stop Polluting Ecology & </span></strong>
+                    <h1 th:text="#{l.start.be.green}">Start Being Green Friendly</h1>
+                    <p th:text="#{l.by.joining.green.mission.andd.start.track}">by <strong>joining Green Mission</strong> and starting track
+                        your CO<sub>2</sub>!
+                    </p>
+                    <a href="#" class="active" th:text="#{l.find.out.more}">Find Out More</a> <a href="my-account.html"
+                                                                                                 th:text="#{l.join.us.now}">Join us Now!</a>
                 </div>
             </div>
             <img style="object-fit: cover;  opacity: 0.4;" th:src="@{/images/h2-slide2.jpg}" alt="">
@@ -112,10 +146,11 @@
         <div class="item" style=" background: black;">
             <div class="slider-caption h2slider">
                 <div class="container">
-                    <strong>Save <span> & don’t waste our life</span> partner</strong>
-                    <h1>Oxygen Resource</h1>
-                    <p>Before <strong>it’s too late</strong> for us...</p>
-                    <a href="#" class="active">Find Out More</a> <a href="my-account.html">Join us Now!</a>
+                    <strong th:text="#{l.save.dont.waste}">Save & don’t waste our life partner</strong>
+                    <h1 th:text="#{l.ox.resource}">Oxygen Resource</h1>
+                    <p th:text="#{before.too.late}">Before <strong>it’s too late</strong> for us...</p>
+                    <a href="#" class="active" th:text="#{l.find.out.more.a}">Find Out More</a> <a href="my-account.html"
+                                                                                                   th:text="#{l.join.us.now}">Join us Now!</a>
                 </div>
             </div>
             <img style="object-fit: cover;  opacity: 0.4;" th:src="@{/images/h2-slide3.jpg}" alt="">
@@ -130,8 +165,8 @@
                 <li>
                     <div class="sinfo">
                         <img th:src="@{/images/sericon1.png}" alt="">
-                        <h6>Recycling</h6>
-                        <p>Waste Management</p>
+                        <h6 th:text="#{l.recycl}">Recycling</h6>
+                        <p th:text="#{l.waste.manag}">Waste Management</p>
                     </div>
                 </li>
                 <!--box  end-->
@@ -139,8 +174,8 @@
                 <li>
                     <div class="sinfo">
                         <img th:src="@{/images/sericon2.png}" alt="">
-                        <h6>Wind Energy</h6>
-                        <p>Polar, Prevailing, Tropical</p>
+                        <h6 th:text="#{l.wind.en}">Wind Energy</h6>
+                        <p th:text="#{l.polar.trop}">Polar, Prevailing, Tropical</p>
                     </div>
                 </li>
                 <!--box  end-->
@@ -148,8 +183,8 @@
                 <li>
                     <div class="sinfo">
                         <img th:src="@{/images/sericon3.png}" alt="">
-                        <h6>Pure Water</h6>
-                        <p>Save Water Resources</p>
+                        <h6 th:text="#{l.pure.water}">Pure Water</h6>
+                        <p th:text="#{l.save.water.res}">Save Water Resources</p>
                     </div>
                 </li>
                 <!--box  end-->
@@ -157,8 +192,8 @@
                 <li class="active">
                     <div class="sinfo">
                         <img th:src="@{/images/sericon5.png}" alt="">
-                        <h6>Decreasing CO<sub>2</sub> emissions</h6>
-                        <p>Make your car be CO<sub>2</sub> Green</p>
+                        <h6 th:text="#{l.decrease.co2.em}">Decreasing CO<sub>2</sub> emissions</h6>
+                        <p th:text="#{make.ur.car.co2.green}">Make your car be CO<sub>2</sub> Green</p>
                     </div>
                 </li>
                 <!--box  end-->
@@ -166,8 +201,8 @@
                 <li>
                     <div class="sinfo">
                         <img th:src="@{/images/sericon4.png}" alt="">
-                        <h6>Solar Panels</h6>
-                        <p>Save Natural Engery</p>
+                        <h6 th:text="#{l.solar.panel}">Solar Panels</h6>
+                        <p th:text="#{l.solar.en}">Save Natural Engery</p>
                     </div>
                 </li>
                 <!--box  end-->
@@ -181,11 +216,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1> Why Green Mission?</h1>
-                    <p>Let’s Join us to do something awesome to Save Ecology, Energy, Control Pollution &
+                    <h1 th:text="#{why.green.mis}"> Why Green Mission?</h1>
+                    <p th:text="#{l.lets.join.us.to.blabla}">Let’s Join us to do something awesome to Save Ecology, Energy, Control Pollution &
                         Environment on our beautiful planet!
                     </p>
-                    <a href="my-account.html" class="cus">Signup to Join us</a>
+                    <a href="my-account.html" class="cus" th:text="#{l.signup.to.join.us}">Signup to Join us</a>
                 </div>
             </div>
         </div>
@@ -203,11 +238,13 @@
                 </div>
                 <div class="col-md-7">
                     <div class="h2-about-txt">
-                        <h3>About Green Mission</h3>
-                        <h2>Eco-friendly products can be made from scratch.</h2>
-                        <p> If anything’s hot in today’s economy, it’s saving money, including a broad range of green
+                        <h3 th:text="#{l.about.gr.mis}">About Green Mission</h3>
+                        <h2 th:text="#{l.about.eco.friend.prod}">Eco-friendly products can be made from scratch.</h2>
+                        <p th:text="#{l.if.any.not.in.economy.bla.bla}"> If anything’s hot in today’s economy, it’s saving money, including a
+                            broad range
+                            of green
                             businesses helping people save energy, water, and other resources. </p>
-                        <a class="aboutus" href="my-account.html">More About us</a>
+                        <a class="aboutus" href="my-account.html" th:text="#{l.more.ab.us}">More About us</a>
                     </div>
                 </div>
             </div>
@@ -218,25 +255,25 @@
                     <div class="col-lg-3 col-sm-6 col-md-3">
                         <div class="counter-box">
                             <p class="counter-count">99000</p>
-                            <p class="ctxt">Tons of CO<sub>2</sub> compensated</p>
+                            <p th:text="#{l.tons.compensated}" class="ctxt">Tons of CO<sub>2</sub> compensated</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-md-3">
                         <div class="counter-box">
                             <p class="counter-count">89000</p>
-                            <p class="ctxt">Trees Planted</p>
+                            <p th:text="#{l.trees.planted}" class="ctxt">Trees Planted</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-md-3">
                         <div class="counter-box">
                             <p class="counter-count">79000</p>
-                            <p class="ctxt">Solar Panels in 2022</p>
+                            <p th:text="#{l.solar.panels}" class="ctxt">Solar Panels in 2022</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6 col-md-3">
                         <div class="counter-box">
                             <p class="counter-count">69000</p>
-                            <p class="ctxt">Wildlife Saved</p>
+                            <p th:text="#{l.wildlife.saved}" class="ctxt">Wildlife Saved</p>
                         </div>
                     </div>
                 </div>
@@ -250,24 +287,25 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="section-title-2 white">
-                        <h5>Urgent Cause</h5>
-                        <h2>Stop Global Warming</h2>
+                        <h5 th:text="#{l.urg.cause}">Urgent Cause</h5>
+                        <h2 th:text="#{l.stop.glob.warm}">Stop Global Warming</h2>
                     </div>
-                    <p> We need your support and help to Stop Globar Warning. Few generations ago it to seemed like the
+                    <p th:text="#{l.we.need.ur.sup}"> We need your support and help to Stop Globar Warning. Few generations ago it to seemed like
+                        the
                         world’s resources were infinite, and the people needed only. </p>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
                              aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <ul class="funds">
-                        <li class="text-left"><strong>73%</strong> Funded</li>
-                        <li class="text-center"><strong>$948.00</strong> Raised</li>
-                        <li class="text-right"><strong>$1750.00</strong> Required</li>
+                        <li th:text="#{li.funded}" class="text-left"><strong>73%</strong> Funded</li>
+                        <li th:text="#{li.raised}" class="text-center"><strong>$948.00</strong> Raised</li>
+                        <li th:text="#{li.required}" class="text-right"><strong>$1750.00</strong> Required</li>
                     </ul>
                 </div>
                 <div class="col-md-6">
                     <div class="donation-amount">
-                        <h5>Donation Amount</h5>
+                        <h5 th:text="#{l.don.am}">Donation Amount</h5>
                         <form>
                             <ul class="radio-boxes">
                                 <li>
@@ -318,7 +356,7 @@
                                     </div>
                                 </li>
                                 <li class="form-submit">
-                                    <button type="submit">Continue to Donate</button>
+                                    <button th:text="#{l.cont.donate}" type="submit">Continue to Donate</button>
                                 </li>
                             </ul>
                         </form>
@@ -334,13 +372,21 @@
     <div class="instagram">
         <br> <br> <br>
         <ul>
-            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta1.jpg}" alt=""></li>
-            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta2.jpg}" alt=""></li>
-            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta3.jpg}" alt=""></li>
-            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta4.jpg}" alt=""></li>
-            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta5.jpg}" alt=""></li>
-            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta6.jpg}" alt=""></li>
-            <li><a href="#"> <i class="fas fa-search"></i> </a> <img th:src="@{/images/insta7.jpg}" alt=""></li>
+            <li><a href="#"> <i class="fas fa-search"></i> </a> <img style="width: 200px; height: 150px;"
+                                                                     th:src="@{/images/sect4/20220602PHT32026_original.jpg}" alt=""></li>
+            <li><a href="#"> <i class="fas fa-search"></i> </a> <img style="width: 200px; height: 150px;"
+                                                                     th:src="@{/images/sect4/download.jpeg}"
+                                                                     alt=""></li>
+            <li><a href="#"> <i class="fas fa-search"></i> </a>
+                <img style="width: 200px; height: 150px;" th:src="@{/images/sect4/download (1).jpeg}" alt=""></li>
+            <li><a href="#"> <i class="fas fa-search"></i> </a> <img style="width: 200px; height: 150px;" th:src="@{/images/sect4/images.jpeg}"
+                                                                     alt=""></li>
+            <li><a href="#"> <i class="fas fa-search"></i> </a>
+                <img style="width: 200px; height: 150px;" th:src="@{/images/sect4/images (1).jpeg}" alt=""></li>
+            <li><a href="#"> <i class="fas fa-search"></i> </a>
+                <img style="width: 200px; height: 150px;" th:src="@{/images/sect4/images (2).jpeg}" alt=""></li>
+            <li><a href="#"> <i class="fas fa-search"></i> </a>
+                <img style="width: 200px; height: 150px;" th:src="@{/images/sect4/SUV-vs-diesel-emissions.png}" alt=""></li>
         </ul>
     </div>
     <!--InstaGram End-->
@@ -352,8 +398,8 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <!--Footer Widget Start-->
                         <div class="footer-widget">
-                            <h4>About Green Mission</h4>
-                            <p> If anything’s hot in today’s economy, it’s saving money, including a broad range of
+                            <h4 th:text="#{l.ab.gre.mis}">About Green Mission</h4>
+                            <p th:text="#{l.if.any.econ}"> If anything’s hot in today’s economy, it’s saving money, including a broad range of
                                 green businesses helping people save energy, water, and other resources. Definitely, you
                                 can go with this business as it is a nothing but the future. </p>
                             <a href="#" class="lm">About us</a>
@@ -363,15 +409,15 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <!--Footer Widget Start-->
                         <div class="footer-widget">
-                            <h4>Our Promises</h4>
+                            <h4 th:text="#{l.our.prom}">Our Promises</h4>
                             <ul class="quick-links">
-                                <li><a href="#">CO<sub>2</sub> Emissions</a></li>
-                                <li><a href="#">Solar Energy</a></li>
-                                <li><a href="#">Waste Management</a></li>
-                                <li><a href="#">Eco Ideas</a></li>
-                                <li><a href="#">Recycling Materials</a></li>
-                                <li><a href="#">Plant Ecology</a></li>
-                                <li><a href="#">Saving Wildlife </a></li>
+                                <li><a th:text="#{l.emis}" href="#">CO<sub>2</sub> Emissions</a></li>
+                                <li><a th:text="#{l.sol.enr}" href="#">Solar Energy</a></li>
+                                <li><a th:text="#{l.wastman}" href="#">Waste Management</a></li>
+                                <li><a th:text="#{l.eco.idea}" href="#">Eco Ideas</a></li>
+                                <li><a th:text="#{l.rec.mat}" href="#">Recycling Materials</a></li>
+                                <li><a th:text="#{l.plant.ecol}" href="#">Plant Ecology</a></li>
+                                <li><a th:text="#{l.sav.wildli}" href="#">Saving Wildlife </a></li>
                             </ul>
                         </div>
                         <!--Footer Widget End-->
@@ -379,15 +425,18 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <!--Footer Widget Start-->
                         <div class="footer-widget">
-                            <h4>Latest Posts</h4>
+                            <h4 th:text="#{l.latest.posts}">Latest Posts</h4>
                             <ul class="lastest-products">
-                                <li><img th:src="@{/images/flp1.jpg}" alt=""> <strong><a href="#">How you can keep
+                                <li><img th:src="@{/images/flp1.jpg}" alt=""> <strong th:text="#{l.how.can.keep.wild.an}"><a href="#">How you
+                                    can keep
                                     alive wild animals for...</a></strong> <span class="pdate"><i>Posted:</i> 29 September, 2022</span>
                                 </li>
-                                <li><img th:src="@{/images/flp2.jpg}" alt=""> <strong><a href="#">Eliminate your
+                                <li><img th:src="@{/images/flp2.jpg}" alt=""> <strong th:text="#{l.eliminate.ur.plastic}"><a href="#">Eliminate
+                                    your
                                     plastic bottle pollution & keep...</a></strong> <span class="pdate"><i>Posted:</i> 21 October, 2022</span>
                                 </li>
-                                <li><img th:src="@{/images/flp3.jpg}" alt=""> <strong><a href="#">How you can keep
+                                <li><img th:src="@{/images/flp3.jpg}" alt=""> <strong><a href="#" th:text="#{l.how.can.keep.wild.an}">How you
+                                    can keep
                                     alive wild animals for...</a></strong> <span class="pdate"><i>Posted:</i> 02 December, 2022</span>
                                 </li>
                             </ul>

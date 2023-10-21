@@ -13,6 +13,7 @@
     <link type="text/css" th:href="@{/css/stylecab.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/mystyles.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/navbarstyles.css}" rel="stylesheet">
     <!-- CSS FILES End -->
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -37,9 +38,9 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="#">Cabinet</a>
+                <a href="#"  th:text="#{cab.my.cab}">Cabinet</a>
             </li>
-            <li class="breadcrumb-item active">Ride new trip</li>
+            <li class="breadcrumb-item active"  th:text="#{t.new.ride.trip}">Ride new trip</li>
         </ol>
 
         <div class="container">
@@ -50,8 +51,8 @@
                     <form action="#">
 
                         <div style="text-align: center" class="alert alert-success" role="alert">
-                            <h3>What do you do with your CO<sub>2</sub> calculation?</h3>
-                            <p style="text-align: left">
+                            <h3  th:text="#{t.what.for.co2.am}">What do you do with your CO<sub>2</sub> calculation?</h3>
+                            <p style="text-align: left"  th:text="#{t.what.for.co2.am.long.descr}">
                                 Once you have calculated the CO<sub>2</sub> emissions of your trip, it is important to do something with it.
                                 There are many
                                 options online to easily offset your emissions. However, there is also a disadvantage with CO<sub>2</sub>
@@ -67,7 +68,7 @@
                         <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
 
                         <div id="useExistingCar" class="form-group form-group-my">
-                            <label for="carId" class="col-sm-3 control-label">Choose car</label>
+                            <label for="carId" class="col-sm-3 control-label"  th:text="#{t.chose.car}">Choose car</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="carId" id="carId" required>
                                     <th:block th:each="car : ${cars}">
@@ -78,7 +79,7 @@
                         </div>
 
                         <div class="form-group form-group-my">
-                            <label for="name" class="col-sm-3 control-label">Make up alias for trip</label>
+                            <label for="name" class="col-sm-3 control-label"  th:text="#{t.make.alias.trip}">Make up alias for trip</label>
                             <div class="col-sm-9">
                                 <input required type="text" class="form-control" name="name" id="name"
                                        placeholder="e.g. My trip for vacation">
@@ -86,7 +87,7 @@
                         </div>
 
                         <div class="form-group form-group-my">
-                            <label for="name" class="col-sm-3 control-label">I am riding from</label>
+                            <label for="name" class="col-sm-3 control-label"  th:text="#{t.from.point}">I am riding from</label>
                             <div class="col-sm-9">
                                 <input required type="text" class="form-control" name="from" id="from"
                                        placeholder="e.g. Kyiv">
@@ -94,7 +95,7 @@
                         </div>
 
                         <div class="form-group form-group-my">
-                            <label for="name" class="col-sm-3 control-label">I am riding to</label>
+                            <label for="name" class="col-sm-3 control-label"  th:text="#{t.to.point}">I am riding to</label>
                             <div class="col-sm-9">
                                 <input required type="text" class="form-control" name="to" id="to"
                                        placeholder="e.g Lviv">
@@ -102,7 +103,7 @@
                         </div>
 
                         <div class="form-group form-group-my">
-                            <label for="name" class="col-sm-3 control-label">How long is distance in km?</label>
+                            <label for="name" class="col-sm-3 control-label" th:text="#{t.how.long.km}">How long is distance in km?</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="distanceKm" name="distanceKm" placeholder="e.g. 715.5" required step=".1"
                                        type="number">
@@ -110,7 +111,7 @@
                         </div>
 
                         <div class="form-group form-group-my">
-                            <label for="about" class="col-sm-3 control-label">Tell about your trip</label>
+                            <label for="about" class="col-sm-3 control-label" th:text="#{t.new.trip.about}">Tell about your trip</label>
                             <div class="col-sm-9">
                                 <textarea name="about" id="about" placeholder="About trip" class="form-control"></textarea>
                             </div>
@@ -118,28 +119,29 @@
 
 
                         <div class="form-group form-group-my">
-                            <label class="col-sm-3 control-label">Save trip to history?</label>
+                            <label class="col-sm-3 control-label" th:text="#{t.save.trip.hist.to}">Save trip to history?</label>
                             <div class="col-sm-9">
                                 <label class="radio-inline">
-                                    <input type="radio" name="saveToHistory" id="saveToHistory1" value="true"> Yes
-                                </label>
+                                    <input type="radio" name="saveToHistory" id="saveToHistory1" value="true" th:text="#{t.save.yes}">                                </label>
                                 <label class="radio-inline">
-                                    <input checked type="radio" name="saveToHistory" id="saveToHistory2" value="false"> No
+                                    <input checked type="radio" name="saveToHistory" id="saveToHistory2" value="false" th:text="#{t.save.no}">
                                 </label>
                             </div>
                         </div>
 
                         <div style="text-align: center; margin-bottom: 2rem; margin-top: 2rem" id="successAlert" class="alert alert-warning"
                              role="alert">
-                            <h5>Don't know exact distance between your points?</h5>
-                            <p style="text-align: center">
-                                Try checking it there: <a class="alert-link" href="https://www.distancecalculator.net/">https://www.distancecalculator.net/</a>
+                            <h5 th:text="#{t.dont.know.how.km.is}">Don't know exact distance between your points?</h5>
+                            <p style="text-align: center" >
+                                <span th:text="#{t.new.check.there}"> Try checking it there: </span> <a class="alert-link"
+                                                                         href="https://www.distancecalculator.net/">https://www
+                                .distancecalculator.net/</a>
                             </p>
                         </div>
 
                         <div class="form-group form-group-my">
                             <div class="col-sm-offset-3 col-sm-9 text-center">
-                                <button class="btn btn-primary" id="newTr">Ride!</button>
+                                <button class="btn btn-primary" id="newTr" th:text="#{t.ride}">Ride!</button>
                             </div>
                         </div>
                     </form>

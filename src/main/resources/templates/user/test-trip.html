@@ -13,6 +13,7 @@
     <link type="text/css" th:href="@{/css/stylecab.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/mystyles.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/navbarstyles.css}" rel="stylesheet">
     <!-- CSS FILES End -->
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -36,9 +37,9 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="#">Cabinet</a>
+                <a href="#" th:text="#{cab.my.cab}">Cabinet</a>
             </li>
-            <li class="breadcrumb-item active">Ride test trip</li>
+            <li class="breadcrumb-item active" th:text="#{tt.new.ride}">Ride test trip</li>
         </ol>
 
         <div class="container">
@@ -49,8 +50,8 @@
                     <form action="#">
 
                         <div style="text-align: center" class="alert alert-success" role="alert">
-                            <h3>Calculate the CO<sub>2</sub> emissions of your car journey</h3>
-                            <p style="text-align: left">
+                            <h3 th:text="#{calc.co2.car.jorn}">Calculate the CO<sub>2</sub> emissions of your car journey</h3>
+                            <p style="text-align: left" th:text="#{tt.long.tldr.desc}">
                                 When calculating the CO<sub>2</sub> emissions of your trip, there are also small things that are important for
                                 the
                                 calculation. For example, when you travel by car, you need more fuel if you have a caravan behind your exhaust or
@@ -67,10 +68,11 @@
 
                         <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
 
-                        <h3 class="form-group-my">Car Info</h3>
+                        <h3 class="form-group-my" th:text="#{tt.carinf}">Car Info</h3>
                         <hr>
                         <div class="form-group form-group-my">
-                            <label class="col-sm-3 control-label" for="yearManufactured">In which year car is manufactured</label>
+                            <label class="col-sm-3 control-label" for="yearManufactured" th:text="#{tt.car.yr}">In which year car is
+                                manufactured</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="yearManufactured" name="yearManufactured" placeholder="e.g. 2012" required
                                        type="number">
@@ -78,27 +80,28 @@
                         </div>
 
                         <div class="form-group form-group-my">
-                            <label for="engineSize" class="col-sm-3 control-label">What is engine size</label>
+                            <label for="engineSize" class="col-sm-3 control-label" th:text="#{tt.eng.size}">What is engine size</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="engineSize" name="engineSize" placeholder="e.g. 1.6" required step=".01"
                                        type="number">
                             </div>
                         </div>
                         <div class="form-group form-group-my">
-                            <label for="cylinders" class="col-sm-3 control-label">How many cylinders</label>
+                            <label for="cylinders" class="col-sm-3 control-label" th:text="#{tt.n.cyl}">How many cylinders</label>
                             <div class="col-sm-9">
                                 <input required type="number" class="form-control" name="cylinders" id="cylinders" placeholder="e.g. 4">
                             </div>
                         </div>
                         <div class="form-group form-group-my">
-                            <label for="fuelConsumptionComb" class="col-sm-3 control-label">What is fuel consumption (comb.)</label>
+                            <label for="fuelConsumptionComb" class="col-sm-3 control-label" th:text="#{tt.fuel.cons}">What is fuel consumption
+                                (comb.)</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="fuelConsumptionComb" name="fuelConsumptionComb" required step=".01" type="number"
                                        placeholder="e.g. 7.5">
                             </div>
                         </div>
                         <div class="form-group form-group-my">
-                            <label class="col-sm-3 control-label" for="fuelType">Choose fuel type</label>
+                            <label class="col-sm-3 control-label" for="fuelType" th:text="#{tt.fuel.type}">Choose fuel type</label>
                             <div class="col-sm-9">
                                 <select class="form-control" id="fuelType" name="fuelType" required>
                                     <th:block th:each="fuelT : ${fuelTypes}">
@@ -111,31 +114,32 @@
 
                         <div style="text-align: center; margin-bottom: 2rem; margin-top: 2rem" class="alert alert-warning"
                              role="alert">
-                            <h5>Don't know exact characteristics of your car?</h5>
+                            <h5 th:text="#{tt.dont.know.car}">Don't know exact characteristics of your car?</h5>
                             <p style="text-align: center">
-                                Try checking it there: <a class="alert-link" href="https://www.auto-data.net/en/">https://www.auto-data.net/en/</a>
+                                <span th:text="#{tt.check.there}">Try checking it there:</span> <a class="alert-link"
+                                                                        href="https://www.auto-data.net/en/">https://www.auto-data .net/en/</a>
                             </p>
                         </div>
 
-                        <h3 class="form-group-my">Ride Info</h3>
+                        <h3 class="form-group-my" th:text="#{tt.ride.ifo}">Ride Info</h3>
                         <hr>
 
                         <div class="form-group form-group-my">
-                            <label for="from" class="col-sm-3 control-label">I am riding from</label>
+                            <label for="from" class="col-sm-3 control-label" th:text="#{tt.from}">I am riding from</label>
                             <div class="col-sm-9">
                                 <input required type="text" class="form-control" name="from" id="from"
                                        placeholder="e.g. Kyiv">
                             </div>
                         </div>
                         <div class="form-group form-group-my">
-                            <label for="to" class="col-sm-3 control-label">I am riding to</label>
+                            <label for="to" class="col-sm-3 control-label" th:text="#{tt.to}">I am riding to</label>
                             <div class="col-sm-9">
                                 <input required type="text" class="form-control" name="to" id="to"
                                        placeholder="e.g Lviv">
                             </div>
                         </div>
                         <div class="form-group form-group-my">
-                            <label for="distanceKm" class="col-sm-3 control-label">How long is distance in km?</label>
+                            <label for="distanceKm" class="col-sm-3 control-label" th:text="#{tt.dist}">How long is distance in km?</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="distanceKm" name="distanceKm" placeholder="e.g. 715.5" required step=".1"
                                        type="number">
@@ -144,15 +148,17 @@
 
                         <div style="text-align: center; margin-bottom: 2rem; margin-top: 2rem" class="alert alert-warning"
                              role="alert">
-                            <h5>Don't know exact distance between your points?</h5>
+                            <h5 th:text="#{tt.dont.exacct.dist}">Don't know exact distance between your points?</h5>
                             <p style="text-align: center">
-                                Try checking it there: <a class="alert-link" href="https://www.distancecalculator.net/">https://www.distancecalculator.net/</a>
+                                <span th:text="#{tt.try.chec.her}"> Try checking it there:</span> <a class="alert-link"
+                                                                         href="https://www.distancecalculator.net/">
+                                https://www.distancecalculator.net/</a>
                             </p>
                         </div>
 
                         <div class="form-group form-group-my">
                             <div class="col-sm-offset-3 col-sm-9 text-center">
-                                <button class="btn btn-primary" id="newTr">Test!</button>
+                                <button class="btn btn-primary" id="newTr" th:text="#{tt.subm}">Test!</button>
                             </div>
                         </div>
 

@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+.navbar-sidenav-my {
+    background-color: darkslategrey !important;
+    padding-top: 1.5rem !important;
+}
+
+.sidenav-second-level-my {
+    background-color: #2a5252 !important;
+}
+
+.navbar-my {
+    background-color: #184f4f !important;
+}
+
+.nav-link-toggler-my {
+    background-color: #184f4f !important;
+}
+
+.nav-link-my {
+}
+
+.nav-item-my {
+    text-align: left;
+    /*margin-left: 1rem;*/
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.content-wrapper-my {
+    padding-left: 2rem;
+    padding-top: 2rem;
+}
+
+.car-img-my {
+    /*margin-top: 10px;*/
+    /*margin-bottom: 10px;*/
+    margin: 2rem 0;
+}
+
+.card-title-my {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 1rem !important;
+}
+
+
+.my-nav-soc-li {
+    float: right !important;
+    /*	margin-left: 6% !important;*/
+}
+
+.my-nav-link {
+    padding: 5px !important;
+}
+
+.soc-icon-landing {
+    margin-top: -20px !important;
+    width: 27px;
+}
+
+.soc-icon-landing:active {
+    transform: rotate(-10deg);
+}
+
+
+.soc-icon {
+    margin-top: 6px !important;
+    width: 27px;
+}
+
+.soc-icon:active {
+    transform: rotate(-10deg);
+}

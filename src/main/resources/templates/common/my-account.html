@@ -51,10 +51,10 @@
     <!--Inner Header Start-->
     <section class="wf100 p100 inner-header">
         <div class="container">
-            <h1>My Account</h1>
+            <h1  th:text="#{l.my.ac}">My Account</h1>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#"> My Account </a></li>
+                <li><a href="#" th:text="#{l.home}">Home</a></li>
+                <li><a href="#" th:text="#{l.my.ac}"> My Account </a></li>
             </ul>
         </div>
     </section>
@@ -65,7 +65,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="myaccount-form">
-                        <h3>Register Your Account</h3>
+                        <h3 th:text="#{l.reg.ac}">Register Your Account</h3>
                         <form th:object="${userForm}" action="#" th:action="@{/registration}" method="post">
 
                             <div class="alert alert-success" role="alert" th:if="${message}" th:text="#{login.logout.alert}"></div>
@@ -74,51 +74,52 @@
                             <div th:if="${#fields.hasErrors('*')}">
                                 <div th:each="e : ${#fields.detailedErrors()}"
                                      th:class="${e.global} ? globalerr : fielderr">
-                                    <p class="alert alert-danger" role="alert" th:text="${e.message}">The error message</p>
+                                    <p class="alert alert-danger" role="alert" th:text="${e.message} ">The error message</p>
                                 </div>
                             </div>
 
                             <ul class="row">
                                 <li class="col-md-6">
                                     <div class="input-group">
-                                        <input name="name" type="text" class="form-control" placeholder="Your Name" required>
+                                        <input name="name" type="text" class="form-control" th:placeholder="#{reg.u.name}" required>
                                     </div>
                                 </li>
                                 <li class="col-md-6">
                                     <div class="input-group">
-                                        <input name="contactNumber" type="text" class="form-control" placeholder="Contact #" required>
+                                        <input name="contactNumber" type="text" class="form-control"  th:placeholder="#{reg.contact.no}"
+                                               required>
                                     </div>
                                 </li>
                                 <li class="col-md-6">
                                     <div class="input-group">
-                                        <input  name="email" type="text" class="form-control" placeholder="Email Address" required>
+                                        <input  name="email" type="text" class="form-control" th:placeholder="#{reg.email.a}" required>
                                     </div>
                                 </li>
                                 <li class="col-md-6">
                                     <div class="input-group">
-                                        <input name="username" type="text" class="form-control" placeholder="User Name">
+                                        <input name="username" type="text" class="form-control" th:placeholder="#{u.name}">
                                     </div>
                                 </li>
                                 <li class="col-md-6">
                                     <div class="input-group">
-                                        <input class="form-control" name="password" placeholder="Password" type="password">
+                                        <input class="form-control" name="password" th:placeholder="#{reg.pwd}" type="password">
                                     </div>
                                 </li>
                                 <li class="col-md-6">
                                     <div class="input-group">
-                                        <input class="form-control" name="passwordConfirm" placeholder="Re-enter Password"
+                                        <input class="form-control" name="passwordConfirm" th:placeholder="#{reg.pwd.2}"
                                                type="password">
                                     </div>
                                 </li>
                                 <li class="col-md-12">
                                     <div class="input-group form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">I agree to the Terms of <a
+                                        <label class="form-check-label" for="exampleCheck1" th:text="#{l.agre.terms}">I agree to the Terms of <a
                                                 href="#">Services & Privacy Policy</a></label>
                                     </div>
                                 </li>
                                 <li class="col-md-12">
-                                    <button class="register">Register Your Account</button>
+                                    <button class="register" th:text="#{reg.conf}">Register Your Account</button>
                                 </li>
                             </ul>
                         </form>
@@ -129,13 +130,13 @@
                         <h3>Login Account</h3>
                         <form action="#" th:action="@{/login}"  method="post">
                             <div class="input-group">
-                                <input id="username" name="username" type="text" class="form-control" placeholder="username" required>
+                                <input id="username" name="username" type="text" class="form-control" th:placeholder="#{login.uname}" required>
                             </div>
                             <div class="input-group">
-                                <input id="password" name="password" type="password" class="form-control" placeholder="password" required>
+                                <input id="password" name="password" type="password" class="form-control" th:placeholder="#{login.pwd}" required>
                             </div>
                             <div class="input-group">
-                                <button type="submit" class="login-btn">Login Account</button>
+                                <button type="submit" class="login-btn" th:text="#{login.confirm}">Login Account</button>
                             </div>
                         </form>
                     </div>
@@ -152,8 +153,8 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <!--Footer Widget Start-->
                         <div class="footer-widget">
-                            <h4>About Green Mission</h4>
-                            <p> If anything’s hot in today’s economy, it’s saving money, including a broad range of
+                            <h4 th:text="#{l.ab.gre.mis}">About Green Mission</h4>
+                            <p th:text="#{l.if.any.econ}"> If anything’s hot in today’s economy, it’s saving money, including a broad range of
                                 green businesses helping people save energy, water, and other resources. Definitely, you
                                 can go with this business as it is a nothing but the future. </p>
                             <a href="#" class="lm">About us</a>
@@ -163,14 +164,15 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <!--Footer Widget Start-->
                         <div class="footer-widget">
-                            <h4>Our Promises</h4>
+                            <h4 th:text="#{l.our.prom}">Our Promises</h4>
                             <ul class="quick-links">
-                                <li><a href="#">Solar Energy</a></li>
-                                <li><a href="#">Waste Management</a></li>
-                                <li><a href="#">Eco Ideas</a></li>
-                                <li><a href="#">Recycling Materials</a></li>
-                                <li><a href="#">Plant Ecology</a></li>
-                                <li><a href="#">Saving Wildlife </a></li>
+                                <li><a th:text="#{l.emis}" href="#">CO<sub>2</sub> Emissions</a></li>
+                                <li><a th:text="#{l.sol.enr}" href="#">Solar Energy</a></li>
+                                <li><a th:text="#{l.wastman}" href="#">Waste Management</a></li>
+                                <li><a th:text="#{l.eco.idea}" href="#">Eco Ideas</a></li>
+                                <li><a th:text="#{l.rec.mat}" href="#">Recycling Materials</a></li>
+                                <li><a th:text="#{l.plant.ecol}" href="#">Plant Ecology</a></li>
+                                <li><a th:text="#{l.sav.wildli}" href="#">Saving Wildlife </a></li>
                             </ul>
                         </div>
                         <!--Footer Widget End-->
@@ -178,61 +180,26 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <!--Footer Widget Start-->
                         <div class="footer-widget">
-                            <h4>Latest Posts</h4>
+                            <h4 th:text="#{l.latest.posts}">Latest Posts</h4>
                             <ul class="lastest-products">
-                                <li><img th:src="@{/images/flp1.jpg}" alt=""> <strong><a href="#">How you can keep
-                                    alive wild animals for...</a></strong> <span class="pdate"><i>Posted:</i> 29 September, 2018</span>
+                                <li><img th:src="@{/images/flp1.jpg}" alt=""> <strong th:text="#{l.how.can.keep.wild.an}"><a href="#">How you
+                                    can keep
+                                    alive wild animals for...</a></strong> <span class="pdate"><i>Posted:</i> 29 September, 2022</span>
                                 </li>
-                                <li><img th:src="@{/images/flp2.jpg}" alt=""> <strong><a href="#">Eliminate your
-                                    plastic bottle pollution & keep...</a></strong> <span class="pdate"><i>Posted:</i> 29 September, 2018</span>
+                                <li><img th:src="@{/images/flp2.jpg}" alt=""> <strong th:text="#{l.eliminate.ur.plastic}"><a href="#">Eliminate
+                                    your
+                                    plastic bottle pollution & keep...</a></strong> <span class="pdate"><i>Posted:</i> 21 October, 2022</span>
                                 </li>
-                                <li><img th:src="@{/images/flp3.jpg}" alt=""> <strong><a href="#">How you can keep
-                                    alive wild animals for...</a></strong> <span class="pdate"><i>Posted:</i> 29 September, 2018</span>
+                                <li><img th:src="@{/images/flp3.jpg}" alt=""> <strong><a href="#" th:text="#{l.how.can.keep.wild.an}">How you
+                                    can keep
+                                    alive wild animals for...</a></strong> <span class="pdate"><i>Posted:</i> 02 December, 2022</span>
                                 </li>
                             </ul>
                         </div>
                         <!--Footer Widget End-->
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-6">
-                        <!--Footer Widget Start-->
-                        <div class="footer-widget">
-                            <div id="fpro-slider" class="owl-carousel owl-theme">
-                                <!--Footer Product Start-->
-                                <div class="item">
-                                    <div class="f-product">
-                                        <img th:src="@{/images/fpro1.jpg}" alt="">
-                                        <div class="fp-text">
-                                            <h6><a href="#">Buy T-Shirts</a></h6>
-                                            <strong>$19.00</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--Footer Product End-->
-                                <!--Footer Product Start-->
-                                <div class="item">
-                                    <div class="f-product">
-                                        <img th:src="@{/images/fpro1.jpg}" alt="">
-                                        <div class="fp-text">
-                                            <h6><a href="#">Buy T-Shirts</a></h6>
-                                            <strong>$19.00</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--Footer Product End-->
-                                <!--Footer Product Start-->
-                                <div class="item">
-                                    <div class="f-product">
-                                        <img th:src="@{/images/fpro1.jpg}" alt="">
-                                        <div class="fp-text">
-                                            <h6><a href="#">Buy T-Shirts</a></h6>
-                                            <strong>$19.00</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--Footer Product End-->
-                            </div>
-                        </div>
-                        <!--Footer Widget End-->
+
                     </div>
                 </div>
             </div>
@@ -240,9 +207,12 @@
         <div class="footer-copyr wf100">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 col-sm-4"><img th:src="@{/images/logo.png}" alt=""></div>
+                    <div class="col-md-4 col-sm-4">
+                        <a class="navbar-brand"> <b style="color: lightgoldenrodyellow">Green Mission</b></a>
+                        <!--                        <img th:src="@{/images/logo.png}" alt="">-->
+                    </div>
                     <div class="col-md-8 col-sm-8">
-                        <p><a href="www.templatespoint.net">Templates Point</a></p>
+                        <p>Stanislav Holovachuk</p>
                     </div>
                 </div>
             </div>

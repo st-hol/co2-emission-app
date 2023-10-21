@@ -13,6 +13,7 @@
     <link type="text/css" th:href="@{/css/stylecab.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link type="text/css" th:href="@{/css/mystyles.css}" rel="stylesheet">
+    <link type="text/css" th:href="@{/css/navbarstyles.css}" rel="stylesheet">
     <!-- CSS FILES End -->
 </head>
 <body class="fixed-nav sticky-footer" id="page-top">
@@ -25,25 +26,25 @@
             <li class="breadcrumb-item">
                 <a href="#">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">My Dashboard</li>
+            <li class="breadcrumb-item active"  th:text="#{cab.my.dash}">My Dashboard</li>
         </ol>
 
         <div class="container-cnt" th:if="${user.co2YearAmount} < 90">
-            <h3 class="text-success text-center">Your yearly CO<sub>2</sub> amount is</h3>
+            <h3 class="text-success text-center"  th:text="#{cab.u.year.co2.am}">Your yearly CO<sub>2</sub> amount is</h3>
             <div class="counter text-success" th:data-countto="${user.co2YearAmount}">0</div>
-            <h3 class="text-success text-center">kg!</h3>
+            <h3 class="text-success text-center"  th:text="#{cab.kg.excl}">kg!</h3>
         </div>
 
         <div class="container-cnt" th:if="${user.co2YearAmount} > 90 and ${user.co2YearAmount} < 120">
-            <h3 class="text-warning text-center">Your yearly CO<sub>2</sub> amount is</h3>
+            <h3 class="text-warning text-center"  th:text="#{cab.u.year.co2.am}">Your yearly CO<sub>2</sub> amount is</h3>
             <div class="counter text-warning" th:data-countto="${user.co2YearAmount}">0</div>
-            <h3 class="text-warning text-center">kg!</h3>
+            <h3 class="text-warning text-center"  th:text="#{cab.kg.excl}">kg!</h3>
         </div>
 
         <div class="container-cnt" th:if="${user.co2YearAmount} > 120">
-            <h3 class="text-danger text-center">Your yearly CO<sub>2</sub> amount is</h3>
+            <h3 class="text-danger text-center"  th:text="#{cab.u.year.co2.am}">Your yearly CO<sub>2</sub> amount is</h3>
             <div class="counter text-danger" th:data-countto="${user.co2YearAmount}">0</div>
-            <h3 class="text-danger text-center">kg!</h3>
+            <h3 class="text-danger text-center"  th:text="#{cab.kg.excl}">kg!</h3>
         </div>
 
         <div class="row">
@@ -51,7 +52,8 @@
                 <!-- Bar Chart Card-->
                 <div class="card mb-3">
                     <div class="card-header">
-                        <i class="fa fa-bar-chart"></i>CO<sub>2</sub> emissions by months</div>
+                        <i class="fa fa-bar-chart"></i>CO<sub>2</sub>
+                        <span  th:text="#{cab.em.month}"> emissions by months </span></div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-8 my-auto">
@@ -59,24 +61,24 @@
                             </div>
                             <div class="col-sm-4 text-center my-auto" th:if="${simulationDemoModeEnabled == true}">
                                 <div class="h4 mb-0 text-primary">1,693 kg</div>
-                                <div class="small text-muted">Highest CO<sub>2</sub></div>
+                                <div class="small text-muted"  th:text="#{cab.gighest.co2}">Highest CO<sub>2</sub></div>
                                 <hr>
                                 <div class="h4 mb-0 text-warning">1,374 kg</div>
-                                <div class="small text-muted">Medium CO<sub>2</sub></div>
+                                <div class="small text-muted"  th:text="#{cab.med.co2}">Medium CO<sub>2</sub></div>
                                 <hr>
                                 <div class="h4 mb-0 text-success">0,919 kg</div>
-                                <div class="small text-muted">Minimal CO<sub>2</sub></div>
+                                <div class="small text-muted"  th:text="#{cab.min.co2}">Minimal CO<sub>2</sub></div>
                             </div>
                             <!--OR-->
                             <div class="col-sm-4 text-center my-auto" th:if="${simulationDemoModeEnabled == false}">
                                 <div class="h4 mb-0 text-primary" th:text="${emissionsByMonthsHighest} + 'kg'"></div>
-                                <div class="small text-muted">Highest CO<sub>2</sub></div>
+                                <div class="small text-muted"  th:text="#{cab.gighest.co2}">Highest CO<sub>2</sub></div>
                                 <hr>
                                 <div class="h4 mb-0 text-warning" th:text="${emissionsByMonthsMedium} + 'kg'"></div>
-                                <div class="small text-muted">Medium CO<sub>2</sub></div>
+                                <div class="small text-muted"  th:text="#{cab.med.co2}">Medium CO<sub>2</sub></div>
                                 <hr>
                                 <div class="h4 mb-0 text-success" th:text="${emissionsByMonthsLowest} + 'kg'"></div>
-                                <div class="small text-muted">Minimal CO<sub>2</sub></div>
+                                <div class="small text-muted"  th:text="#{cab.min.co2}">Minimal CO<sub>2</sub></div>
                             </div>
                         </div>
                     </div>
@@ -88,7 +90,7 @@
                 <!-- Pie Chart Card-->
                 <div class="card mb-3">
                     <div class="card-header">
-                        <i class="fa fa-pie-chart"></i>Your most used cars</div>
+                        <i class="fa fa-pie-chart"></i><span th:text="#{cab.most.used.cars}"> Your most used cars</span></div>
                     <div class="card-body">
                         <canvas id="myPieChart" width="100%" height="70"></canvas>
                     </div>
@@ -101,7 +103,7 @@
     <!-- Area Chart-->
     <div class="card mb-3">
         <div class="card-header">
-            <i class="fa fa-area-chart"></i>Current month daily exhaust overview</div>
+            <i class="fa fa-area-chart"></i><span th:text="#{cab.cur.month.d.ex}">Current month daily exhaust overview</span></div>
         <div class="card-body">
             <canvas id="myAreaChart" width="98%" height="30"></canvas>
         </div>
