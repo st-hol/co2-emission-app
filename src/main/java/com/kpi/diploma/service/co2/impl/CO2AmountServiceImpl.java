@@ -55,11 +55,11 @@ public class CO2AmountServiceImpl implements CO2AmountService {
 	/**
 	 * Calculate value.
 	 *
-	 * @param emissionGramPer100km     g/km
+	 * @param emissionGramPerKm     g/km
 	 * @param driveTripDto dto with trip info
 	 * @return value of emissions per trip c
 	 */
-	private double calculateByFormula(double emissionGramPer100km, DriveTripDto driveTripDto) {
+	private double calculateByFormula(double emissionGramPerKm, DriveTripDto driveTripDto) {
 		FuelType fuelType;
 		if (!driveTripDto.isTestTrip()) {
 			Car car = carService.findById(driveTripDto.getCarId());
@@ -67,8 +67,8 @@ public class CO2AmountServiceImpl implements CO2AmountService {
 		} else {
 			fuelType = TypeEnum.findOptionalEnumValue(FuelType.class, driveTripDto.getFuelType()).orElse(FuelType.UNDEFINED);
 		}
-		final double emissionsKgPer100km = emissionGramPer100km / 1000.0;
-		final double decadesKmDistance = driveTripDto.getDistanceKm() / 100.0;
-		return ftFloatingCoefficientCorrelationMap.get(fuelType) * emissionsKgPer100km * decadesKmDistance;
+		final double emissionsKgPerKm = emissionGramPerKm / 1000.0;
+		final double kmDistance = driveTripDto.getDistanceKm();
+		return ftFloatingCoefficientCorrelationMap.get(fuelType) * emissionsKgPerKm * kmDistance;
 	}
 }
